@@ -173,3 +173,40 @@
   1. Rewrite analysis notebook with all current topology data (1CU-1/2/3/4DU)
   2. Implement multi-CU topologies
   3. Run matrix experiments for multi-CU topologies
+
+## 2026-05-11
+### Breakdown measurements: final validated runs
+- Repeated all breakdown measurements with system fully cooled between topologies (cores below 35°C)
+- CU-CP shows non-monotonic behaviour across topologies: 0.494W, 0.922W, 0.680W, 0.409W
+  - Likely due to low absolute power (<1W) relative to Scaphandre measurement resolution
+  - In test mode, CU-CP signalling load is minimal and nearly constant regardless of DU count
+- 1CU-4DU first run anomalous: DU1 at 11.99W vs ~15W for others
+  - Cause: DU1 not fully synchronised with CU-CP at measurement start
+  - Repeated and confirmed consistent values across all 4 DUs
+- Final validated files:
+  - docs/logs/breakdown_1cu1du_20260510_071356.csv
+  - docs/logs/breakdown_1cu2du_20260510_121914.csv
+  - docs/logs/breakdown_1cu3du_20260510_125725.csv
+  - docs/logs/breakdown_1cu4du_20260510_161647.csv
+
+### Analysis notebook rewrite
+- Rewrote power_analysis.ipynb from scratch with dynamic topology handling
+  - Part 1: per-component breakdown (stacked bar per topology)
+  - Part 2: matrix analysis (power vs UEs, topology comparison, W per UE, marginal cost,
+    heatmap, boxplot run variability, fixed vs dynamic overhead, LaTeX summary table)
+  - All topology lists and colour palettes generated dynamically from available data
+  - Adding new topologies requires only dropping JSON files in docs/logs/matrix/
+
+### Repository setup
+- Initialised Git repository and created public GitHub repo: github.com/martafra/5g-power-dissertation
+  - Includes README, .gitignore, scripts/, analysis/, docs/lab-notebook.md
+  - docs/logs/ excluded from version control
+- Submitted CloudLab account request for bare-metal experiments
+  - Required to overcome thermal throttling observed at 4+ DU on local hardware
+  - Planned use: matrix experiments for 1CU-4DU and multi-CU topologies
+- Next steps:
+  1. Await CloudLab approval and run matrix experiments for 1CU-4DU
+  2. Implement multi-CU topologies (2CU-2DU, 2CU-4DU)
+  3. Run matrix experiments for multi-CU topologies
+  4. Write Design and Implementation chapters
+  5. Write Evaluation chapter with full comparison
