@@ -1,0 +1,4330 @@
+nohup: ignoring input
+=== srsRAN Power Matrix Experiment ===
+Topologies: 1cu1du 1cu2du 1cu3du
+UE values:  1 4 16 64 96
+CQI values: 5 10 15
+Runs: 5
+Total experiments: 225
+Estimated time: 22h 30m
+Output dir: /home/martafra/Desktop/dissertation/scripts/../docs/logs/matrix
+=======================================
+
+[1/225] 1CU-1DU | CQI=5 | UEs=1 | Run=1
+srsran_du2
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_1ue_run1.json
+
+[2/225] 1CU-2DU | CQI=5 | UEs=1 | Run=1
+srsran_du
+srsran_du2
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_1ue_run1.json
+
+[3/225] 1CU-3DU | CQI=5 | UEs=1 | Run=1
+srsran_du
+srsran_du2
+srsran_du
+srsran_du2
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 26.646846566939935W
+    Sample 2/30: 26.61534942058323W
+    Sample 3/30: 27.33312240221062W
+    Sample 4/30: 26.63018249711368W
+    Sample 5/30: 27.026669610227195W
+    Sample 6/30: 26.804742850720125W
+    Sample 7/30: 26.836182191875135W
+    Sample 8/30: 26.77049066068323W
+    Sample 9/30: 26.895780282027076W
+    Sample 10/30: 27.229564939344407W
+    Sample 11/30: 27.406444366593213W
+    Sample 12/30: 27.295527059729846W
+    Sample 13/30: 26.846041819483258W
+    Sample 14/30: 26.90419461539371W
+    Sample 15/30: 27.089996328265627W
+    Sample 16/30: 26.85356188044014W
+    Sample 17/30: 27.3769633963795W
+    Sample 18/30: 27.09400015223804W
+    Sample 19/30: 27.184423760844183W
+    Sample 20/30: 27.150128055543213W
+    Sample 21/30: 27.159936583079393W
+    Sample 22/30: 27.383279958599335W
+    Sample 23/30: 27.215346665979293W
+    Sample 24/30: 27.053580331142893W
+    Sample 25/30: 27.298718360225774W
+    Sample 26/30: 27.080882795562516W
+    Sample 27/30: 27.170686170305174W
+    Sample 28/30: 27.34700165321564W
+    Sample 29/30: 27.434103911274526W
+    Sample 30/30: 26.987856144845104W
+  Saved: power_1cu3du_cqi5_1ue_run1.json
+  mean=27.071W std=0.240W n=30
+
+[4/225] 1CU-1DU | CQI=5 | UEs=1 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_1ue_run2.json
+
+[5/225] 1CU-2DU | CQI=5 | UEs=1 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_1ue_run2.json
+
+[6/225] 1CU-3DU | CQI=5 | UEs=1 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 27.545553616436006W
+    Sample 2/30: 27.2241966432407W
+    Sample 3/30: 27.31838372960337W
+    Sample 4/30: 27.32462961582716W
+    Sample 5/30: 27.465786956180388W
+    Sample 6/30: 27.152882259459933W
+    Sample 7/30: 27.186366838592186W
+    Sample 8/30: 27.298095162758997W
+    Sample 9/30: 27.296536412402595W
+    Sample 10/30: 27.349167442521804W
+    Sample 11/30: 27.40666217927594W
+    Sample 12/30: 27.225682961041546W
+    Sample 13/30: 27.421021320191862W
+    Sample 14/30: 27.34487482110874W
+    Sample 15/30: 27.270649842382497W
+    Sample 16/30: 27.04856456003221W
+    Sample 17/30: 27.065276692119255W
+    Sample 18/30: 27.282559700369138W
+    Sample 19/30: 26.993436129822445W
+    Sample 20/30: 27.488614351022463W
+    Sample 21/30: 27.365599347096435W
+    Sample 22/30: 27.310269752018755W
+    Sample 23/30: 27.4200502287117W
+    Sample 24/30: 27.269717797717092W
+    Sample 25/30: 27.036195450947915W
+    Sample 26/30: 27.29386378199753W
+    Sample 27/30: 27.312597568287387W
+    Sample 28/30: 27.158926801601716W
+    Sample 29/30: 27.594875341233454W
+    Sample 30/30: 27.40262648954647W
+  Saved: power_1cu3du_cqi5_1ue_run2.json
+  mean=27.296W std=0.144W n=30
+
+[7/225] 1CU-1DU | CQI=5 | UEs=1 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_1ue_run3.json
+
+[8/225] 1CU-2DU | CQI=5 | UEs=1 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_1ue_run3.json
+
+[9/225] 1CU-3DU | CQI=5 | UEs=1 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 27.399503583881454W
+    Sample 2/30: 27.31974129872958W
+    Sample 3/30: 27.11775690206894W
+    Sample 4/30: 27.308698360675308W
+    Sample 5/30: 27.24536112272739W
+    Sample 6/30: 27.199332181173514W
+    Sample 7/30: 27.237411315479584W
+    Sample 8/30: 27.126294232613382W
+    Sample 9/30: 27.032696858102305W
+    Sample 10/30: 26.873141364063933W
+    Sample 11/30: 26.73682941436099W
+    Sample 12/30: 27.082942942386627W
+    Sample 13/30: 27.13448385650554W
+    Sample 14/30: 26.985530401254238W
+    Sample 15/30: 26.72842716332778W
+    Sample 16/30: 26.96619984257193W
+    Sample 17/30: 27.066008183060266W
+    Sample 18/30: 26.474508967471884W
+    Sample 19/30: 26.992602897127206W
+    Sample 20/30: 27.078779134674498W
+    Sample 21/30: 26.97759608690076W
+    Sample 22/30: 27.21622324399129W
+    Sample 23/30: 26.817395462929113W
+    Sample 24/30: 26.681929049041653W
+    Sample 25/30: 27.22401209982608W
+    Sample 26/30: 26.92174309538415W
+    Sample 27/30: 26.80951326131072W
+    Sample 28/30: 27.046613178250887W
+    Sample 29/30: 27.103499237006936W
+    Sample 30/30: 27.005357818601617W
+  Saved: power_1cu3du_cqi5_1ue_run3.json
+  mean=27.030W std=0.206W n=30
+
+[10/225] 1CU-1DU | CQI=5 | UEs=1 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_1ue_run4.json
+
+[11/225] 1CU-2DU | CQI=5 | UEs=1 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_1ue_run4.json
+
+[12/225] 1CU-3DU | CQI=5 | UEs=1 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 27.30146422275758W
+    Sample 2/30: 26.867744978368044W
+    Sample 3/30: 26.980872092506583W
+    Sample 4/30: 26.50213411152798W
+    Sample 5/30: 26.63681132341309W
+    Sample 6/30: 26.945385649471838W
+    Sample 7/30: 26.671391932772217W
+    Sample 8/30: 27.155500414376224W
+    Sample 9/30: 26.859611845951747W
+    Sample 10/30: 26.711207597774774W
+    Sample 11/30: 26.86161896838785W
+    Sample 12/30: 26.286802980308536W
+    Sample 13/30: 26.603021052160976W
+    Sample 14/30: 26.350960618215893W
+    Sample 15/30: 26.562261871878107W
+    Sample 16/30: 26.344165616458895W
+    Sample 17/30: 26.75820157545204W
+    Sample 18/30: 26.44161601216664W
+    Sample 19/30: 26.54068514740548W
+    Sample 20/30: 26.62077531780735W
+    Sample 21/30: 26.68995337661959W
+    Sample 22/30: 26.529416526908797W
+    Sample 23/30: 26.948397332333563W
+    Sample 24/30: 26.58075968166046W
+    Sample 25/30: 26.72085470006231W
+    Sample 26/30: 26.533452405053097W
+    Sample 27/30: 26.72442738506355W
+    Sample 28/30: 26.561311964186757W
+    Sample 29/30: 26.318366351649075W
+    Sample 30/30: 26.678299520464236W
+  Saved: power_1cu3du_cqi5_1ue_run4.json
+  mean=26.676W std=0.236W n=30
+
+[13/225] 1CU-1DU | CQI=5 | UEs=1 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_1ue_run5.json
+
+[14/225] 1CU-2DU | CQI=5 | UEs=1 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_1ue_run5.json
+
+[15/225] 1CU-3DU | CQI=5 | UEs=1 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 26.813259048362507W
+    Sample 2/30: 26.483345259990006W
+    Sample 3/30: 26.49813618200684W
+    Sample 4/30: 26.725182508848455W
+    Sample 5/30: 26.301730789260265W
+    Sample 6/30: 26.753740624065287W
+    Sample 7/30: 26.452282820051717W
+    Sample 8/30: 26.610061127260565W
+    Sample 9/30: 26.654741811365028W
+    Sample 10/30: 26.624043541448994W
+    Sample 11/30: 26.355452478871996W
+    Sample 12/30: 26.04778571283387W
+    Sample 13/30: 26.48155824488741W
+    Sample 14/30: 26.4718831757013W
+    Sample 15/30: 26.597126917886925W
+    Sample 16/30: 26.383173440214645W
+    Sample 17/30: 26.331837422818516W
+    Sample 18/30: 26.532990712258215W
+    Sample 19/30: 26.593940512029477W
+    Sample 20/30: 26.587006010299334W
+    Sample 21/30: 26.182092882984467W
+    Sample 22/30: 26.506474718150027W
+    Sample 23/30: 26.231928550732277W
+    Sample 24/30: 26.591286398667872W
+    Sample 25/30: 26.678096745545652W
+    Sample 26/30: 25.992480322578892W
+    Sample 27/30: 26.051128854095765W
+    Sample 28/30: 26.514758575614948W
+    Sample 29/30: 26.359606385204316W
+    Sample 30/30: 26.541047249590186W
+  Saved: power_1cu3du_cqi5_1ue_run5.json
+  mean=26.465W std=0.205W n=30
+
+[16/225] 1CU-1DU | CQI=5 | UEs=4 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_4ue_run1.json
+
+[17/225] 1CU-2DU | CQI=5 | UEs=4 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_4ue_run1.json
+
+[18/225] 1CU-3DU | CQI=5 | UEs=4 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 26.79137560528159W
+    Sample 2/30: 27.167779341982353W
+    Sample 3/30: 26.975582553755522W
+    Sample 4/30: 26.808104208983895W
+    Sample 5/30: 26.510400071974104W
+    Sample 6/30: 26.558744548169688W
+    Sample 7/30: 26.904140206101744W
+    Sample 8/30: 26.712341680858728W
+    Sample 9/30: 26.713744520859805W
+    Sample 10/30: 26.81278350601435W
+    Sample 11/30: 26.62134671011772W
+    Sample 12/30: 27.030852421219397W
+    Sample 13/30: 26.577071115470694W
+    Sample 14/30: 26.774153591940916W
+    Sample 15/30: 26.692364158744567W
+    Sample 16/30: 26.67859287382865W
+    Sample 17/30: 26.86123879518196W
+    Sample 18/30: 26.54912483123016W
+    Sample 19/30: 26.507295365367476W
+    Sample 20/30: 26.608084852945595W
+    Sample 21/30: 26.506558033835642W
+    Sample 22/30: 26.3532465851849W
+    Sample 23/30: 26.591653737519433W
+    Sample 24/30: 26.28181290407135W
+    Sample 25/30: 26.777492282292368W
+    Sample 26/30: 26.78089801640564W
+    Sample 27/30: 26.69991960670041W
+    Sample 28/30: 26.832025781756514W
+    Sample 29/30: 26.600837332321788W
+    Sample 30/30: 26.64499666039713W
+  Saved: power_1cu3du_cqi5_4ue_run1.json
+  mean=26.697W std=0.187W n=30
+
+[19/225] 1CU-1DU | CQI=5 | UEs=4 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_4ue_run2.json
+
+[20/225] 1CU-2DU | CQI=5 | UEs=4 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_4ue_run2.json
+
+[21/225] 1CU-3DU | CQI=5 | UEs=4 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 26.93650580718613W
+    Sample 2/30: 26.635143439727635W
+    Sample 3/30: 26.46909673463623W
+    Sample 4/30: 26.749655568084716W
+    Sample 5/30: 26.666015714815828W
+    Sample 6/30: 0W
+    Sample 7/30: 26.86631154938445W
+    Sample 8/30: 26.506848157210996W
+    Sample 9/30: 26.034801139345493W
+    Sample 10/30: 26.792371459985418W
+    Sample 11/30: 26.592444165679897W
+    Sample 12/30: 26.392024610304645W
+    Sample 13/30: 26.45927872740841W
+    Sample 14/30: 26.823518457731495W
+    Sample 15/30: 26.727669042264147W
+    Sample 16/30: 26.416193257759836W
+    Sample 17/30: 26.57387445517473W
+    Sample 18/30: 26.709540984579085W
+    Sample 19/30: 26.353988225438158W
+    Sample 20/30: 26.410200247530785W
+    Sample 21/30: 26.72028033973929W
+    Sample 22/30: 26.435011590874907W
+    Sample 23/30: 26.569378773049053W
+    Sample 24/30: 26.59179416717398W
+    Sample 25/30: 26.351071020154727W
+    Sample 26/30: 26.5812833034544W
+    Sample 27/30: 26.26677207861166W
+    Sample 28/30: 26.607621909821777W
+    Sample 29/30: 26.085585083909834W
+    Sample 30/30: 26.421613423384123W
+  Saved: power_1cu3du_cqi5_4ue_run2.json
+  mean=26.543W std=0.211W n=29
+
+[22/225] 1CU-1DU | CQI=5 | UEs=4 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_4ue_run3.json
+
+[23/225] 1CU-2DU | CQI=5 | UEs=4 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_4ue_run3.json
+
+[24/225] 1CU-3DU | CQI=5 | UEs=4 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 26.435122517186855W
+    Sample 2/30: 26.729953559687253W
+    Sample 3/30: 26.60383161526337W
+    Sample 4/30: 26.341871027038728W
+    Sample 5/30: 29.019430589000876W
+    Sample 6/30: 26.343445807991294W
+    Sample 7/30: 26.20917259867676W
+    Sample 8/30: 26.53963911156464W
+    Sample 9/30: 26.32743808544512W
+    Sample 10/30: 26.235103154369547W
+    Sample 11/30: 26.15511530279337W
+    Sample 12/30: 26.471587390987203W
+    Sample 13/30: 26.570033456915127W
+    Sample 14/30: 26.43463368471558W
+    Sample 15/30: 26.79086218770749W
+    Sample 16/30: 26.55596797148247W
+    Sample 17/30: 26.439246221770567W
+    Sample 18/30: 26.487627763235178W
+    Sample 19/30: 26.530233229925763W
+    Sample 20/30: 26.498410878525014W
+    Sample 21/30: 26.629482159038083W
+    Sample 22/30: 26.39081700335312W
+    Sample 23/30: 26.53908289119501W
+    Sample 24/30: 26.533506485411223W
+    Sample 25/30: 26.742989165614528W
+    Sample 26/30: 26.35611751295523W
+    Sample 27/30: 15.120511773350486W
+    Sample 28/30: 28.362329800807565W
+    Sample 29/30: 27.22583535861122W
+    Sample 30/30: 27.137899566765377W
+  Saved: power_1cu3du_cqi5_4ue_run3.json
+  mean=26.292W std=2.157W n=30
+
+[25/225] 1CU-1DU | CQI=5 | UEs=4 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_4ue_run4.json
+
+[26/225] 1CU-2DU | CQI=5 | UEs=4 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_4ue_run4.json
+
+[27/225] 1CU-3DU | CQI=5 | UEs=4 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 27.504815066812924W
+    Sample 2/30: 27.20812070976409W
+    Sample 3/30: 26.958152414321443W
+    Sample 4/30: 27.56923639452121W
+    Sample 5/30: 27.26593662773819W
+    Sample 6/30: 27.390750571941375W
+    Sample 7/30: 27.269779949502528W
+    Sample 8/30: 27.074805974844743W
+    Sample 9/30: 27.003903584418154W
+    Sample 10/30: 27.086304496901416W
+    Sample 11/30: 26.95651421593054W
+    Sample 12/30: 27.360057123728048W
+    Sample 13/30: 27.037892612913748W
+    Sample 14/30: 26.79870808616328W
+    Sample 15/30: 27.250277425587683W
+    Sample 16/30: 28.659860354204408W
+    Sample 17/30: 26.813860415273965W
+    Sample 18/30: 27.326346443038272W
+    Sample 19/30: 27.566158020974683W
+    Sample 20/30: 27.094845797682993W
+    Sample 21/30: 27.114658141954422W
+    Sample 22/30: 27.38965331400656W
+    Sample 23/30: 26.82562165364456W
+    Sample 24/30: 27.19486457611742W
+    Sample 25/30: 26.90227357178055W
+    Sample 26/30: 26.94184180921402W
+    Sample 27/30: 26.821772554726753W
+    Sample 28/30: 27.03142055468834W
+    Sample 29/30: 27.485753316234394W
+    Sample 30/30: 27.2733436591221W
+  Saved: power_1cu3du_cqi5_4ue_run4.json
+  mean=27.206W std=0.352W n=30
+
+[28/225] 1CU-1DU | CQI=5 | UEs=4 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_4ue_run5.json
+
+[29/225] 1CU-2DU | CQI=5 | UEs=4 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_4ue_run5.json
+
+[30/225] 1CU-3DU | CQI=5 | UEs=4 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 27.191837966464185W
+    Sample 2/30: 27.043502972402575W
+    Sample 3/30: 27.462146906901737W
+    Sample 4/30: 27.398977231549054W
+    Sample 5/30: 27.382392640104992W
+    Sample 6/30: 27.437802523847438W
+    Sample 7/30: 27.369665772550395W
+    Sample 8/30: 26.971197601864702W
+    Sample 9/30: 27.038505108110165W
+    Sample 10/30: 26.87549930249852W
+    Sample 11/30: 27.056700238591347W
+    Sample 12/30: 27.201998073557508W
+    Sample 13/30: 26.97502001513208W
+    Sample 14/30: 26.709917853775693W
+    Sample 15/30: 26.72435391824264W
+    Sample 16/30: 27.220528425283383W
+    Sample 17/30: 26.897635122612954W
+    Sample 18/30: 27.330278232397916W
+    Sample 19/30: 26.92278175265382W
+    Sample 20/30: 26.93656579428961W
+    Sample 21/30: 26.957447691091918W
+    Sample 22/30: 26.402554480406764W
+    Sample 23/30: 26.688144773393873W
+    Sample 24/30: 26.89717598284681W
+    Sample 25/30: 26.530699944761352W
+    Sample 26/30: 26.63597132628937W
+    Sample 27/30: 26.516332639582217W
+    Sample 28/30: 26.48006378902793W
+    Sample 29/30: 26.54969628650398W
+    Sample 30/30: 26.611166078328036W
+  Saved: power_1cu3du_cqi5_4ue_run5.json
+  mean=26.947W std=0.310W n=30
+
+[31/225] 1CU-1DU | CQI=5 | UEs=16 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_16ue_run1.json
+
+[32/225] 1CU-2DU | CQI=5 | UEs=16 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_16ue_run1.json
+
+[33/225] 1CU-3DU | CQI=5 | UEs=16 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 33.065474410444914W
+    Sample 2/30: 33.16025786204235W
+    Sample 3/30: 33.08004492176072W
+    Sample 4/30: 32.85593432586027W
+    Sample 5/30: 33.1473660168071W
+    Sample 6/30: 32.62535878583908W
+    Sample 7/30: 32.36637145357111W
+    Sample 8/30: 32.841285950941256W
+    Sample 9/30: 32.76788968171921W
+    Sample 10/30: 32.588661161666835W
+    Sample 11/30: 32.98307396418831W
+    Sample 12/30: 32.67513625740051W
+    Sample 13/30: 32.84843852170151W
+    Sample 14/30: 32.95961884223648W
+    Sample 15/30: 32.648371882385334W
+    Sample 16/30: 32.75767478383938W
+    Sample 17/30: 32.95160416771125W
+    Sample 18/30: 32.879057420018924W
+    Sample 19/30: 32.69394275479317W
+    Sample 20/30: 32.86935632976292W
+    Sample 21/30: 32.553547101728824W
+    Sample 22/30: 32.8428461602977W
+    Sample 23/30: 32.79243129392933W
+    Sample 24/30: 32.654795418999306W
+    Sample 25/30: 32.56077156919182W
+    Sample 26/30: 32.465528604125176W
+    Sample 27/30: 32.79787121376785W
+    Sample 28/30: 32.58848182128697W
+    Sample 29/30: 32.46715333558674W
+    Sample 30/30: 32.60362565642372W
+  Saved: power_1cu3du_cqi5_16ue_run1.json
+  mean=32.770W std=0.203W n=30
+
+[34/225] 1CU-1DU | CQI=5 | UEs=16 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_16ue_run2.json
+
+[35/225] 1CU-2DU | CQI=5 | UEs=16 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_16ue_run2.json
+
+[36/225] 1CU-3DU | CQI=5 | UEs=16 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 32.86230437355869W
+    Sample 2/30: 32.61047642026535W
+    Sample 3/30: 32.27042047510203W
+    Sample 4/30: 32.50959074946617W
+    Sample 5/30: 32.51006196875603W
+    Sample 6/30: 32.31712994714813W
+    Sample 7/30: 32.19341834574314W
+    Sample 8/30: 32.38442715012279W
+    Sample 9/30: 32.22944197442642W
+    Sample 10/30: 32.397917037344456W
+    Sample 11/30: 32.33325426024834W
+    Sample 12/30: 32.48603713078745W
+    Sample 13/30: 32.5418725597464W
+    Sample 14/30: 32.24239073575782W
+    Sample 15/30: 32.423237475767905W
+    Sample 16/30: 32.70788123701395W
+    Sample 17/30: 32.46543620998373W
+    Sample 18/30: 32.352290566811526W
+    Sample 19/30: 32.11606033948021W
+    Sample 20/30: 32.25447365446816W
+    Sample 21/30: 32.34406175882056W
+    Sample 22/30: 32.7123594126091W
+    Sample 23/30: 32.29544336007849W
+    Sample 24/30: 32.392997913630296W
+    Sample 25/30: 32.87940870544922W
+    Sample 26/30: 32.43449625351379W
+    Sample 27/30: 32.43880535383507W
+    Sample 28/30: 32.517550738889845W
+    Sample 29/30: 32.29539763579125W
+    Sample 30/30: 31.982835089509337W
+  Saved: power_1cu3du_cqi5_16ue_run2.json
+  mean=32.417W std=0.198W n=30
+
+[37/225] 1CU-1DU | CQI=5 | UEs=16 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_16ue_run3.json
+
+[38/225] 1CU-2DU | CQI=5 | UEs=16 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_16ue_run3.json
+
+[39/225] 1CU-3DU | CQI=5 | UEs=16 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 32.46727079656151W
+    Sample 2/30: 32.73592083641499W
+    Sample 3/30: 32.60255446804367W
+    Sample 4/30: 32.590870370179445W
+    Sample 5/30: 32.68435287610485W
+    Sample 6/30: 32.674237153669125W
+    Sample 7/30: 32.5411051596303W
+    Sample 8/30: 32.38261234245796W
+    Sample 9/30: 32.71214858585449W
+    Sample 10/30: 32.70144832232918W
+    Sample 11/30: 32.49123747127091W
+    Sample 12/30: 32.977988528122026W
+    Sample 13/30: 32.33114731649134W
+    Sample 14/30: 32.48435662317312W
+    Sample 15/30: 32.3281133110849W
+    Sample 16/30: 32.35551765183771W
+    Sample 17/30: 32.46743071285124W
+    Sample 18/30: 32.50184195977501W
+    Sample 19/30: 32.300808218877314W
+    Sample 20/30: 32.369898232138006W
+    Sample 21/30: 32.400620524687156W
+    Sample 22/30: 32.4507220630374W
+    Sample 23/30: 32.25720193434807W
+    Sample 24/30: 32.79244714606638W
+    Sample 25/30: 32.585235327118376W
+    Sample 26/30: 32.52130860200374W
+    Sample 27/30: 32.62971563619232W
+    Sample 28/30: 32.149936928668524W
+    Sample 29/30: 32.315773760788176W
+    Sample 30/30: 32.49276682292511W
+  Saved: power_1cu3du_cqi5_16ue_run3.json
+  mean=32.510W std=0.177W n=30
+
+[40/225] 1CU-1DU | CQI=5 | UEs=16 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_16ue_run4.json
+
+[41/225] 1CU-2DU | CQI=5 | UEs=16 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_16ue_run4.json
+
+[42/225] 1CU-3DU | CQI=5 | UEs=16 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 32.62603879774418W
+    Sample 2/30: 32.68207891447006W
+    Sample 3/30: 32.42947524896145W
+    Sample 4/30: 32.59092597839906W
+    Sample 5/30: 32.5258877273909W
+    Sample 6/30: 32.45338733441826W
+    Sample 7/30: 32.67246575976131W
+    Sample 8/30: 32.43099289119663W
+    Sample 9/30: 32.43824461461682W
+    Sample 10/30: 32.37632299157818W
+    Sample 11/30: 32.261529246994016W
+    Sample 12/30: 32.61891565337021W
+    Sample 13/30: 32.481645498726365W
+    Sample 14/30: 32.62232736533175W
+    Sample 15/30: 32.5784964304018W
+    Sample 16/30: 32.72471758638672W
+    Sample 17/30: 32.47844657129906W
+    Sample 18/30: 32.61117163082861W
+    Sample 19/30: 32.467594907395686W
+    Sample 20/30: 32.72856669161663W
+    Sample 21/30: 32.14997393049614W
+    Sample 22/30: 32.25227217330288W
+    Sample 23/30: 32.54090352313328W
+    Sample 24/30: 32.543557706195564W
+    Sample 25/30: 32.59893638657968W
+    Sample 26/30: 32.42347106704891W
+    Sample 27/30: 32.517504800858W
+    Sample 28/30: 32.2525619231366W
+    Sample 29/30: 32.62459402202446W
+    Sample 30/30: 32.50099555702835W
+  Saved: power_1cu3du_cqi5_16ue_run4.json
+  mean=32.507W std=0.142W n=30
+
+[43/225] 1CU-1DU | CQI=5 | UEs=16 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_16ue_run5.json
+
+[44/225] 1CU-2DU | CQI=5 | UEs=16 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_16ue_run5.json
+
+[45/225] 1CU-3DU | CQI=5 | UEs=16 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 32.2740528291861W
+    Sample 2/30: 32.45366183729858W
+    Sample 3/30: 32.557529576521794W
+    Sample 4/30: 32.45459964607178W
+    Sample 5/30: 32.15206210120148W
+    Sample 6/30: 32.33363530877381W
+    Sample 7/30: 32.50440508988018W
+    Sample 8/30: 32.45432983117435W
+    Sample 9/30: 32.279838425021666W
+    Sample 10/30: 32.30893666353653W
+    Sample 11/30: 32.21024734756303W
+    Sample 12/30: 32.32458071457367W
+    Sample 13/30: 32.17549855029339W
+    Sample 14/30: 32.25414521100616W
+    Sample 15/30: 32.06254195224752W
+    Sample 16/30: 32.11763835825083W
+    Sample 17/30: 32.270391700564005W
+    Sample 18/30: 31.981881129259662W
+    Sample 19/30: 32.061664695778504W
+    Sample 20/30: 32.0780650251812W
+    Sample 21/30: 32.304824603003226W
+    Sample 22/30: 32.232201826967625W
+    Sample 23/30: 32.19644363137791W
+    Sample 24/30: 32.001796469071884W
+    Sample 25/30: 31.90633658870205W
+    Sample 26/30: 32.05393638838457W
+    Sample 27/30: 31.802914098723292W
+    Sample 28/30: 31.98922088171066W
+    Sample 29/30: 32.11487362487745W
+    Sample 30/30: 32.029956229037474W
+  Saved: power_1cu3du_cqi5_16ue_run5.json
+  mean=32.198W std=0.181W n=30
+
+[46/225] 1CU-1DU | CQI=5 | UEs=64 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_64ue_run1.json
+
+[47/225] 1CU-2DU | CQI=5 | UEs=64 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_64ue_run1.json
+
+[48/225] 1CU-3DU | CQI=5 | UEs=64 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.5372784408371W
+    Sample 2/30: 36.34579919184151W
+    Sample 3/30: 36.187263737710936W
+    Sample 4/30: 36.47694235943321W
+    Sample 5/30: 36.567588812688065W
+    Sample 6/30: 36.45662910135727W
+    Sample 7/30: 36.54062148618639W
+    Sample 8/30: 36.205539959236454W
+    Sample 9/30: 36.089624921695346W
+    Sample 10/30: 36.30956579472069W
+    Sample 11/30: 36.249524395741425W
+    Sample 12/30: 36.393362432692186W
+    Sample 13/30: 36.43266836189651W
+    Sample 14/30: 36.14286272380486W
+    Sample 15/30: 36.30132064019177W
+    Sample 16/30: 36.23551493485905W
+    Sample 17/30: 36.29256257438404W
+    Sample 18/30: 36.2598612131176W
+    Sample 19/30: 36.54145895007385W
+    Sample 20/30: 36.40457092974289W
+    Sample 21/30: 36.41521299073242W
+    Sample 22/30: 36.298154382367514W
+    Sample 23/30: 36.23128465094162W
+    Sample 24/30: 36.24480660637352W
+    Sample 25/30: 36.48943851295922W
+    Sample 26/30: 35.93568008589516W
+    Sample 27/30: 36.160382368867715W
+    Sample 28/30: 36.23150072978325W
+    Sample 29/30: 35.94043343743893W
+    Sample 30/30: 35.93696807942047W
+  Saved: power_1cu3du_cqi5_64ue_run1.json
+  mean=36.295W std=0.174W n=30
+
+[49/225] 1CU-1DU | CQI=5 | UEs=64 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_64ue_run2.json
+
+[50/225] 1CU-2DU | CQI=5 | UEs=64 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_64ue_run2.json
+
+[51/225] 1CU-3DU | CQI=5 | UEs=64 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.70525663610809W
+    Sample 2/30: 36.56743656965531W
+    Sample 3/30: 36.282554287431736W
+    Sample 4/30: 36.46488055739553W
+    Sample 5/30: 36.462604363753506W
+    Sample 6/30: 36.28517428532267W
+    Sample 7/30: 36.61653162553482W
+    Sample 8/30: 36.37439677305893W
+    Sample 9/30: 36.36866517528534W
+    Sample 10/30: 36.50508849850943W
+    Sample 11/30: 36.25309219687118W
+    Sample 12/30: 36.12207958225189W
+    Sample 13/30: 36.31127062543236W
+    Sample 14/30: 36.31305244753885W
+    Sample 15/30: 36.306747438171385W
+    Sample 16/30: 36.256598159440614W
+    Sample 17/30: 36.10436442674692W
+    Sample 18/30: 36.11694560521087W
+    Sample 19/30: 36.45576808763286W
+    Sample 20/30: 36.2977032678994W
+    Sample 21/30: 36.317715793919376W
+    Sample 22/30: 36.62595799379935W
+    Sample 23/30: 36.386086604792325W
+    Sample 24/30: 36.39359958501365W
+    Sample 25/30: 36.40660805101358W
+    Sample 26/30: 36.29450694829387W
+    Sample 27/30: 36.582205958148535W
+    Sample 28/30: 36.300797346770935W
+    Sample 29/30: 36.13745144589615W
+    Sample 30/30: 36.19824468275013W
+  Saved: power_1cu3du_cqi5_64ue_run2.json
+  mean=36.360W std=0.154W n=30
+
+[52/225] 1CU-1DU | CQI=5 | UEs=64 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_64ue_run3.json
+
+[53/225] 1CU-2DU | CQI=5 | UEs=64 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_64ue_run3.json
+
+[54/225] 1CU-3DU | CQI=5 | UEs=64 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.58065968528715W
+    Sample 2/30: 36.430433553837474W
+    Sample 3/30: 36.362396974648135W
+    Sample 4/30: 36.61326961926098W
+    Sample 5/30: 36.482474509967076W
+    Sample 6/30: 36.16914816731216W
+    Sample 7/30: 36.29342848190787W
+    Sample 8/30: 36.42219929922724W
+    Sample 9/30: 36.42307502258335W
+    Sample 10/30: 36.57188756450226W
+    Sample 11/30: 36.422755977234644W
+    Sample 12/30: 36.39154505568695W
+    Sample 13/30: 36.50638317203779W
+    Sample 14/30: 36.37378750180119W
+    Sample 15/30: 36.2194205056152W
+    Sample 16/30: 36.54597198310644W
+    Sample 17/30: 36.37506466172333W
+    Sample 18/30: 36.452964721305676W
+    Sample 19/30: 36.59624505112169W
+    Sample 20/30: 36.22481240251599W
+    Sample 21/30: 36.307982935600506W
+    Sample 22/30: 36.18537588202011W
+    Sample 23/30: 36.43909432308483W
+    Sample 24/30: 36.57313754032326W
+    Sample 25/30: 36.58092453629614W
+    Sample 26/30: 36.35228962935402W
+    Sample 27/30: 36.46940894980122W
+    Sample 28/30: 36.42247701189549W
+    Sample 29/30: 36.53158549895096W
+    Sample 30/30: 36.28079568754272W
+  Saved: power_1cu3du_cqi5_64ue_run3.json
+  mean=36.420W std=0.125W n=30
+
+[55/225] 1CU-1DU | CQI=5 | UEs=64 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_64ue_run4.json
+
+[56/225] 1CU-2DU | CQI=5 | UEs=64 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_64ue_run4.json
+
+[57/225] 1CU-3DU | CQI=5 | UEs=64 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.89564612130165W
+    Sample 2/30: 36.69294939054291W
+    Sample 3/30: 36.66644122276989W
+    Sample 4/30: 36.79629726986521W
+    Sample 5/30: 36.28604238517578W
+    Sample 6/30: 36.56173208945846W
+    Sample 7/30: 36.292015004161605W
+    Sample 8/30: 36.500743061034854W
+    Sample 9/30: 36.633677427429575W
+    Sample 10/30: 36.69954426629389W
+    Sample 11/30: 36.47502765057278W
+    Sample 12/30: 36.199319060396554W
+    Sample 13/30: 36.55333774677574W
+    Sample 14/30: 36.3911321822068W
+    Sample 15/30: 36.540245811382064W
+    Sample 16/30: 36.895879248136445W
+    Sample 17/30: 36.86676877314552W
+    Sample 18/30: 36.39805358900023W
+    Sample 19/30: 36.66339183111158W
+    Sample 20/30: 36.49056503101803W
+    Sample 21/30: 36.28408638318756W
+    Sample 22/30: 36.47588414550343W
+    Sample 23/30: 36.314160364978484W
+    Sample 24/30: 36.31925240969734W
+    Sample 25/30: 36.24152001300811W
+    Sample 26/30: 36.51896182671955W
+    Sample 27/30: 36.48152283847503W
+    Sample 28/30: 36.54156088431286W
+    Sample 29/30: 36.19829803796502W
+    Sample 30/30: 36.22555683857822W
+  Saved: power_1cu3du_cqi5_64ue_run4.json
+  mean=36.503W std=0.204W n=30
+
+[58/225] 1CU-1DU | CQI=5 | UEs=64 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_64ue_run5.json
+
+[59/225] 1CU-2DU | CQI=5 | UEs=64 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_64ue_run5.json
+
+[60/225] 1CU-3DU | CQI=5 | UEs=64 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.5922938674028W
+    Sample 2/30: 36.60209576268551W
+    Sample 3/30: 36.54729143433655W
+    Sample 4/30: 36.44346659663229W
+    Sample 5/30: 36.035777105383644W
+    Sample 6/30: 35.63820653143051W
+    Sample 7/30: 36.11651905409803W
+    Sample 8/30: 36.13038027467607W
+    Sample 9/30: 36.20840640781309W
+    Sample 10/30: 36.13210907598496W
+    Sample 11/30: 36.185775394181476W
+    Sample 12/30: 36.10277743988388W
+    Sample 13/30: 36.362328089129925W
+    Sample 14/30: 36.28918562947143W
+    Sample 15/30: 36.343627214890596W
+    Sample 16/30: 36.695687697884026W
+    Sample 17/30: 36.448022878100915W
+    Sample 18/30: 36.49655068516319W
+    Sample 19/30: 36.44920372980377W
+    Sample 20/30: 36.305631054610174W
+    Sample 21/30: 36.3554680548349W
+    Sample 22/30: 36.420948096054154W
+    Sample 23/30: 36.2368348011676W
+    Sample 24/30: 36.21827049937534W
+    Sample 25/30: 36.74326125582428W
+    Sample 26/30: 36.48614599738075W
+    Sample 27/30: 36.342460981041945W
+    Sample 28/30: 36.247092162462W
+    Sample 29/30: 36.23488485524523W
+    Sample 30/30: 36.061005015221255W
+  Saved: power_1cu3du_cqi5_64ue_run5.json
+  mean=36.316W std=0.222W n=30
+
+[61/225] 1CU-1DU | CQI=5 | UEs=96 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_96ue_run1.json
+
+[62/225] 1CU-2DU | CQI=5 | UEs=96 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_96ue_run1.json
+
+[63/225] 1CU-3DU | CQI=5 | UEs=96 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.56339404397316W
+    Sample 2/30: 39.498566632811276W
+    Sample 3/30: 39.24112736096535W
+    Sample 4/30: 39.48526785517016W
+    Sample 5/30: 39.12610170699263W
+    Sample 6/30: 39.25920409540686W
+    Sample 7/30: 39.14878709648989W
+    Sample 8/30: 39.35033380746842W
+    Sample 9/30: 39.35899984187896W
+    Sample 10/30: 39.64357477145811W
+    Sample 11/30: 39.40213367268929W
+    Sample 12/30: 39.412749149308205W
+    Sample 13/30: 39.482407792207724W
+    Sample 14/30: 39.618130138696706W
+    Sample 15/30: 39.821297492887744W
+    Sample 16/30: 39.39715791300562W
+    Sample 17/30: 39.58517136486328W
+    Sample 18/30: 39.47169715238461W
+    Sample 19/30: 39.1325008078006W
+    Sample 20/30: 39.045748940567265W
+    Sample 21/30: 39.05388287527344W
+    Sample 22/30: 39.05839825009404W
+    Sample 23/30: 39.180760109485476W
+    Sample 24/30: 39.25123035329254W
+    Sample 25/30: 39.33163627470215W
+    Sample 26/30: 39.01510901433882W
+    Sample 27/30: 39.13307415370224W
+    Sample 28/30: 39.14632099184607W
+    Sample 29/30: 39.297271200340276W
+    Sample 30/30: 39.267829860463024W
+  Saved: power_1cu3du_cqi5_96ue_run1.json
+  mean=39.326W std=0.201W n=30
+
+[64/225] 1CU-1DU | CQI=5 | UEs=96 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_96ue_run2.json
+
+[65/225] 1CU-2DU | CQI=5 | UEs=96 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_96ue_run2.json
+
+[66/225] 1CU-3DU | CQI=5 | UEs=96 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.3907583567667W
+    Sample 2/30: 39.29165921979504W
+    Sample 3/30: 39.208516282185414W
+    Sample 4/30: 39.607132507102584W
+    Sample 5/30: 38.93897609558213W
+    Sample 6/30: 39.20508705715141W
+    Sample 7/30: 39.11401651567224W
+    Sample 8/30: 38.64509519267568W
+    Sample 9/30: 39.05652152065979W
+    Sample 10/30: 38.94787192056823W
+    Sample 11/30: 38.99303658231468W
+    Sample 12/30: 38.81078653406857W
+    Sample 13/30: 39.03230354819622W
+    Sample 14/30: 38.91714276680568W
+    Sample 15/30: 38.917237763316535W
+    Sample 16/30: 38.94676894685965W
+    Sample 17/30: 38.759803276155W
+    Sample 18/30: 39.208373585154554W
+    Sample 19/30: 39.23137256254448W
+    Sample 20/30: 39.49105941068985W
+    Sample 21/30: 38.89625400641708W
+    Sample 22/30: 38.839209624652W
+    Sample 23/30: 39.16774316789579W
+    Sample 24/30: 38.99503921010834W
+    Sample 25/30: 39.10077213114815W
+    Sample 26/30: 38.835490453138966W
+    Sample 27/30: 39.41081601033211W
+    Sample 28/30: 38.775957959792215W
+    Sample 29/30: 38.511802231070135W
+    Sample 30/30: 38.68184935327919W
+  Saved: power_1cu3du_cqi5_96ue_run2.json
+  mean=39.031W std=0.253W n=30
+
+[67/225] 1CU-1DU | CQI=5 | UEs=96 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_96ue_run3.json
+
+[68/225] 1CU-2DU | CQI=5 | UEs=96 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_96ue_run3.json
+
+[69/225] 1CU-3DU | CQI=5 | UEs=96 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.96414619139355W
+    Sample 2/30: 38.93293419256554W
+    Sample 3/30: 39.25934374345428W
+    Sample 4/30: 39.249294880119244W
+    Sample 5/30: 38.9502614879385W
+    Sample 6/30: 39.15509067786398W
+    Sample 7/30: 39.09934156828262W
+    Sample 8/30: 38.87550586609795W
+    Sample 9/30: 38.93666366771959W
+    Sample 10/30: 38.88594312708706W
+    Sample 11/30: 38.823746209036216W
+    Sample 12/30: 38.94876834917997W
+    Sample 13/30: 39.03105802856083W
+    Sample 14/30: 39.19129197423668W
+    Sample 15/30: 38.955410113396816W
+    Sample 16/30: 38.70881755291035W
+    Sample 17/30: 38.7855885716951W
+    Sample 18/30: 38.92874344255543W
+    Sample 19/30: 38.99509337382986W
+    Sample 20/30: 39.38007618351999W
+    Sample 21/30: 39.05566552908966W
+    Sample 22/30: 38.989470679604494W
+    Sample 23/30: 39.325414357540744W
+    Sample 24/30: 39.08664936885825W
+    Sample 25/30: 39.109093930364224W
+    Sample 26/30: 39.22228606858669W
+    Sample 27/30: 38.55314304863348W
+    Sample 28/30: 38.69206559221756W
+    Sample 29/30: 38.46203027881845W
+    Sample 30/30: 38.69354543382778W
+  Saved: power_1cu3du_cqi5_96ue_run3.json
+  mean=38.975W std=0.216W n=30
+
+[70/225] 1CU-1DU | CQI=5 | UEs=96 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_96ue_run4.json
+
+[71/225] 1CU-2DU | CQI=5 | UEs=96 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_96ue_run4.json
+
+[72/225] 1CU-3DU | CQI=5 | UEs=96 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.16573104761152W
+    Sample 2/30: 39.69922211425411W
+    Sample 3/30: 39.21969237375795W
+    Sample 4/30: 38.87473537015629W
+    Sample 5/30: 38.77151790681099W
+    Sample 6/30: 38.828373086060836W
+    Sample 7/30: 38.74537587076334W
+    Sample 8/30: 38.847325374438284W
+    Sample 9/30: 38.98730939731613W
+    Sample 10/30: 38.52730586736369W
+    Sample 11/30: 38.569443780566786W
+    Sample 12/30: 38.53813087575234W
+    Sample 13/30: 38.81473234354078W
+    Sample 14/30: 38.63475120763699W
+    Sample 15/30: 38.8309327940982W
+    Sample 16/30: 39.39032748746261W
+    Sample 17/30: 38.94341512270803W
+    Sample 18/30: 39.129419481569656W
+    Sample 19/30: 39.38280394118752W
+    Sample 20/30: 39.392772550268475W
+    Sample 21/30: 38.58062777135571W
+    Sample 22/30: 38.51542536950119W
+    Sample 23/30: 38.586590761673335W
+    Sample 24/30: 38.634343638452265W
+    Sample 25/30: 38.89255635462551W
+    Sample 26/30: 38.87446762466622W
+    Sample 27/30: 38.74561654857399W
+    Sample 28/30: 38.87858413817703W
+    Sample 29/30: 38.78869775262701W
+    Sample 30/30: 38.80568642528427W
+  Saved: power_1cu3du_cqi5_96ue_run4.json
+  mean=38.887W std=0.292W n=30
+
+[73/225] 1CU-1DU | CQI=5 | UEs=96 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi5_96ue_run5.json
+
+[74/225] 1CU-2DU | CQI=5 | UEs=96 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi5_96ue_run5.json
+
+[75/225] 1CU-3DU | CQI=5 | UEs=96 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.74576055523464W
+    Sample 2/30: 39.47499586632357W
+    Sample 3/30: 39.51394916393906W
+    Sample 4/30: 39.33557197069199W
+    Sample 5/30: 39.17191844063092W
+    Sample 6/30: 38.93846824110413W
+    Sample 7/30: 38.77785606194121W
+    Sample 8/30: 38.73781420691033W
+    Sample 9/30: 38.974933017589755W
+    Sample 10/30: 39.277874596740226W
+    Sample 11/30: 39.024567774824526W
+    Sample 12/30: 38.931775433815346W
+    Sample 13/30: 38.858605043638235W
+    Sample 14/30: 39.08271300956497W
+    Sample 15/30: 39.25376956150421W
+    Sample 16/30: 39.16727200412193W
+    Sample 17/30: 39.1360781172542W
+    Sample 18/30: 39.02911544559334W
+    Sample 19/30: 39.06755761852742W
+    Sample 20/30: 38.74138289281798W
+    Sample 21/30: 38.88854039126957W
+    Sample 22/30: 38.944229026431884W
+    Sample 23/30: 39.13559750506836W
+    Sample 24/30: 39.115011392372125W
+    Sample 25/30: 38.82120759010553W
+    Sample 26/30: 38.84547017153893W
+    Sample 27/30: 39.1643683623002W
+    Sample 28/30: 38.903763171340294W
+    Sample 29/30: 38.942870717287335W
+    Sample 30/30: 38.85731368743437W
+  Saved: power_1cu3du_cqi5_96ue_run5.json
+  mean=39.062W std=0.235W n=30
+
+[76/225] 1CU-1DU | CQI=10 | UEs=1 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_1ue_run1.json
+
+[77/225] 1CU-2DU | CQI=10 | UEs=1 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_1ue_run1.json
+
+[78/225] 1CU-3DU | CQI=10 | UEs=1 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 24.984949627456835W
+    Sample 2/30: 24.90111273215256W
+    Sample 3/30: 24.72899468378W
+    Sample 4/30: 24.700216228260587W
+    Sample 5/30: 24.876649514210293W
+    Sample 6/30: 24.91481873407982W
+    Sample 7/30: 24.61566127452455W
+    Sample 8/30: 24.4833907113154W
+    Sample 9/30: 25.009315467509545W
+    Sample 10/30: 24.80591669740348W
+    Sample 11/30: 24.643618574040804W
+    Sample 12/30: 24.55376992380851W
+    Sample 13/30: 24.741612806984804W
+    Sample 14/30: 24.937382946005634W
+    Sample 15/30: 24.537985990823366W
+    Sample 16/30: 24.68579504213425W
+    Sample 17/30: 24.79564926650216W
+    Sample 18/30: 24.75315786406945W
+    Sample 19/30: 24.699743980215988W
+    Sample 20/30: 24.67886510684003W
+    Sample 21/30: 24.735538856423492W
+    Sample 22/30: 24.533782813759117W
+    Sample 23/30: 25.005986632464296W
+    Sample 24/30: 24.766010928694456W
+    Sample 25/30: 24.705304569963836W
+    Sample 26/30: 24.636920855961613W
+    Sample 27/30: 24.56631615609745W
+    Sample 28/30: 24.660824169432523W
+    Sample 29/30: 24.63716578905592W
+    Sample 30/30: 24.590113893634125W
+  Saved: power_1cu3du_cqi10_1ue_run1.json
+  mean=24.730W std=0.144W n=30
+
+[79/225] 1CU-1DU | CQI=10 | UEs=1 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_1ue_run2.json
+
+[80/225] 1CU-2DU | CQI=10 | UEs=1 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_1ue_run2.json
+
+[81/225] 1CU-3DU | CQI=10 | UEs=1 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.223710714551736W
+    Sample 2/30: 25.11188412165133W
+    Sample 3/30: 24.945379613680245W
+    Sample 4/30: 24.56551376146269W
+    Sample 5/30: 24.874651752308232W
+    Sample 6/30: 25.00949930501251W
+    Sample 7/30: 25.131405348263854W
+    Sample 8/30: 25.0517715774024W
+    Sample 9/30: 24.954434211894153W
+    Sample 10/30: 24.672510035498878W
+    Sample 11/30: 25.009831446464425W
+    Sample 12/30: 25.25869345440529W
+    Sample 13/30: 25.17170083545047W
+    Sample 14/30: 24.601242848327352W
+    Sample 15/30: 24.551952627800674W
+    Sample 16/30: 24.639623078345586W
+    Sample 17/30: 24.93525573116989W
+    Sample 18/30: 24.5351436361017W
+    Sample 19/30: 24.496998523950367W
+    Sample 20/30: 24.934637843033713W
+    Sample 21/30: 24.42056199870847W
+    Sample 22/30: 24.58088583398346W
+    Sample 23/30: 24.496055405221938W
+    Sample 24/30: 24.428301888252925W
+    Sample 25/30: 24.70533052995453W
+    Sample 26/30: 24.224640153749657W
+    Sample 27/30: 24.59141779756616W
+    Sample 28/30: 24.444690601671983W
+    Sample 29/30: 25.121083967304838W
+    Sample 30/30: 24.73340608110089W
+  Saved: power_1cu3du_cqi10_1ue_run2.json
+  mean=24.781W std=0.281W n=30
+
+[82/225] 1CU-1DU | CQI=10 | UEs=1 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_1ue_run3.json
+
+[83/225] 1CU-2DU | CQI=10 | UEs=1 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_1ue_run3.json
+
+[84/225] 1CU-3DU | CQI=10 | UEs=1 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.250921076555215W
+    Sample 2/30: 24.846546122452168W
+    Sample 3/30: 25.10947966588398W
+    Sample 4/30: 24.8680088796599W
+    Sample 5/30: 24.89465246813235W
+    Sample 6/30: 24.695103120507973W
+    Sample 7/30: 24.9508793295798W
+    Sample 8/30: 24.754203595062762W
+    Sample 9/30: 24.75737325509494W
+    Sample 10/30: 24.921946344792026W
+    Sample 11/30: 24.97389199704972W
+    Sample 12/30: 24.578919959835837W
+    Sample 13/30: 24.63712853824282W
+    Sample 14/30: 25.064061710235336W
+    Sample 15/30: 24.99527525254299W
+    Sample 16/30: 24.90442653295525W
+    Sample 17/30: 24.686080411465035W
+    Sample 18/30: 24.70334528070346W
+    Sample 19/30: 24.96290627743759W
+    Sample 20/30: 24.96990244630505W
+    Sample 21/30: 24.743161585855578W
+    Sample 22/30: 24.931962353139554W
+    Sample 23/30: 24.843448392820548W
+    Sample 24/30: 24.797986635763742W
+    Sample 25/30: 24.98356785758191W
+    Sample 26/30: 24.417012600718117W
+    Sample 27/30: 24.399841453996736W
+    Sample 28/30: 24.8817822803712W
+    Sample 29/30: 24.846941039066532W
+    Sample 30/30: 24.688834131443777W
+  Saved: power_1cu3du_cqi10_1ue_run3.json
+  mean=24.835W std=0.184W n=30
+
+[85/225] 1CU-1DU | CQI=10 | UEs=1 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_1ue_run4.json
+
+[86/225] 1CU-2DU | CQI=10 | UEs=1 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_1ue_run4.json
+
+[87/225] 1CU-3DU | CQI=10 | UEs=1 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.136933415273717W
+    Sample 2/30: 24.7439265782889W
+    Sample 3/30: 24.97693001868805W
+    Sample 4/30: 25.130464786599028W
+    Sample 5/30: 24.9893762593334W
+    Sample 6/30: 24.73551376203472W
+    Sample 7/30: 24.50051177233882W
+    Sample 8/30: 24.85819354427948W
+    Sample 9/30: 24.60209935335016W
+    Sample 10/30: 24.712108357772916W
+    Sample 11/30: 24.594419997861173W
+    Sample 12/30: 24.796610507095068W
+    Sample 13/30: 24.880437994421165W
+    Sample 14/30: 24.676910581963156W
+    Sample 15/30: 24.4756057522414W
+    Sample 16/30: 24.36064476879141W
+    Sample 17/30: 24.651911409686672W
+    Sample 18/30: 25.132905334859164W
+    Sample 19/30: 24.572556551773168W
+    Sample 20/30: 24.60989645457201W
+    Sample 21/30: 24.921293310292196W
+    Sample 22/30: 24.839223050117795W
+    Sample 23/30: 24.799876338240626W
+    Sample 24/30: 24.86122982122345W
+    Sample 25/30: 24.55603073213787W
+    Sample 26/30: 24.632188630631447W
+    Sample 27/30: 25.162299997132504W
+    Sample 28/30: 24.9060948805663W
+    Sample 29/30: 24.495479641505128W
+    Sample 30/30: 25.056492666136265W
+  Saved: power_1cu3du_cqi10_1ue_run4.json
+  mean=24.779W std=0.217W n=30
+
+[88/225] 1CU-1DU | CQI=10 | UEs=1 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_1ue_run5.json
+
+[89/225] 1CU-2DU | CQI=10 | UEs=1 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_1ue_run5.json
+
+[90/225] 1CU-3DU | CQI=10 | UEs=1 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 24.723010493159627W
+    Sample 2/30: 25.00529891616869W
+    Sample 3/30: 25.04119383161235W
+    Sample 4/30: 24.953617720350437W
+    Sample 5/30: 24.9566965436705W
+    Sample 6/30: 25.07664397155411W
+    Sample 7/30: 24.978067702416915W
+    Sample 8/30: 25.081243885572356W
+    Sample 9/30: 24.73918349892464W
+    Sample 10/30: 24.914194779359363W
+    Sample 11/30: 24.846639930891236W
+    Sample 12/30: 24.860884132321537W
+    Sample 13/30: 24.64448814421831W
+    Sample 14/30: 25.083698261083363W
+    Sample 15/30: 24.681355391535703W
+    Sample 16/30: 24.69355570831082W
+    Sample 17/30: 24.941558886929933W
+    Sample 18/30: 24.843725840705453W
+    Sample 19/30: 24.684009380775205W
+    Sample 20/30: 24.886312007200317W
+    Sample 21/30: 0W
+    Sample 22/30: 24.62559498323207W
+    Sample 23/30: 24.841205973993333W
+    Sample 24/30: 24.91088195586586W
+    Sample 25/30: 24.592322023662327W
+    Sample 26/30: 24.79485376961589W
+    Sample 27/30: 24.909534046394015W
+    Sample 28/30: 24.929823008609773W
+    Sample 29/30: 24.925630994249612W
+    Sample 30/30: 24.672165119491197W
+  Saved: power_1cu3du_cqi10_1ue_run5.json
+  mean=24.856W std=0.143W n=29
+
+[91/225] 1CU-1DU | CQI=10 | UEs=4 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_4ue_run1.json
+
+[92/225] 1CU-2DU | CQI=10 | UEs=4 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_4ue_run1.json
+
+[93/225] 1CU-3DU | CQI=10 | UEs=4 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.653568430907875W
+    Sample 2/30: 25.69889262113381W
+    Sample 3/30: 25.629140882666817W
+    Sample 4/30: 25.678175887760545W
+    Sample 5/30: 25.838205238708497W
+    Sample 6/30: 25.420543047952883W
+    Sample 7/30: 25.503101370030276W
+    Sample 8/30: 25.57815425265659W
+    Sample 9/30: 25.558890182764465W
+    Sample 10/30: 25.596637576773833W
+    Sample 11/30: 25.678627695124103W
+    Sample 12/30: 25.535684368188182W
+    Sample 13/30: 25.520211064287626W
+    Sample 14/30: 25.453528731083203W
+    Sample 15/30: 25.51581621603381W
+    Sample 16/30: 25.507498064124107W
+    Sample 17/30: 25.6268881868079W
+    Sample 18/30: 25.738374554142W
+    Sample 19/30: 25.497701120865827W
+    Sample 20/30: 25.423113764536858W
+    Sample 21/30: 25.295809198428344W
+    Sample 22/30: 25.26055810427353W
+    Sample 23/30: 25.5895810271451W
+    Sample 24/30: 25.314883617999648W
+    Sample 25/30: 25.043048646383568W
+    Sample 26/30: 25.394915551613998W
+    Sample 27/30: 25.290195431974702W
+    Sample 28/30: 25.41144673972624W
+    Sample 29/30: 25.512010043177796W
+    Sample 30/30: 25.448847162603187W
+  Saved: power_1cu3du_cqi10_4ue_run1.json
+  mean=25.507W std=0.161W n=30
+
+[94/225] 1CU-1DU | CQI=10 | UEs=4 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_4ue_run2.json
+
+[95/225] 1CU-2DU | CQI=10 | UEs=4 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_4ue_run2.json
+
+[96/225] 1CU-3DU | CQI=10 | UEs=4 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.559840052531396W
+    Sample 2/30: 25.454537133059695W
+    Sample 3/30: 25.513796854784545W
+    Sample 4/30: 25.699363568563033W
+    Sample 5/30: 25.343296736365964W
+    Sample 6/30: 25.418221154104813W
+    Sample 7/30: 25.38610283413027W
+    Sample 8/30: 25.365771736225135W
+    Sample 9/30: 25.527787718541646W
+    Sample 10/30: 25.38011595687614W
+    Sample 11/30: 25.39982791757642W
+    Sample 12/30: 25.080625483668765W
+    Sample 13/30: 25.2528034722843W
+    Sample 14/30: 25.502658398161316W
+    Sample 15/30: 25.345704773245473W
+    Sample 16/30: 25.18510341643482W
+    Sample 17/30: 25.40683178656268W
+    Sample 18/30: 25.425166128588867W
+    Sample 19/30: 25.379117793730085W
+    Sample 20/30: 25.355656601403865W
+    Sample 21/30: 25.359169117545584W
+    Sample 22/30: 25.27655607741577W
+    Sample 23/30: 25.22315550871338W
+    Sample 24/30: 25.201745028364954W
+    Sample 25/30: 25.1104537440578W
+    Sample 26/30: 25.253174609053517W
+    Sample 27/30: 25.12813432279587W
+    Sample 28/30: 25.21019253022299W
+    Sample 29/30: 25.236991846675473W
+    Sample 30/30: 25.37997629289204W
+  Saved: power_1cu3du_cqi10_4ue_run2.json
+  mean=25.345W std=0.139W n=30
+
+[97/225] 1CU-1DU | CQI=10 | UEs=4 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_4ue_run3.json
+
+[98/225] 1CU-2DU | CQI=10 | UEs=4 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_4ue_run3.json
+
+[99/225] 1CU-3DU | CQI=10 | UEs=4 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.430661086630916W
+    Sample 2/30: 25.44665787575949W
+    Sample 3/30: 25.53316078295517W
+    Sample 4/30: 25.465009198054503W
+    Sample 5/30: 25.338616688310328W
+    Sample 6/30: 25.157540751676482W
+    Sample 7/30: 25.504810054223935W
+    Sample 8/30: 24.984453484110574W
+    Sample 9/30: 25.153917263128854W
+    Sample 10/30: 25.40968125002258W
+    Sample 11/30: 25.272621464377327W
+    Sample 12/30: 25.3758598065699W
+    Sample 13/30: 25.364336866786374W
+    Sample 14/30: 25.267817719263057W
+    Sample 15/30: 25.32628993154607W
+    Sample 16/30: 25.50098273002112W
+    Sample 17/30: 25.322306642002115W
+    Sample 18/30: 25.131390807877597W
+    Sample 19/30: 25.48056887509021W
+    Sample 20/30: 25.334937550727844W
+    Sample 21/30: 25.248580018919373W
+    Sample 22/30: 25.436020988093947W
+    Sample 23/30: 25.370894916121244W
+    Sample 24/30: 25.148310603739642W
+    Sample 25/30: 25.746362061572952W
+    Sample 26/30: 25.33461406294864W
+    Sample 27/30: 25.280806325172275W
+    Sample 28/30: 25.264422458078784W
+    Sample 29/30: 25.28647547702316W
+    Sample 30/30: 25.14750810825182W
+  Saved: power_1cu3du_cqi10_4ue_run3.json
+  mean=25.336W std=0.149W n=30
+
+[100/225] 1CU-1DU | CQI=10 | UEs=4 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_4ue_run4.json
+
+[101/225] 1CU-2DU | CQI=10 | UEs=4 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_4ue_run4.json
+
+[102/225] 1CU-3DU | CQI=10 | UEs=4 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.74520137543332W
+    Sample 2/30: 25.312129199701786W
+    Sample 3/30: 25.461342905572472W
+    Sample 4/30: 25.463149471961223W
+    Sample 5/30: 25.727996161018865W
+    Sample 6/30: 25.579958956245687W
+    Sample 7/30: 25.170559884164767W
+    Sample 8/30: 25.142042117491435W
+    Sample 9/30: 25.32693557355669W
+    Sample 10/30: 25.17987509001279W
+    Sample 11/30: 25.59408707740235W
+    Sample 12/30: 25.502209325981482W
+    Sample 13/30: 25.351242223528097W
+    Sample 14/30: 25.269005771068187W
+    Sample 15/30: 25.652092039349895W
+    Sample 16/30: 25.67444160279876W
+    Sample 17/30: 25.405844816569402W
+    Sample 18/30: 25.307616850017276W
+    Sample 19/30: 25.325556570253674W
+    Sample 20/30: 25.367368759476015W
+    Sample 21/30: 25.350075280508957W
+    Sample 22/30: 25.31501711981163W
+    Sample 23/30: 25.581665486125715W
+    Sample 24/30: 25.41737299394291W
+    Sample 25/30: 25.283598179815332W
+    Sample 26/30: 25.373371841990952W
+    Sample 27/30: 25.252081012068118W
+    Sample 28/30: 25.264926102281507W
+    Sample 29/30: 25.15298112334301W
+    Sample 30/30: 25.072888286231375W
+  Saved: power_1cu3du_cqi10_4ue_run4.json
+  mean=25.387W std=0.176W n=30
+
+[103/225] 1CU-1DU | CQI=10 | UEs=4 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_4ue_run5.json
+
+[104/225] 1CU-2DU | CQI=10 | UEs=4 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_4ue_run5.json
+
+[105/225] 1CU-3DU | CQI=10 | UEs=4 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.33236051718656W
+    Sample 2/30: 25.335201795055482W
+    Sample 3/30: 25.087410297536813W
+    Sample 4/30: 25.424666225572167W
+    Sample 5/30: 25.304484553521984W
+    Sample 6/30: 25.313543061134148W
+    Sample 7/30: 25.25086878501297W
+    Sample 8/30: 25.163874177571365W
+    Sample 9/30: 25.102068882046268W
+    Sample 10/30: 25.47388255972266W
+    Sample 11/30: 25.409854397327187W
+    Sample 12/30: 25.43722581928393W
+    Sample 13/30: 25.356935533534145W
+    Sample 14/30: 25.277693283530482W
+    Sample 15/30: 25.42931538222178W
+    Sample 16/30: 25.451680383249357W
+    Sample 17/30: 25.184415618690593W
+    Sample 18/30: 25.33500452219177W
+    Sample 19/30: 25.162470198399543W
+    Sample 20/30: 25.232908491833157W
+    Sample 21/30: 25.448952483117715W
+    Sample 22/30: 25.224075539088304W
+    Sample 23/30: 25.517564240854796W
+    Sample 24/30: 25.30489103486481W
+    Sample 25/30: 24.84222288861374W
+    Sample 26/30: 25.092847270057348W
+    Sample 27/30: 25.280936021963957W
+    Sample 28/30: 25.27109881504455W
+    Sample 29/30: 25.138442824001253W
+    Sample 30/30: 25.283645115585458W
+  Saved: power_1cu3du_cqi10_4ue_run5.json
+  mean=25.282W std=0.143W n=30
+
+[106/225] 1CU-1DU | CQI=10 | UEs=16 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_16ue_run1.json
+
+[107/225] 1CU-2DU | CQI=10 | UEs=16 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_16ue_run1.json
+
+[108/225] 1CU-3DU | CQI=10 | UEs=16 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.931561818567886W
+    Sample 2/30: 31.86027748598286W
+    Sample 3/30: 32.114917026615146W
+    Sample 4/30: 32.1148919082481W
+    Sample 5/30: 32.04102609384522W
+    Sample 6/30: 32.152535647618805W
+    Sample 7/30: 31.89184900846157W
+    Sample 8/30: 32.12270712394701W
+    Sample 9/30: 32.12295716405045W
+    Sample 10/30: 31.87503103567572W
+    Sample 11/30: 31.665645967235946W
+    Sample 12/30: 31.71507542344112W
+    Sample 13/30: 32.08676759307117W
+    Sample 14/30: 31.907295776088432W
+    Sample 15/30: 32.04802891061859W
+    Sample 16/30: 32.11083765461426W
+    Sample 17/30: 31.894175564028394W
+    Sample 18/30: 31.859121040575715W
+    Sample 19/30: 32.01993223689938W
+    Sample 20/30: 31.85305457126259W
+    Sample 21/30: 32.10333202863693W
+    Sample 22/30: 31.86535724057171W
+    Sample 23/30: 31.771555650570946W
+    Sample 24/30: 31.619855721065825W
+    Sample 25/30: 31.68733419428665W
+    Sample 26/30: 31.83941116036987W
+    Sample 27/30: 31.729450210445485W
+    Sample 28/30: 31.953206831712972W
+    Sample 29/30: 31.86605456079782W
+    Sample 30/30: 31.82650944889742W
+  Saved: power_1cu3du_cqi10_16ue_run1.json
+  mean=31.922W std=0.153W n=30
+
+[109/225] 1CU-1DU | CQI=10 | UEs=16 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_16ue_run2.json
+
+[110/225] 1CU-2DU | CQI=10 | UEs=16 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_16ue_run2.json
+
+[111/225] 1CU-3DU | CQI=10 | UEs=16 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.68504480757948W
+    Sample 2/30: 32.00946470757843W
+    Sample 3/30: 31.87096697561531W
+    Sample 4/30: 31.74022681641702W
+    Sample 5/30: 32.00103855229397W
+    Sample 6/30: 31.830030322675476W
+    Sample 7/30: 31.979460342923623W
+    Sample 8/30: 32.17990591478245W
+    Sample 9/30: 31.81578857209778W
+    Sample 10/30: 31.385822624331666W
+    Sample 11/30: 31.89444193818352W
+    Sample 12/30: 31.6036231849802W
+    Sample 13/30: 31.714371662483344W
+    Sample 14/30: 31.72393752817257W
+    Sample 15/30: 31.45973283226089W
+    Sample 16/30: 31.75950954851614W
+    Sample 17/30: 31.693476853310777W
+    Sample 18/30: 31.68127477729317W
+    Sample 19/30: 31.646873506816235W
+    Sample 20/30: 31.82896421145832W
+    Sample 21/30: 31.79563160301086W
+    Sample 22/30: 31.893730442035274W
+    Sample 23/30: 31.90480353983505W
+    Sample 24/30: 31.631366634182967W
+    Sample 25/30: 31.6035020615284W
+    Sample 26/30: 31.759433164854602W
+    Sample 27/30: 31.672235439116534W
+    Sample 28/30: 31.579198604897805W
+    Sample 29/30: 32.011928974155694W
+    Sample 30/30: 31.886743378158187W
+  Saved: power_1cu3du_cqi10_16ue_run2.json
+  mean=31.775W std=0.170W n=30
+
+[112/225] 1CU-1DU | CQI=10 | UEs=16 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_16ue_run3.json
+
+[113/225] 1CU-2DU | CQI=10 | UEs=16 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_16ue_run3.json
+
+[114/225] 1CU-3DU | CQI=10 | UEs=16 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.826853454918783W
+    Sample 2/30: 31.930298301564406W
+    Sample 3/30: 31.60015876626285W
+    Sample 4/30: 31.72956872830381W
+    Sample 5/30: 31.584454853714178W
+    Sample 6/30: 31.844712849235155W
+    Sample 7/30: 31.6740938429203W
+    Sample 8/30: 31.536558316505662W
+    Sample 9/30: 31.414995077548106W
+    Sample 10/30: 31.59192648495255W
+    Sample 11/30: 31.636613194194602W
+    Sample 12/30: 31.759320508638W
+    Sample 13/30: 31.760012863362775W
+    Sample 14/30: 31.732656640925597W
+    Sample 15/30: 31.796316731009064W
+    Sample 16/30: 31.841358072021578W
+    Sample 17/30: 31.549592582138672W
+    Sample 18/30: 31.676589480443308W
+    Sample 19/30: 31.655363088872683W
+    Sample 20/30: 31.413154736856445W
+    Sample 21/30: 31.536065605951062W
+    Sample 22/30: 31.578601177186968W
+    Sample 23/30: 31.697067135275915W
+    Sample 24/30: 31.64427693337469W
+    Sample 25/30: 31.68235557704765W
+    Sample 26/30: 31.525543851049655W
+    Sample 27/30: 31.587312580137063W
+    Sample 28/30: 31.40865553676796W
+    Sample 29/30: 31.721011077005038W
+    Sample 30/30: 31.628746042235697W
+  Saved: power_1cu3du_cqi10_16ue_run3.json
+  mean=31.652W std=0.128W n=30
+
+[115/225] 1CU-1DU | CQI=10 | UEs=16 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_16ue_run4.json
+
+[116/225] 1CU-2DU | CQI=10 | UEs=16 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_16ue_run4.json
+
+[117/225] 1CU-3DU | CQI=10 | UEs=16 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 32.57200432358876W
+    Sample 2/30: 32.15636747753649W
+    Sample 3/30: 32.22295450053669W
+    Sample 4/30: 31.977880769139823W
+    Sample 5/30: 32.04464158540468W
+    Sample 6/30: 31.88509339657831W
+    Sample 7/30: 31.789064796565167W
+    Sample 8/30: 31.82039006177977W
+    Sample 9/30: 31.960107533133375W
+    Sample 10/30: 31.84205012898945W
+    Sample 11/30: 31.781674143658066W
+    Sample 12/30: 31.796827295905914W
+    Sample 13/30: 31.825785964920506W
+    Sample 14/30: 31.851879120869967W
+    Sample 15/30: 31.862606721127662W
+    Sample 16/30: 31.851324861967562W
+    Sample 17/30: 31.779187681713793W
+    Sample 18/30: 31.88990092235487W
+    Sample 19/30: 32.24484032457218W
+    Sample 20/30: 32.06600663011696W
+    Sample 21/30: 32.070926592292096W
+    Sample 22/30: 32.36737021524181W
+    Sample 23/30: 32.090797678727725W
+    Sample 24/30: 32.07867043064773W
+    Sample 25/30: 32.273755456590095W
+    Sample 26/30: 32.17378862602631W
+    Sample 27/30: 31.8905429935405W
+    Sample 28/30: 32.162607765936585W
+    Sample 29/30: 31.94744968257927W
+    Sample 30/30: 31.813341908044737W
+  Saved: power_1cu3du_cqi10_16ue_run4.json
+  mean=32.003W std=0.197W n=30
+
+[118/225] 1CU-1DU | CQI=10 | UEs=16 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_16ue_run5.json
+
+[119/225] 1CU-2DU | CQI=10 | UEs=16 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_16ue_run5.json
+
+[120/225] 1CU-3DU | CQI=10 | UEs=16 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 32.082288681733516W
+    Sample 2/30: 31.757405584963323W
+    Sample 3/30: 31.829882592013284W
+    Sample 4/30: 31.66982829946285W
+    Sample 5/30: 31.770839040597842W
+    Sample 6/30: 32.11462510575662W
+    Sample 7/30: 31.97355697046826W
+    Sample 8/30: 32.1595790565358W
+    Sample 9/30: 31.947755933813283W
+    Sample 10/30: 31.67852788750267W
+    Sample 11/30: 31.721844059025806W
+    Sample 12/30: 31.817071535276185W
+    Sample 13/30: 31.70946435107405W
+    Sample 14/30: 31.684716816591454W
+    Sample 15/30: 31.61456313161161W
+    Sample 16/30: 31.758511900110165W
+    Sample 17/30: 31.834013655370867W
+    Sample 18/30: 31.52689888956585W
+    Sample 19/30: 31.673854892287213W
+    Sample 20/30: 31.710988510402963W
+    Sample 21/30: 31.751337635576476W
+    Sample 22/30: 31.574489386083393W
+    Sample 23/30: 31.60029776923004W
+    Sample 24/30: 31.600176312989785W
+    Sample 25/30: 31.673348901055352W
+    Sample 26/30: 31.645245478708382W
+    Sample 27/30: 31.766930637607608W
+    Sample 28/30: 31.739482489555378W
+    Sample 29/30: 31.752181890694814W
+    Sample 30/30: 31.712916686961382W
+  Saved: power_1cu3du_cqi10_16ue_run5.json
+  mean=31.762W std=0.153W n=30
+
+[121/225] 1CU-1DU | CQI=10 | UEs=64 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_64ue_run1.json
+
+[122/225] 1CU-2DU | CQI=10 | UEs=64 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_64ue_run1.json
+
+[123/225] 1CU-3DU | CQI=10 | UEs=64 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.57614643410558W
+    Sample 2/30: 36.48868852819042W
+    Sample 3/30: 36.02802040326216W
+    Sample 4/30: 36.06581539721111W
+    Sample 5/30: 36.0712180809141W
+    Sample 6/30: 35.75261906071804W
+    Sample 7/30: 35.798610234162446W
+    Sample 8/30: 36.11537482628946W
+    Sample 9/30: 35.94033471561644W
+    Sample 10/30: 36.30584139846247W
+    Sample 11/30: 35.91903607335449W
+    Sample 12/30: 35.85969334350013W
+    Sample 13/30: 35.984063646975706W
+    Sample 14/30: 36.20152906432007W
+    Sample 15/30: 35.78173440922764W
+    Sample 16/30: 35.63171699034699W
+    Sample 17/30: 35.953489592917464W
+    Sample 18/30: 36.21671527859756W
+    Sample 19/30: 36.04394740490328W
+    Sample 20/30: 36.14812006729733W
+    Sample 21/30: 36.17926215563686W
+    Sample 22/30: 35.66632281365021W
+    Sample 23/30: 35.69662355155911W
+    Sample 24/30: 35.983603169544125W
+    Sample 25/30: 35.99581116135799W
+    Sample 26/30: 35.87363767386732W
+    Sample 27/30: 36.052015804819376W
+    Sample 28/30: 35.95919651700699W
+    Sample 29/30: 35.97163264055824W
+    Sample 30/30: 36.163149811162086W
+  Saved: power_1cu3du_cqi10_64ue_run1.json
+  mean=36.014W std=0.216W n=30
+
+[124/225] 1CU-1DU | CQI=10 | UEs=64 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_64ue_run2.json
+
+[125/225] 1CU-2DU | CQI=10 | UEs=64 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_64ue_run2.json
+
+[126/225] 1CU-3DU | CQI=10 | UEs=64 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.47888139152527W
+    Sample 2/30: 36.02059912915243W
+    Sample 3/30: 36.18998774554207W
+    Sample 4/30: 36.20405869659462W
+    Sample 5/30: 35.930364279069934W
+    Sample 6/30: 35.96019160922504W
+    Sample 7/30: 36.24385786760399W
+    Sample 8/30: 36.13590540513508W
+    Sample 9/30: 0W
+    Sample 10/30: 36.345424215481415W
+    Sample 11/30: 36.05183751689682W
+    Sample 12/30: 36.27518011391905W
+    Sample 13/30: 36.371826481989956W
+    Sample 14/30: 35.86549818694925W
+    Sample 15/30: 36.06759663572313W
+    Sample 16/30: 35.76905471566904W
+    Sample 17/30: 36.195807985133705W
+    Sample 18/30: 36.55884102830635W
+    Sample 19/30: 35.962603748616026W
+    Sample 20/30: 36.363408829819335W
+    Sample 21/30: 36.06960726820748W
+    Sample 22/30: 35.91756463621332W
+    Sample 23/30: 35.96131512799313W
+    Sample 24/30: 36.17364106759047W
+    Sample 25/30: 36.02513172124704W
+    Sample 26/30: 36.026710612859574W
+    Sample 27/30: 36.08433400104995W
+    Sample 28/30: 35.92287222936554W
+    Sample 29/30: 35.83753171622172W
+    Sample 30/30: 36.129225753702656W
+  Saved: power_1cu3du_cqi10_64ue_run2.json
+  mean=36.108W std=0.190W n=29
+
+[127/225] 1CU-1DU | CQI=10 | UEs=64 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_64ue_run3.json
+
+[128/225] 1CU-2DU | CQI=10 | UEs=64 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_64ue_run3.json
+
+[129/225] 1CU-3DU | CQI=10 | UEs=64 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.05249439359434W
+    Sample 2/30: 35.537679006707016W
+    Sample 3/30: 36.01988938416992W
+    Sample 4/30: 35.85560375817238W
+    Sample 5/30: 35.87791563939411W
+    Sample 6/30: 35.88507753849838W
+    Sample 7/30: 35.781263561220705W
+    Sample 8/30: 35.83029473176832W
+    Sample 9/30: 35.90402397180359W
+    Sample 10/30: 36.10222336652252W
+    Sample 11/30: 36.07657141255892W
+    Sample 12/30: 35.89554469774933W
+    Sample 13/30: 35.81833289614332W
+    Sample 14/30: 35.731270489523105W
+    Sample 15/30: 35.75029941905527W
+    Sample 16/30: 35.7880829854875W
+    Sample 17/30: 35.98245516706558W
+    Sample 18/30: 36.37742396459799W
+    Sample 19/30: 35.98015464165299W
+    Sample 20/30: 35.57484082622147W
+    Sample 21/30: 35.788426864252145W
+    Sample 22/30: 35.74664525265835W
+    Sample 23/30: 35.70482890685053W
+    Sample 24/30: 35.77378805702011W
+    Sample 25/30: 35.68981968682861W
+    Sample 26/30: 35.589879535487654W
+    Sample 27/30: 35.76942818799134W
+    Sample 28/30: 35.68060646640194W
+    Sample 29/30: 35.921318102635766W
+    Sample 30/30: 35.859530908521W
+  Saved: power_1cu3du_cqi10_64ue_run3.json
+  mean=35.845W std=0.172W n=30
+
+[130/225] 1CU-1DU | CQI=10 | UEs=64 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_64ue_run4.json
+
+[131/225] 1CU-2DU | CQI=10 | UEs=64 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_64ue_run4.json
+
+[132/225] 1CU-3DU | CQI=10 | UEs=64 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 35.868793849164504W
+    Sample 2/30: 36.16044091270958W
+    Sample 3/30: 36.165623700518765W
+    Sample 4/30: 36.18004259419784W
+    Sample 5/30: 36.2611778252388W
+    Sample 6/30: 36.159648934773216W
+    Sample 7/30: 36.20789642144043W
+    Sample 8/30: 36.190091679157504W
+    Sample 9/30: 36.03745246784723W
+    Sample 10/30: 36.248325655194094W
+    Sample 11/30: 35.92411467809513W
+    Sample 12/30: 35.70783840856304W
+    Sample 13/30: 35.86177139022438W
+    Sample 14/30: 35.765614743772126W
+    Sample 15/30: 35.595917317388654W
+    Sample 16/30: 35.83192807144226W
+    Sample 17/30: 36.00965230962689W
+    Sample 18/30: 35.91632127172638W
+    Sample 19/30: 35.802627604627304W
+    Sample 20/30: 35.990255149380395W
+    Sample 21/30: 35.88926960065767W
+    Sample 22/30: 35.963782612822115W
+    Sample 23/30: 36.08981591787035W
+    Sample 24/30: 36.11328192176634W
+    Sample 25/30: 35.9225892248803W
+    Sample 26/30: 36.06872046265262W
+    Sample 27/30: 36.134262214691105W
+    Sample 28/30: 36.146618380865874W
+    Sample 29/30: 35.7785166671937W
+    Sample 30/30: 36.004890159701276W
+  Saved: power_1cu3du_cqi10_64ue_run4.json
+  mean=36.000W std=0.171W n=30
+
+[133/225] 1CU-1DU | CQI=10 | UEs=64 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_64ue_run5.json
+
+[134/225] 1CU-2DU | CQI=10 | UEs=64 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_64ue_run5.json
+
+[135/225] 1CU-3DU | CQI=10 | UEs=64 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 36.1070988072975W
+    Sample 2/30: 36.18838477589445W
+    Sample 3/30: 36.01149367768946W
+    Sample 4/30: 36.16897555179516W
+    Sample 5/30: 35.72123744092758W
+    Sample 6/30: 36.13686028403555W
+    Sample 7/30: 35.84479121050125W
+    Sample 8/30: 36.00201309411879W
+    Sample 9/30: 35.805409465813405W
+    Sample 10/30: 36.09212835263996W
+    Sample 11/30: 35.957569365877454W
+    Sample 12/30: 35.877429181943796W
+    Sample 13/30: 36.08754050093742W
+    Sample 14/30: 36.18759500960152W
+    Sample 15/30: 36.19624759833622W
+    Sample 16/30: 36.2178732714168W
+    Sample 17/30: 36.40297086325607W
+    Sample 18/30: 36.21077685692001W
+    Sample 19/30: 36.233609589284995W
+    Sample 20/30: 36.572212065536505W
+    Sample 21/30: 36.22557864414768W
+    Sample 22/30: 35.95566157703465W
+    Sample 23/30: 36.37686511501942W
+    Sample 24/30: 36.04215153558111W
+    Sample 25/30: 35.923196740905034W
+    Sample 26/30: 36.124408045115736W
+    Sample 27/30: 36.22057802013035W
+    Sample 28/30: 36.02145871838358W
+    Sample 29/30: 36.26172796781988W
+    Sample 30/30: 36.01760041899405W
+  Saved: power_1cu3du_cqi10_64ue_run5.json
+  mean=36.106W std=0.180W n=30
+
+[136/225] 1CU-1DU | CQI=10 | UEs=96 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_96ue_run1.json
+
+[137/225] 1CU-2DU | CQI=10 | UEs=96 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_96ue_run1.json
+
+[138/225] 1CU-3DU | CQI=10 | UEs=96 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.69499466977447W
+    Sample 2/30: 39.025291040712816W
+    Sample 3/30: 38.78281559628204W
+    Sample 4/30: 38.57714394471806W
+    Sample 5/30: 38.94581169040062W
+    Sample 6/30: 38.90272700242092W
+    Sample 7/30: 38.50865561414932W
+    Sample 8/30: 38.61127944327393W
+    Sample 9/30: 38.92005233667542W
+    Sample 10/30: 38.762608315350036W
+    Sample 11/30: 38.72889292717714W
+    Sample 12/30: 38.846792392748256W
+    Sample 13/30: 38.79692900560684W
+    Sample 14/30: 38.8197039660007W
+    Sample 15/30: 38.80948620184921W
+    Sample 16/30: 38.59835798491478W
+    Sample 17/30: 38.48217204872132W
+    Sample 18/30: 38.38713427524399W
+    Sample 19/30: 38.202675445426465W
+    Sample 20/30: 38.4539635085784W
+    Sample 21/30: 38.384283944036866W
+    Sample 22/30: 38.62407108709888W
+    Sample 23/30: 38.68812728481721W
+    Sample 24/30: 38.42919836412146W
+    Sample 25/30: 38.42273053311739W
+    Sample 26/30: 38.72478187656086W
+    Sample 27/30: 38.452019645145434W
+    Sample 28/30: 38.395258475266345W
+    Sample 29/30: 38.52158136286846W
+    Sample 30/30: 38.48333995364227W
+  Saved: power_1cu3du_cqi10_96ue_run1.json
+  mean=38.633W std=0.200W n=30
+
+[139/225] 1CU-1DU | CQI=10 | UEs=96 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_96ue_run2.json
+
+[140/225] 1CU-2DU | CQI=10 | UEs=96 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_96ue_run2.json
+
+[141/225] 1CU-3DU | CQI=10 | UEs=96 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.071251684976126W
+    Sample 2/30: 38.96174061759625W
+    Sample 3/30: 39.12708439582611W
+    Sample 4/30: 39.05864407142467W
+    Sample 5/30: 39.01823595108461W
+    Sample 6/30: 38.77391449717289W
+    Sample 7/30: 38.580089845214786W
+    Sample 8/30: 38.50580682533901W
+    Sample 9/30: 38.61312810583592W
+    Sample 10/30: 38.46204848404211W
+    Sample 11/30: 38.93467424077932W
+    Sample 12/30: 38.61528849008995W
+    Sample 13/30: 38.80197538535096W
+    Sample 14/30: 38.60975565009512W
+    Sample 15/30: 39.051283662911125W
+    Sample 16/30: 38.85034498018345W
+    Sample 17/30: 38.867076349672885W
+    Sample 18/30: 38.688276008831124W
+    Sample 19/30: 38.759809173491064W
+    Sample 20/30: 38.6994437320221W
+    Sample 21/30: 38.52698957878424W
+    Sample 22/30: 38.708019790982284W
+    Sample 23/30: 38.54477863562611W
+    Sample 24/30: 38.46362350015396W
+    Sample 25/30: 38.689072175347896W
+    Sample 26/30: 38.3834789666565W
+    Sample 27/30: 39.00360000697689W
+    Sample 28/30: 39.25293620922717W
+    Sample 29/30: 38.719370196601126W
+    Sample 30/30: 38.66812824440231W
+  Saved: power_1cu3du_cqi10_96ue_run2.json
+  mean=38.767W std=0.222W n=30
+
+[142/225] 1CU-1DU | CQI=10 | UEs=96 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_96ue_run3.json
+
+[143/225] 1CU-2DU | CQI=10 | UEs=96 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_96ue_run3.json
+
+[144/225] 1CU-3DU | CQI=10 | UEs=96 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.42699565841484W
+    Sample 2/30: 38.84235342736006W
+    Sample 3/30: 38.77615018215824W
+    Sample 4/30: 39.21642949387751W
+    Sample 5/30: 39.05914437374592W
+    Sample 6/30: 38.95915162596039W
+    Sample 7/30: 39.23361775198906W
+    Sample 8/30: 39.11795480632856W
+    Sample 9/30: 39.133179769688105W
+    Sample 10/30: 39.169957583313675W
+    Sample 11/30: 38.69621557066475W
+    Sample 12/30: 38.84846304789642W
+    Sample 13/30: 39.10317820875635W
+    Sample 14/30: 38.90486788088997W
+    Sample 15/30: 38.97342140574257W
+    Sample 16/30: 38.97273875849121W
+    Sample 17/30: 38.62669632591831W
+    Sample 18/30: 38.966497281661525W
+    Sample 19/30: 38.97769285031542W
+    Sample 20/30: 38.776847835821435W
+    Sample 21/30: 38.8959997219194W
+    Sample 22/30: 39.15028930662481W
+    Sample 23/30: 38.89015749230488W
+    Sample 24/30: 38.53316732210116W
+    Sample 25/30: 39.06303185565716W
+    Sample 26/30: 38.91764058618061W
+    Sample 27/30: 39.06673433184663W
+    Sample 28/30: 39.24262778835045W
+    Sample 29/30: 38.68366961464304W
+    Sample 30/30: 38.86368724201751W
+  Saved: power_1cu3du_cqi10_96ue_run3.json
+  mean=38.970W std=0.198W n=30
+
+[145/225] 1CU-1DU | CQI=10 | UEs=96 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_96ue_run4.json
+
+[146/225] 1CU-2DU | CQI=10 | UEs=96 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_96ue_run4.json
+
+[147/225] 1CU-3DU | CQI=10 | UEs=96 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.92481732466345W
+    Sample 2/30: 38.82032115962885W
+    Sample 3/30: 38.73997152966814W
+    Sample 4/30: 39.11272190134336W
+    Sample 5/30: 38.842395203388975W
+    Sample 6/30: 38.67337282928574W
+    Sample 7/30: 38.88603270974064W
+    Sample 8/30: 38.85497350030474W
+    Sample 9/30: 38.85230355478918W
+    Sample 10/30: 38.6519189706896W
+    Sample 11/30: 38.91563495139327W
+    Sample 12/30: 39.08695873652091W
+    Sample 13/30: 39.05736796355621W
+    Sample 14/30: 39.04630029315552W
+    Sample 15/30: 38.78409059820808W
+    Sample 16/30: 38.7048253805727W
+    Sample 17/30: 38.659645561224345W
+    Sample 18/30: 38.7824502106534W
+    Sample 19/30: 38.824436807954065W
+    Sample 20/30: 38.734438104220814W
+    Sample 21/30: 39.16709781784178W
+    Sample 22/30: 38.699050085408594W
+    Sample 23/30: 38.39115834102696W
+    Sample 24/30: 38.733605945146465W
+    Sample 25/30: 38.82681866408501W
+    Sample 26/30: 38.79985334095032W
+    Sample 27/30: 38.76126025050083W
+    Sample 28/30: 38.76765547744711W
+    Sample 29/30: 38.923468381789974W
+    Sample 30/30: 39.008487456884765W
+  Saved: power_1cu3du_cqi10_96ue_run4.json
+  mean=38.834W std=0.160W n=30
+
+[148/225] 1CU-1DU | CQI=10 | UEs=96 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi10_96ue_run5.json
+
+[149/225] 1CU-2DU | CQI=10 | UEs=96 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi10_96ue_run5.json
+
+[150/225] 1CU-3DU | CQI=10 | UEs=96 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.096500327414745W
+    Sample 2/30: 39.284304036422654W
+    Sample 3/30: 39.3821948922773W
+    Sample 4/30: 39.23849711239967W
+    Sample 5/30: 38.71295845460632W
+    Sample 6/30: 38.78716987555252W
+    Sample 7/30: 38.655342051353514W
+    Sample 8/30: 38.925541751272206W
+    Sample 9/30: 39.14911615313483W
+    Sample 10/30: 39.11535182909684W
+    Sample 11/30: 38.84117502152385W
+    Sample 12/30: 39.2662675365469W
+    Sample 13/30: 38.891788506736845W
+    Sample 14/30: 38.713233669735715W
+    Sample 15/30: 39.00615562444654W
+    Sample 16/30: 39.11174305588226W
+    Sample 17/30: 39.156205560719776W
+    Sample 18/30: 38.96236558652401W
+    Sample 19/30: 38.964103162998484W
+    Sample 20/30: 39.157216455275915W
+    Sample 21/30: 39.14052119868438W
+    Sample 22/30: 39.01354276585923W
+    Sample 23/30: 39.15136985342909W
+    Sample 24/30: 39.0851268246805W
+    Sample 25/30: 39.50776913000538W
+    Sample 26/30: 39.33858761028603W
+    Sample 27/30: 39.34902815497303W
+    Sample 28/30: 39.176943753090285W
+    Sample 29/30: 39.2120518879137W
+    Sample 30/30: 39.09532800007147W
+  Saved: power_1cu3du_cqi10_96ue_run5.json
+  mean=39.083W std=0.205W n=30
+
+[151/225] 1CU-1DU | CQI=15 | UEs=1 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_1ue_run1.json
+
+[152/225] 1CU-2DU | CQI=15 | UEs=1 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_1ue_run1.json
+
+[153/225] 1CU-3DU | CQI=15 | UEs=1 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.55350900599064W
+    Sample 2/30: 25.197464940402952W
+    Sample 3/30: 24.94177785135163W
+    Sample 4/30: 25.009214292773905W
+    Sample 5/30: 24.799145650891113W
+    Sample 6/30: 25.2724374807423W
+    Sample 7/30: 25.09482392658859W
+    Sample 8/30: 25.011780512124304W
+    Sample 9/30: 25.10865280903492W
+    Sample 10/30: 25.090478667829437W
+    Sample 11/30: 24.82119183142658W
+    Sample 12/30: 24.941239070535296W
+    Sample 13/30: 24.74118648844719W
+    Sample 14/30: 24.871969404219133W
+    Sample 15/30: 25.061465132970973W
+    Sample 16/30: 24.89383636816451W
+    Sample 17/30: 24.65175056283698W
+    Sample 18/30: 24.954279991334836W
+    Sample 19/30: 25.187995095525686W
+    Sample 20/30: 24.837948905386632W
+    Sample 21/30: 24.94452220357704W
+    Sample 22/30: 24.747933271065477W
+    Sample 23/30: 25.134027631784658W
+    Sample 24/30: 24.892100648882398W
+    Sample 25/30: 24.6652477474965W
+    Sample 26/30: 24.80492076186919W
+    Sample 27/30: 25.0077235266954W
+    Sample 28/30: 24.96198992723339W
+    Sample 29/30: 24.943854151916646W
+    Sample 30/30: 25.068345151161097W
+  Saved: power_1cu3du_cqi15_1ue_run1.json
+  mean=24.974W std=0.187W n=30
+
+[154/225] 1CU-1DU | CQI=15 | UEs=1 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_1ue_run2.json
+
+[155/225] 1CU-2DU | CQI=15 | UEs=1 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_1ue_run2.json
+
+[156/225] 1CU-3DU | CQI=15 | UEs=1 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.125336195232773W
+    Sample 2/30: 25.371405764476947W
+    Sample 3/30: 25.314448937054394W
+    Sample 4/30: 25.210333448096808W
+    Sample 5/30: 24.93378337065458W
+    Sample 6/30: 25.026050910109944W
+    Sample 7/30: 25.015250096517335W
+    Sample 8/30: 24.94698867565315W
+    Sample 9/30: 24.643551991051673W
+    Sample 10/30: 24.995537267809652W
+    Sample 11/30: 25.011904196576502W
+    Sample 12/30: 24.9612066944252W
+    Sample 13/30: 24.933922131438734W
+    Sample 14/30: 25.00674480746519W
+    Sample 15/30: 25.046579233848664W
+    Sample 16/30: 24.724923889505483W
+    Sample 17/30: 24.825487719302217W
+    Sample 18/30: 24.745823735469244W
+    Sample 19/30: 25.118201840656738W
+    Sample 20/30: 25.13158954853363W
+    Sample 21/30: 24.90439679322155W
+    Sample 22/30: 24.73073464360487W
+    Sample 23/30: 24.820471973608015W
+    Sample 24/30: 24.811853331374557W
+    Sample 25/30: 24.89530591071253W
+    Sample 26/30: 24.559982260401533W
+    Sample 27/30: 24.914492244115593W
+    Sample 28/30: 25.28841894778412W
+    Sample 29/30: 24.81548945689911W
+    Sample 30/30: 24.86600992103119W
+  Saved: power_1cu3du_cqi15_1ue_run2.json
+  mean=24.957W std=0.190W n=30
+
+[157/225] 1CU-1DU | CQI=15 | UEs=1 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_1ue_run3.json
+
+[158/225] 1CU-2DU | CQI=15 | UEs=1 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_1ue_run3.json
+
+[159/225] 1CU-3DU | CQI=15 | UEs=1 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 24.681505280697237W
+    Sample 2/30: 24.91076713310501W
+    Sample 3/30: 24.73206162856836W
+    Sample 4/30: 25.01487701568712W
+    Sample 5/30: 24.620419569930895W
+    Sample 6/30: 24.90258942078676W
+    Sample 7/30: 24.54184343756498W
+    Sample 8/30: 24.766029117654494W
+    Sample 9/30: 24.417262891109278W
+    Sample 10/30: 24.65110324662614W
+    Sample 11/30: 24.661088877963778W
+    Sample 12/30: 24.4604906037842W
+    Sample 13/30: 24.68349246314905W
+    Sample 14/30: 24.926997075896004W
+    Sample 15/30: 24.37749477252497W
+    Sample 16/30: 24.41771080168545W
+    Sample 17/30: 25.0320124104703W
+    Sample 18/30: 24.74835280585203W
+    Sample 19/30: 24.726596098831024W
+    Sample 20/30: 24.79545595980577W
+    Sample 21/30: 24.443707420970362W
+    Sample 22/30: 24.28409547361104W
+    Sample 23/30: 24.79452638489584W
+    Sample 24/30: 24.473893603864003W
+    Sample 25/30: 24.586937861585618W
+    Sample 26/30: 24.683781811745128W
+    Sample 27/30: 24.562728474240217W
+    Sample 28/30: 24.939317040321257W
+    Sample 29/30: 24.655363023768597W
+    Sample 30/30: 24.693399599906417W
+  Saved: power_1cu3du_cqi15_1ue_run3.json
+  mean=24.673W std=0.190W n=30
+
+[160/225] 1CU-1DU | CQI=15 | UEs=1 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_1ue_run4.json
+
+[161/225] 1CU-2DU | CQI=15 | UEs=1 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_1ue_run4.json
+
+[162/225] 1CU-3DU | CQI=15 | UEs=1 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 24.88583433662842W
+    Sample 2/30: 25.06970848859147W
+    Sample 3/30: 24.832325919345337W
+    Sample 4/30: 24.84835931310898W
+    Sample 5/30: 25.00856602365117W
+    Sample 6/30: 25.172188402243044W
+    Sample 7/30: 24.894275869044172W
+    Sample 8/30: 24.66300276659342W
+    Sample 9/30: 25.158227685734822W
+    Sample 10/30: 25.172665965124366W
+    Sample 11/30: 24.726586309863112W
+    Sample 12/30: 24.90938924176959W
+    Sample 13/30: 24.83257581109286W
+    Sample 14/30: 24.78887019917434W
+    Sample 15/30: 24.81957488990806W
+    Sample 16/30: 24.724692549777604W
+    Sample 17/30: 24.657884053912355W
+    Sample 18/30: 24.863331392920866W
+    Sample 19/30: 24.634601406327555W
+    Sample 20/30: 24.65516517707474W
+    Sample 21/30: 24.772596410460796W
+    Sample 22/30: 25.10139935622803W
+    Sample 23/30: 24.597765319519368W
+    Sample 24/30: 24.338403922268178W
+    Sample 25/30: 24.70515751695095W
+    Sample 26/30: 24.520681616224564W
+    Sample 27/30: 24.526845839168026W
+    Sample 28/30: 24.744823519397016W
+    Sample 29/30: 24.69975809020908W
+    Sample 30/30: 24.820680395646974W
+  Saved: power_1cu3du_cqi15_1ue_run4.json
+  mean=24.805W std=0.198W n=30
+
+[163/225] 1CU-1DU | CQI=15 | UEs=1 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_1ue_run5.json
+
+[164/225] 1CU-2DU | CQI=15 | UEs=1 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_1ue_run5.json
+
+[165/225] 1CU-3DU | CQI=15 | UEs=1 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.092510722681894W
+    Sample 2/30: 25.155087489444973W
+    Sample 3/30: 24.934994505779457W
+    Sample 4/30: 24.70748722906089W
+    Sample 5/30: 24.759952047916187W
+    Sample 6/30: 24.746408677196534W
+    Sample 7/30: 25.16131274866973W
+    Sample 8/30: 24.91594739525621W
+    Sample 9/30: 24.97085195137462W
+    Sample 10/30: 24.81436007885456W
+    Sample 11/30: 25.23074430661116W
+    Sample 12/30: 24.968192720084097W
+    Sample 13/30: 24.637392025219818W
+    Sample 14/30: 25.196876167850654W
+    Sample 15/30: 25.198287822277656W
+    Sample 16/30: 24.68872938045168W
+    Sample 17/30: 24.66055931920176W
+    Sample 18/30: 24.907244791578677W
+    Sample 19/30: 24.731210567152328W
+    Sample 20/30: 24.894949181368485W
+    Sample 21/30: 24.834554175717145W
+    Sample 22/30: 24.61912280854783W
+    Sample 23/30: 24.904378202653216W
+    Sample 24/30: 24.80029142185976W
+    Sample 25/30: 24.651472756804743W
+    Sample 26/30: 24.928407545465326W
+    Sample 27/30: 24.437918346275808W
+    Sample 28/30: 24.9669089960176W
+    Sample 29/30: 24.828818687324677W
+    Sample 30/30: 24.64214013439988W
+  Saved: power_1cu3du_cqi15_1ue_run5.json
+  mean=24.866W std=0.197W n=30
+
+[166/225] 1CU-1DU | CQI=15 | UEs=4 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_4ue_run1.json
+
+[167/225] 1CU-2DU | CQI=15 | UEs=4 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_4ue_run1.json
+
+[168/225] 1CU-3DU | CQI=15 | UEs=4 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.26315548712315W
+    Sample 2/30: 25.538473164403953W
+    Sample 3/30: 25.36394372094452W
+    Sample 4/30: 25.42994933350363W
+    Sample 5/30: 25.190489157482517W
+    Sample 6/30: 25.1895222259487W
+    Sample 7/30: 25.188288823327696W
+    Sample 8/30: 25.45171895526432W
+    Sample 9/30: 25.29083634410965W
+    Sample 10/30: 25.098189116289213W
+    Sample 11/30: 25.39564733059246W
+    Sample 12/30: 25.264608749002456W
+    Sample 13/30: 25.329692559107777W
+    Sample 14/30: 25.34726254124923W
+    Sample 15/30: 25.179696256683798W
+    Sample 16/30: 25.5225826860696W
+    Sample 17/30: 25.40225205069538W
+    Sample 18/30: 25.28209027776305W
+    Sample 19/30: 25.257207574026026W
+    Sample 20/30: 25.506229832616242W
+    Sample 21/30: 25.031544003230955W
+    Sample 22/30: 25.246285034492455W
+    Sample 23/30: 25.573184716818524W
+    Sample 24/30: 25.42300125728591W
+    Sample 25/30: 25.189701779293586W
+    Sample 26/30: 25.208620490047036W
+    Sample 27/30: 25.12378487086425W
+    Sample 28/30: 25.274123520971344W
+    Sample 29/30: 25.495895717273513W
+    Sample 30/30: 25.13759399064561W
+  Saved: power_1cu3du_cqi15_4ue_run1.json
+  mean=25.307W std=0.141W n=30
+
+[169/225] 1CU-1DU | CQI=15 | UEs=4 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_4ue_run2.json
+
+[170/225] 1CU-2DU | CQI=15 | UEs=4 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_4ue_run2.json
+
+[171/225] 1CU-3DU | CQI=15 | UEs=4 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.58367225397587W
+    Sample 2/30: 25.72151854501482W
+    Sample 3/30: 25.276669270912898W
+    Sample 4/30: 25.23448393935213W
+    Sample 5/30: 25.536888372947388W
+    Sample 6/30: 25.284980006651075W
+    Sample 7/30: 25.228234415888426W
+    Sample 8/30: 25.288198281170224W
+    Sample 9/30: 25.400425691898043W
+    Sample 10/30: 25.316161121009547W
+    Sample 11/30: 25.15760561267147W
+    Sample 12/30: 25.513359445974537W
+    Sample 13/30: 25.273693465282175W
+    Sample 14/30: 25.343955026452704W
+    Sample 15/30: 25.0880575425211W
+    Sample 16/30: 25.216564485009812W
+    Sample 17/30: 25.09470246078621W
+    Sample 18/30: 25.415520074186638W
+    Sample 19/30: 25.32382627366634W
+    Sample 20/30: 25.214258894070056W
+    Sample 21/30: 25.37753511598131W
+    Sample 22/30: 25.49784994038488W
+    Sample 23/30: 25.40510564450836W
+    Sample 24/30: 25.682957299285484W
+    Sample 25/30: 25.465325441407813W
+    Sample 26/30: 25.221268291686634W
+    Sample 27/30: 25.183945846282796W
+    Sample 28/30: 25.52541366090118W
+    Sample 29/30: 25.1298842102845W
+    Sample 30/30: 25.268699664552784W
+  Saved: power_1cu3du_cqi15_4ue_run2.json
+  mean=25.342W std=0.163W n=30
+
+[172/225] 1CU-1DU | CQI=15 | UEs=4 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_4ue_run3.json
+
+[173/225] 1CU-2DU | CQI=15 | UEs=4 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_4ue_run3.json
+
+[174/225] 1CU-3DU | CQI=15 | UEs=4 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.577040070223752W
+    Sample 2/30: 25.70127685458546W
+    Sample 3/30: 25.347177859623642W
+    Sample 4/30: 25.20514569916788W
+    Sample 5/30: 25.253689565217677W
+    Sample 6/30: 25.221257627639666W
+    Sample 7/30: 25.309874447691648W
+    Sample 8/30: 25.522898446671817W
+    Sample 9/30: 25.426734436660624W
+    Sample 10/30: 25.15265451542713W
+    Sample 11/30: 25.196560271816253W
+    Sample 12/30: 25.279706743358226W
+    Sample 13/30: 25.235688707094727W
+    Sample 14/30: 25.431592271841236W
+    Sample 15/30: 25.34311031431671W
+    Sample 16/30: 25.262018250368385W
+    Sample 17/30: 25.200987519989532W
+    Sample 18/30: 25.08471249003439W
+    Sample 19/30: 25.229944797898387W
+    Sample 20/30: 25.02296022686302W
+    Sample 21/30: 25.219965050204888W
+    Sample 22/30: 25.014219792619606W
+    Sample 23/30: 25.29793329136165W
+    Sample 24/30: 25.262113510022722W
+    Sample 25/30: 25.255819551727864W
+    Sample 26/30: 25.334079431725357W
+    Sample 27/30: 25.163843627307017W
+    Sample 28/30: 25.235949632417572W
+    Sample 29/30: 25.072219097313166W
+    Sample 30/30: 25.246031387663983W
+  Saved: power_1cu3du_cqi15_4ue_run3.json
+  mean=25.270W std=0.149W n=30
+
+[175/225] 1CU-1DU | CQI=15 | UEs=4 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_4ue_run4.json
+
+[176/225] 1CU-2DU | CQI=15 | UEs=4 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_4ue_run4.json
+
+[177/225] 1CU-3DU | CQI=15 | UEs=4 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.373884378571603W
+    Sample 2/30: 25.362223209409464W
+    Sample 3/30: 25.593727172603238W
+    Sample 4/30: 25.06938565825026W
+    Sample 5/30: 25.293069856609513W
+    Sample 6/30: 25.15236353231395W
+    Sample 7/30: 25.13658063440588W
+    Sample 8/30: 25.038214131495618W
+    Sample 9/30: 25.500800183854864W
+    Sample 10/30: 25.44185267605284W
+    Sample 11/30: 25.16735897878771W
+    Sample 12/30: 25.14127019856145W
+    Sample 13/30: 25.190610530184863W
+    Sample 14/30: 25.41764945675537W
+    Sample 15/30: 25.315944743729553W
+    Sample 16/30: 25.088354111181985W
+    Sample 17/30: 25.283372745999586W
+    Sample 18/30: 25.207571308655996W
+    Sample 19/30: 25.127467545632715W
+    Sample 20/30: 25.277902910321046W
+    Sample 21/30: 25.449631670134373W
+    Sample 22/30: 25.34955755338875W
+    Sample 23/30: 25.308528405021683W
+    Sample 24/30: 25.37819256873992W
+    Sample 25/30: 25.297919249433065W
+    Sample 26/30: 25.160314234973583W
+    Sample 27/30: 25.304008677405644W
+    Sample 28/30: 25.3398438694699W
+    Sample 29/30: 25.533935462807655W
+    Sample 30/30: 25.331952910622633W
+  Saved: power_1cu3du_cqi15_4ue_run4.json
+  mean=25.288W std=0.139W n=30
+
+[178/225] 1CU-1DU | CQI=15 | UEs=4 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_4ue_run5.json
+
+[179/225] 1CU-2DU | CQI=15 | UEs=4 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_4ue_run5.json
+
+[180/225] 1CU-3DU | CQI=15 | UEs=4 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 25.385658715190075W
+    Sample 2/30: 25.555853270223047W
+    Sample 3/30: 25.531797813742024W
+    Sample 4/30: 25.079234021091015W
+    Sample 5/30: 25.394083362902023W
+    Sample 6/30: 25.59517752814434W
+    Sample 7/30: 25.652428394120005W
+    Sample 8/30: 25.23884970798691W
+    Sample 9/30: 25.12384419241937W
+    Sample 10/30: 25.702141518312082W
+    Sample 11/30: 25.39689978850498W
+    Sample 12/30: 25.354340976546947W
+    Sample 13/30: 25.252638422110195W
+    Sample 14/30: 25.373212646466065W
+    Sample 15/30: 25.556351501569807W
+    Sample 16/30: 25.384958699511024W
+    Sample 17/30: 25.449342443147707W
+    Sample 18/30: 25.36604990492775W
+    Sample 19/30: 25.3493479376441W
+    Sample 20/30: 25.384290187222167W
+    Sample 21/30: 25.329463921632538W
+    Sample 22/30: 25.37845748233204W
+    Sample 23/30: 25.44905428521311W
+    Sample 24/30: 25.168089054874457W
+    Sample 25/30: 25.20099298439484W
+    Sample 26/30: 25.45058800476039W
+    Sample 27/30: 25.13775484837346W
+    Sample 28/30: 25.229550651225434W
+    Sample 29/30: 25.254709864318425W
+    Sample 30/30: 25.01239916074054W
+  Saved: power_1cu3du_cqi15_4ue_run5.json
+  mean=25.358W std=0.165W n=30
+
+[181/225] 1CU-1DU | CQI=15 | UEs=16 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_16ue_run1.json
+
+[182/225] 1CU-2DU | CQI=15 | UEs=16 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_16ue_run1.json
+
+[183/225] 1CU-3DU | CQI=15 | UEs=16 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.353382861582944W
+    Sample 2/30: 31.6258145169857W
+    Sample 3/30: 31.37532025267708W
+    Sample 4/30: 31.18204589494446W
+    Sample 5/30: 31.27709434292032W
+    Sample 6/30: 31.46229371462372W
+    Sample 7/30: 31.129517795683384W
+    Sample 8/30: 31.012487650774098W
+    Sample 9/30: 31.51428625260281W
+    Sample 10/30: 31.329238771116025W
+    Sample 11/30: 31.350536647903212W
+    Sample 12/30: 31.15932057076578W
+    Sample 13/30: 31.242806187348883W
+    Sample 14/30: 31.013596679314617W
+    Sample 15/30: 31.003321225993652W
+    Sample 16/30: 31.331578187335744W
+    Sample 17/30: 31.315976698370935W
+    Sample 18/30: 31.43579091459469W
+    Sample 19/30: 31.47347186765549W
+    Sample 20/30: 31.51432152645458W
+    Sample 21/30: 31.18226038346981W
+    Sample 22/30: 30.888300490734174W
+    Sample 23/30: 31.213779690775908W
+    Sample 24/30: 31.29893232472763W
+    Sample 25/30: 31.41902064505588W
+    Sample 26/30: 31.20701803924942W
+    Sample 27/30: 31.071817600280838W
+    Sample 28/30: 31.291537395261077W
+    Sample 29/30: 31.532226451666602W
+    Sample 30/30: 31.16745436856447W
+  Saved: power_1cu3du_cqi15_16ue_run1.json
+  mean=31.279W std=0.176W n=30
+
+[184/225] 1CU-1DU | CQI=15 | UEs=16 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_16ue_run2.json
+
+[185/225] 1CU-2DU | CQI=15 | UEs=16 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_16ue_run2.json
+
+[186/225] 1CU-3DU | CQI=15 | UEs=16 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.623862346283246W
+    Sample 2/30: 31.608013503359224W
+    Sample 3/30: 31.40468742476473W
+    Sample 4/30: 31.509416512490656W
+    Sample 5/30: 31.47570856309931W
+    Sample 6/30: 31.60979171272026W
+    Sample 7/30: 31.610706616514094W
+    Sample 8/30: 31.61787541267668W
+    Sample 9/30: 31.54388620307455W
+    Sample 10/30: 31.667208425603025W
+    Sample 11/30: 31.57160537893215W
+    Sample 12/30: 31.81576943122559W
+    Sample 13/30: 31.564634811539765W
+    Sample 14/30: 31.467581021235272W
+    Sample 15/30: 31.639136112819898W
+    Sample 16/30: 31.41234459884609W
+    Sample 17/30: 31.46209653399351W
+    Sample 18/30: 31.486010426536218W
+    Sample 19/30: 31.40729771009903W
+    Sample 20/30: 31.561841282948457W
+    Sample 21/30: 31.551551684479524W
+    Sample 22/30: 31.453152988726618W
+    Sample 23/30: 31.695028966440006W
+    Sample 24/30: 31.543283250668505W
+    Sample 25/30: 31.602863016199095W
+    Sample 26/30: 31.43752245824814W
+    Sample 27/30: 31.466991561967774W
+    Sample 28/30: 31.52906941824875W
+    Sample 29/30: 31.772997197336366W
+    Sample 30/30: 31.593080427669523W
+  Saved: power_1cu3du_cqi15_16ue_run2.json
+  mean=31.557W std=0.101W n=30
+
+[187/225] 1CU-1DU | CQI=15 | UEs=16 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_16ue_run3.json
+
+[188/225] 1CU-2DU | CQI=15 | UEs=16 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_16ue_run3.json
+
+[189/225] 1CU-3DU | CQI=15 | UEs=16 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.782242818926523W
+    Sample 2/30: 31.848570501909638W
+    Sample 3/30: 31.48424458106884W
+    Sample 4/30: 31.59365160552933W
+    Sample 5/30: 31.85488217892637W
+    Sample 6/30: 31.516478208896594W
+    Sample 7/30: 31.55010937746048W
+    Sample 8/30: 31.70310500410841W
+    Sample 9/30: 31.400429818109743W
+    Sample 10/30: 31.403958197072868W
+    Sample 11/30: 31.631330438913423W
+    Sample 12/30: 31.582740900753862W
+    Sample 13/30: 31.634637322118284W
+    Sample 14/30: 31.856588829479826W
+    Sample 15/30: 31.514744177521074W
+    Sample 16/30: 31.574615748782577W
+    Sample 17/30: 31.583771032543943W
+    Sample 18/30: 31.61641707392767W
+    Sample 19/30: 31.44482559544157W
+    Sample 20/30: 31.423648712626647W
+    Sample 21/30: 31.537147838034016W
+    Sample 22/30: 31.064199788289166W
+    Sample 23/30: 31.549353522297192W
+    Sample 24/30: 31.460818138265992W
+    Sample 25/30: 31.225086669144286W
+    Sample 26/30: 31.364873130843655W
+    Sample 27/30: 31.43568804891804W
+    Sample 28/30: 31.570541540397947W
+    Sample 29/30: 31.593551346842993W
+    Sample 30/30: 31.731814967562258W
+  Saved: power_1cu3du_cqi15_16ue_run3.json
+  mean=31.551W std=0.172W n=30
+
+[190/225] 1CU-1DU | CQI=15 | UEs=16 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_16ue_run4.json
+
+[191/225] 1CU-2DU | CQI=15 | UEs=16 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_16ue_run4.json
+
+[192/225] 1CU-3DU | CQI=15 | UEs=16 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.686068758656788W
+    Sample 2/30: 31.72491274089508W
+    Sample 3/30: 31.53380158091064W
+    Sample 4/30: 31.56720715031006W
+    Sample 5/30: 31.424476485116386W
+    Sample 6/30: 31.38748282924822W
+    Sample 7/30: 31.52524714338913W
+    Sample 8/30: 31.347499348319438W
+    Sample 9/30: 31.503110441924743W
+    Sample 10/30: 31.548875279382322W
+    Sample 11/30: 31.558917299523355W
+    Sample 12/30: 31.372458289902323W
+    Sample 13/30: 31.355261736170636W
+    Sample 14/30: 31.533720284489497W
+    Sample 15/30: 31.725029507324045W
+    Sample 16/30: 31.470693987313233W
+    Sample 17/30: 31.240783804323577W
+    Sample 18/30: 31.499020928180997W
+    Sample 19/30: 31.521812778513244W
+    Sample 20/30: 31.33986154716213W
+    Sample 21/30: 31.56913489166977W
+    Sample 22/30: 31.549149689687503W
+    Sample 23/30: 31.445044820294342W
+    Sample 24/30: 31.33463673271179W
+    Sample 25/30: 31.365351264820475W
+    Sample 26/30: 31.47708310326464W
+    Sample 27/30: 31.660202375725824W
+    Sample 28/30: 31.427015041965408W
+    Sample 29/30: 31.402408960042493W
+    Sample 30/30: 31.45239951662834W
+  Saved: power_1cu3du_cqi15_16ue_run4.json
+  mean=31.485W std=0.118W n=30
+
+[193/225] 1CU-1DU | CQI=15 | UEs=16 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_16ue_run5.json
+
+[194/225] 1CU-2DU | CQI=15 | UEs=16 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_16ue_run5.json
+
+[195/225] 1CU-3DU | CQI=15 | UEs=16 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 31.631090088631893W
+    Sample 2/30: 31.410030635677455W
+    Sample 3/30: 31.410335160536953W
+    Sample 4/30: 31.55151460394024W
+    Sample 5/30: 31.297865530931624W
+    Sample 6/30: 31.766063448162534W
+    Sample 7/30: 31.55586916638302W
+    Sample 8/30: 31.51492844052887W
+    Sample 9/30: 31.542935873592455W
+    Sample 10/30: 31.619178532798006W
+    Sample 11/30: 31.216197470834828W
+    Sample 12/30: 31.03979935117012W
+    Sample 13/30: 31.304887947864074W
+    Sample 14/30: 31.306044583375627W
+    Sample 15/30: 31.161036208217066W
+    Sample 16/30: 31.391272966382598W
+    Sample 17/30: 31.348171083582514W
+    Sample 18/30: 31.30063418210205W
+    Sample 19/30: 31.35015238976822W
+    Sample 20/30: 31.320101742858583W
+    Sample 21/30: 31.31095172332489W
+    Sample 22/30: 31.412834999337157W
+    Sample 23/30: 31.359382731023558W
+    Sample 24/30: 31.210758951555633W
+    Sample 25/30: 31.19836539768219W
+    Sample 26/30: 31.18506670997864W
+    Sample 27/30: 31.311111649435944W
+    Sample 28/30: 31.594678761320004W
+    Sample 29/30: 31.383337406420363W
+    Sample 30/30: 31.28418140805279W
+  Saved: power_1cu3du_cqi15_16ue_run5.json
+  mean=31.376W std=0.159W n=30
+
+[196/225] 1CU-1DU | CQI=15 | UEs=64 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_64ue_run1.json
+
+[197/225] 1CU-2DU | CQI=15 | UEs=64 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_64ue_run1.json
+
+[198/225] 1CU-3DU | CQI=15 | UEs=64 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 35.35090833993313W
+    Sample 2/30: 35.46096681531692W
+    Sample 3/30: 35.454084997057784W
+    Sample 4/30: 35.503951820085526W
+    Sample 5/30: 35.59060336041504W
+    Sample 6/30: 35.4911117729248W
+    Sample 7/30: 35.50212045337875W
+    Sample 8/30: 35.40976727681414W
+    Sample 9/30: 35.37177982509306W
+    Sample 10/30: 35.47072925114233W
+    Sample 11/30: 35.66157477995047W
+    Sample 12/30: 35.41334242724258W
+    Sample 13/30: 35.456308829428195W
+    Sample 14/30: 35.466624243706626W
+    Sample 15/30: 35.4430883941418W
+    Sample 16/30: 35.51054366860043W
+    Sample 17/30: 35.39405184269455W
+    Sample 18/30: 35.33268534858452W
+    Sample 19/30: 35.33496166951332W
+    Sample 20/30: 35.31160268156147W
+    Sample 21/30: 35.51221350022848W
+    Sample 22/30: 35.41765609376135W
+    Sample 23/30: 35.28819194581013W
+    Sample 24/30: 35.457295535315W
+    Sample 25/30: 35.558897510413225W
+    Sample 26/30: 35.27043778537449W
+    Sample 27/30: 35.526489743129936W
+    Sample 28/30: 35.393674867342526W
+    Sample 29/30: 35.119939070319845W
+    Sample 30/30: 35.5695572184106W
+  Saved: power_1cu3du_cqi15_64ue_run1.json
+  mean=35.435W std=0.107W n=30
+
+[199/225] 1CU-1DU | CQI=15 | UEs=64 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_64ue_run2.json
+
+[200/225] 1CU-2DU | CQI=15 | UEs=64 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_64ue_run2.json
+
+[201/225] 1CU-3DU | CQI=15 | UEs=64 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 35.77625477085398W
+    Sample 2/30: 35.77578840588555W
+    Sample 3/30: 35.908046371332745W
+    Sample 4/30: 35.69408788319542W
+    Sample 5/30: 35.606404234773166W
+    Sample 6/30: 35.5508860667193W
+    Sample 7/30: 35.46454555279215W
+    Sample 8/30: 35.50385979005182W
+    Sample 9/30: 35.92035182187104W
+    Sample 10/30: 35.93236975074707W
+    Sample 11/30: 35.55893054588242W
+    Sample 12/30: 35.755981487327006W
+    Sample 13/30: 36.0358069158388W
+    Sample 14/30: 35.86536134504853W
+    Sample 15/30: 35.921929440445325W
+    Sample 16/30: 35.570521234772684W
+    Sample 17/30: 35.79520985112407W
+    Sample 18/30: 35.50297554090868W
+    Sample 19/30: 35.7817316962052W
+    Sample 20/30: 35.596931906900274W
+    Sample 21/30: 35.335513552256224W
+    Sample 22/30: 35.72361330801309W
+    Sample 23/30: 35.744294706049345W
+    Sample 24/30: 35.701455845062945W
+    Sample 25/30: 35.723344335227104W
+    Sample 26/30: 35.504054325679775W
+    Sample 27/30: 35.846559820076294W
+    Sample 28/30: 35.723564976634876W
+    Sample 29/30: 35.921049953210044W
+    Sample 30/30: 35.73994550214798W
+  Saved: power_1cu3du_cqi15_64ue_run2.json
+  mean=35.716W std=0.165W n=30
+
+[202/225] 1CU-1DU | CQI=15 | UEs=64 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_64ue_run3.json
+
+[203/225] 1CU-2DU | CQI=15 | UEs=64 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_64ue_run3.json
+
+[204/225] 1CU-3DU | CQI=15 | UEs=64 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 35.658502059627004W
+    Sample 2/30: 35.54936359400253W
+    Sample 3/30: 35.31815155145691W
+    Sample 4/30: 35.667162402530046W
+    Sample 5/30: 35.93953423899336W
+    Sample 6/30: 35.76763785563347W
+    Sample 7/30: 35.7472334209407W
+    Sample 8/30: 35.65853035653031W
+    Sample 9/30: 35.44943963397867W
+    Sample 10/30: 35.39645338419547W
+    Sample 11/30: 35.78316123935537W
+    Sample 12/30: 36.11893894506523W
+    Sample 13/30: 35.83663831686001W
+    Sample 14/30: 35.526674034258896W
+    Sample 15/30: 35.75519741467562W
+    Sample 16/30: 35.67341334845923W
+    Sample 17/30: 35.5030720273695W
+    Sample 18/30: 35.25977635562023W
+    Sample 19/30: 35.51627708821198W
+    Sample 20/30: 35.387908351565095W
+    Sample 21/30: 35.35133678659109W
+    Sample 22/30: 35.5086360427246W
+    Sample 23/30: 35.743049660196306W
+    Sample 24/30: 35.65344572224028W
+    Sample 25/30: 35.67766619803848W
+    Sample 26/30: 35.54356347955995W
+    Sample 27/30: 35.79328715508831W
+    Sample 28/30: 35.74884437136647W
+    Sample 29/30: 35.645373975152964W
+    Sample 30/30: 35.796056415816466W
+  Saved: power_1cu3du_cqi15_64ue_run3.json
+  mean=35.632W std=0.188W n=30
+
+[205/225] 1CU-1DU | CQI=15 | UEs=64 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_64ue_run4.json
+
+[206/225] 1CU-2DU | CQI=15 | UEs=64 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_64ue_run4.json
+
+[207/225] 1CU-3DU | CQI=15 | UEs=64 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 35.634372237333984W
+    Sample 2/30: 35.30919371878136W
+    Sample 3/30: 35.649682586539456W
+    Sample 4/30: 35.700693728594516W
+    Sample 5/30: 35.74133749929697W
+    Sample 6/30: 35.49033245918835W
+    Sample 7/30: 35.41020353760925W
+    Sample 8/30: 35.597176364069085W
+    Sample 9/30: 35.72924417830982W
+    Sample 10/30: 35.386639517614576W
+    Sample 11/30: 35.83841834284632W
+    Sample 12/30: 35.62895085699623W
+    Sample 13/30: 35.5535224382148W
+    Sample 14/30: 35.40913625010292W
+    Sample 15/30: 35.50105681387995W
+    Sample 16/30: 35.690005993499454W
+    Sample 17/30: 35.70755705263984W
+    Sample 18/30: 35.408545039943505W
+    Sample 19/30: 35.77353497545337W
+    Sample 20/30: 35.750451243969685W
+    Sample 21/30: 35.945737250885756W
+    Sample 22/30: 35.65526443456478W
+    Sample 23/30: 35.54491833435886W
+    Sample 24/30: 35.462823963310946W
+    Sample 25/30: 35.618767780184726W
+    Sample 26/30: 35.776840510330544W
+    Sample 27/30: 35.465346052079205W
+    Sample 28/30: 35.1929995433852W
+    Sample 29/30: 35.49815993807774W
+    Sample 30/30: 35.27178944844234W
+  Saved: power_1cu3du_cqi15_64ue_run4.json
+  mean=35.578W std=0.174W n=30
+
+[208/225] 1CU-1DU | CQI=15 | UEs=64 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_64ue_run5.json
+
+[209/225] 1CU-2DU | CQI=15 | UEs=64 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_64ue_run5.json
+
+[210/225] 1CU-3DU | CQI=15 | UEs=64 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 35.91552171460212W
+    Sample 2/30: 36.01687334509144W
+    Sample 3/30: 35.97189731722315W
+    Sample 4/30: 36.061515361513884W
+    Sample 5/30: 36.175073820048794W
+    Sample 6/30: 35.939540318447115W
+    Sample 7/30: 35.931640127966304W
+    Sample 8/30: 35.901195649453356W
+    Sample 9/30: 35.681799186586645W
+    Sample 10/30: 35.51409024551048W
+    Sample 11/30: 35.88926426958015W
+    Sample 12/30: 35.58341476039718W
+    Sample 13/30: 35.67500336029434W
+    Sample 14/30: 35.81214197518379W
+    Sample 15/30: 35.551617664627116W
+    Sample 16/30: 35.29401152159687W
+    Sample 17/30: 35.798570039316374W
+    Sample 18/30: 35.72709099786644W
+    Sample 19/30: 35.934856091419604W
+    Sample 20/30: 35.83232762058844W
+    Sample 21/30: 35.541795234964525W
+    Sample 22/30: 35.774070613257976W
+    Sample 23/30: 35.90176376529976W
+    Sample 24/30: 35.2595739697815W
+    Sample 25/30: 35.262772314772334W
+    Sample 26/30: 35.65170237205549W
+    Sample 27/30: 35.3783500848126W
+    Sample 28/30: 35.481166983050954W
+    Sample 29/30: 35.614056998118016W
+    Sample 30/30: 35.77706085997051W
+  Saved: power_1cu3du_cqi15_64ue_run5.json
+  mean=35.728W std=0.238W n=30
+
+[211/225] 1CU-1DU | CQI=15 | UEs=96 | Run=1
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_96ue_run1.json
+
+[212/225] 1CU-2DU | CQI=15 | UEs=96 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_96ue_run1.json
+
+[213/225] 1CU-3DU | CQI=15 | UEs=96 | Run=1
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.59850335275192W
+    Sample 2/30: 38.28258959223385W
+    Sample 3/30: 38.064829454875316W
+    Sample 4/30: 38.620723865389465W
+    Sample 5/30: 38.530914264806064W
+    Sample 6/30: 38.51843290746828W
+    Sample 7/30: 38.54616172864883W
+    Sample 8/30: 38.43271300350122W
+    Sample 9/30: 38.4734631177816W
+    Sample 10/30: 38.41749295794525W
+    Sample 11/30: 38.459239770407024W
+    Sample 12/30: 38.61475654824869W
+    Sample 13/30: 38.73678889696396W
+    Sample 14/30: 38.565935088810384W
+    Sample 15/30: 38.36267297732811W
+    Sample 16/30: 38.809803630309716W
+    Sample 17/30: 38.67461227577118W
+    Sample 18/30: 38.53526303871952W
+    Sample 19/30: 38.676976809784186W
+    Sample 20/30: 38.27910291742935W
+    Sample 21/30: 38.91080563665266W
+    Sample 22/30: 38.467378410939595W
+    Sample 23/30: 38.57824376046867W
+    Sample 24/30: 38.4403355645636W
+    Sample 25/30: 38.259547425633414W
+    Sample 26/30: 38.348230852449475W
+    Sample 27/30: 37.970649292121315W
+    Sample 28/30: 38.026766794795705W
+    Sample 29/30: 37.943542846808086W
+    Sample 30/30: 38.019698168226704W
+  Saved: power_1cu3du_cqi15_96ue_run1.json
+  mean=38.439W std=0.243W n=30
+
+[214/225] 1CU-1DU | CQI=15 | UEs=96 | Run=2
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_96ue_run2.json
+
+[215/225] 1CU-2DU | CQI=15 | UEs=96 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_96ue_run2.json
+
+[216/225] 1CU-3DU | CQI=15 | UEs=96 | Run=2
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 39.05106599643128W
+    Sample 2/30: 38.38764628427292W
+    Sample 3/30: 38.71332520768692W
+    Sample 4/30: 38.96801247545614W
+    Sample 5/30: 39.04278507198028W
+    Sample 6/30: 38.703502534042336W
+    Sample 7/30: 38.8019822086568W
+    Sample 8/30: 38.82527700970173W
+    Sample 9/30: 38.70944854702892W
+    Sample 10/30: 38.99431125890923W
+    Sample 11/30: 38.44210560886883W
+    Sample 12/30: 38.747689038704394W
+    Sample 13/30: 38.483435983891184W
+    Sample 14/30: 37.93489374103889W
+    Sample 15/30: 38.551919570429384W
+    Sample 16/30: 38.46061667681173W
+    Sample 17/30: 38.52613155742884W
+    Sample 18/30: 38.595884465402904W
+    Sample 19/30: 38.752588722150136W
+    Sample 20/30: 38.47837532186508W
+    Sample 21/30: 38.8192759907959W
+    Sample 22/30: 38.98598972990804W
+    Sample 23/30: 38.5725473683049W
+    Sample 24/30: 38.55249048011603W
+    Sample 25/30: 38.55709459572136W
+    Sample 26/30: 38.69819706606882W
+    Sample 27/30: 38.546632853131484W
+    Sample 28/30: 38.72191071069561W
+    Sample 29/30: 38.62157829299416W
+    Sample 30/30: 38.47237084733261W
+  Saved: power_1cu3du_cqi15_96ue_run2.json
+  mean=38.657W std=0.229W n=30
+
+[217/225] 1CU-1DU | CQI=15 | UEs=96 | Run=3
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_96ue_run3.json
+
+[218/225] 1CU-2DU | CQI=15 | UEs=96 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_96ue_run3.json
+
+[219/225] 1CU-3DU | CQI=15 | UEs=96 | Run=3
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.16933317719513W
+    Sample 2/30: 38.496112838601604W
+    Sample 3/30: 38.79592798412109W
+    Sample 4/30: 38.70132626557865W
+    Sample 5/30: 38.63851979342556W
+    Sample 6/30: 38.51830712559521W
+    Sample 7/30: 38.77541559848774W
+    Sample 8/30: 38.607020385946356W
+    Sample 9/30: 38.457119423080634W
+    Sample 10/30: 38.15685531801086W
+    Sample 11/30: 38.23962622507542W
+    Sample 12/30: 38.54201977878571W
+    Sample 13/30: 38.57392516936155W
+    Sample 14/30: 38.769270983631095W
+    Sample 15/30: 38.74646648263149W
+    Sample 16/30: 38.547557163815405W
+    Sample 17/30: 38.57219063198797W
+    Sample 18/30: 38.54064322429439W
+    Sample 19/30: 38.53831694559028W
+    Sample 20/30: 38.47477862086659W
+    Sample 21/30: 38.77432512861683W
+    Sample 22/30: 38.47912040371157W
+    Sample 23/30: 38.50106440258384W
+    Sample 24/30: 38.315354835522655W
+    Sample 25/30: 38.26697026505074W
+    Sample 26/30: 38.331363714169065W
+    Sample 27/30: 38.20053336886372W
+    Sample 28/30: 38.2077540625W
+    Sample 29/30: 38.13513880823365W
+    Sample 30/30: 38.319992793834686W
+  Saved: power_1cu3du_cqi15_96ue_run3.json
+  mean=38.480W std=0.200W n=30
+
+[220/225] 1CU-1DU | CQI=15 | UEs=96 | Run=4
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_96ue_run4.json
+
+[221/225] 1CU-2DU | CQI=15 | UEs=96 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_96ue_run4.json
+
+[222/225] 1CU-3DU | CQI=15 | UEs=96 | Run=4
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.53639848691544W
+    Sample 2/30: 38.392353321234744W
+    Sample 3/30: 38.758367539971616W
+    Sample 4/30: 38.48715628176439W
+    Sample 5/30: 38.38427449691757W
+    Sample 6/30: 38.706638984626615W
+    Sample 7/30: 38.29067838802105W
+    Sample 8/30: 38.335323283078765W
+    Sample 9/30: 38.07306860139553W
+    Sample 10/30: 38.30841916189356W
+    Sample 11/30: 38.04450686601643W
+    Sample 12/30: 38.32528003735493W
+    Sample 13/30: 37.85204319622879W
+    Sample 14/30: 37.97950933823635W
+    Sample 15/30: 38.30185753114884W
+    Sample 16/30: 38.23753687514383W
+    Sample 17/30: 38.24532403676918W
+    Sample 18/30: 38.4686128951833W
+    Sample 19/30: 38.34862118272724W
+    Sample 20/30: 38.29920423768814W
+    Sample 21/30: 38.50255389888418W
+    Sample 22/30: 38.31172188416542W
+    Sample 23/30: 38.45508921315674W
+    Sample 24/30: 38.25026564560799W
+    Sample 25/30: 38.184137629552175W
+    Sample 26/30: 38.3199301567503W
+    Sample 27/30: 38.395758792803406W
+    Sample 28/30: 38.08802059217197W
+    Sample 29/30: 38.27228303719991W
+    Sample 30/30: 38.43129252373152W
+  Saved: power_1cu3du_cqi15_96ue_run4.json
+  mean=38.320W std=0.190W n=30
+
+[223/225] 1CU-1DU | CQI=15 | UEs=96 | Run=5
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du
+  Already exists, skipping: power_1cu1du_cqi15_96ue_run5.json
+
+[224/225] 1CU-2DU | CQI=15 | UEs=96 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+  Already exists, skipping: power_1cu2du_cqi15_96ue_run5.json
+
+[225/225] 1CU-3DU | CQI=15 | UEs=96 | Run=5
+srsran_du
+srsran_du2
+srsran_du3
+srsran_du
+srsran_du2
+srsran_du3
+  Warming up 60s...
+  Sampling every 10s for 300s...
+    Sample 1/30: 38.91900969436283W
+    Sample 2/30: 38.67603525387878W
+    Sample 3/30: 38.8382616595891W
+    Sample 4/30: 38.601918457407855W
+    Sample 5/30: 38.64054251240759W
+    Sample 6/30: 38.76019098918736W
+    Sample 7/30: 38.752903771313385W
+    Sample 8/30: 38.60366476588917W
+    Sample 9/30: 38.263771252137396W
+    Sample 10/30: 38.616636038537045W
+    Sample 11/30: 38.72138995617762W
+    Sample 12/30: 38.658686568046875W
+    Sample 13/30: 38.42223343383327W
+    Sample 14/30: 38.64304343490768W
+    Sample 15/30: 38.689927190947955W
+    Sample 16/30: 38.65883933271637W
+    Sample 17/30: 38.81991777291733W
+    Sample 18/30: 38.36554192324287W
+    Sample 19/30: 38.57686588236372W
+    Sample 20/30: 38.31294788955406W
+    Sample 21/30: 38.512383456989596W
+    Sample 22/30: 38.82258865900748W
+    Sample 23/30: 38.065295048121186W
+    Sample 24/30: 38.06747048614386W
+    Sample 25/30: 38.57400564948358W
+    Sample 26/30: 38.46948167680115W
+    Sample 27/30: 38.48772161563262W
+    Sample 28/30: 38.24157564166174W
+    Sample 29/30: 38.354700740346715W
+    Sample 30/30: 38.57342242877398W
+  Saved: power_1cu3du_cqi15_96ue_run5.json
+  mean=38.557W std=0.214W n=30
+
+=== All experiments complete! ===
+
+=== SUMMARY ===
+1cu1du CQI=5 1UE: mean=3.359W std=0.026W runs=5
+1cu1du CQI=5 4UE: mean=3.442W std=0.016W runs=5
+1cu1du CQI=5 16UE: mean=4.658W std=0.020W runs=5
+1cu1du CQI=5 64UE: mean=4.884W std=0.007W runs=5
+1cu1du CQI=5 96UE: mean=5.014W std=0.229W runs=5
+1cu1du CQI=10 1UE: mean=3.057W std=0.014W runs=5
+1cu1du CQI=10 4UE: mean=3.094W std=0.013W runs=5
+1cu1du CQI=10 16UE: mean=4.111W std=0.005W runs=5
+1cu1du CQI=10 64UE: mean=4.365W std=0.004W runs=5
+1cu1du CQI=10 96UE: mean=4.594W std=0.010W runs=5
+1cu1du CQI=15 1UE: mean=3.064W std=0.005W runs=5
+1cu1du CQI=15 4UE: mean=3.115W std=0.007W runs=5
+1cu1du CQI=15 16UE: mean=4.076W std=0.011W runs=5
+1cu1du CQI=15 64UE: mean=4.315W std=0.005W runs=5
+1cu1du CQI=15 96UE: mean=4.537W std=0.017W runs=5
+1cu2du CQI=5 1UE: mean=12.235W std=0.076W runs=5
+1cu2du CQI=5 4UE: mean=12.662W std=0.029W runs=5
+1cu2du CQI=5 16UE: mean=16.306W std=0.034W runs=5
+1cu2du CQI=5 64UE: mean=16.814W std=0.053W runs=5
+1cu2du CQI=5 96UE: mean=15.478W std=0.432W runs=5
+1cu2du CQI=10 1UE: mean=11.852W std=0.011W runs=5
+1cu2du CQI=10 4UE: mean=12.194W std=0.036W runs=5
+1cu2du CQI=10 16UE: mean=14.945W std=0.037W runs=5
+1cu2du CQI=10 64UE: mean=15.908W std=0.032W runs=5
+1cu2du CQI=10 96UE: mean=15.134W std=0.024W runs=5
+1cu2du CQI=15 1UE: mean=12.033W std=0.033W runs=5
+1cu2du CQI=15 4UE: mean=12.295W std=0.033W runs=5
+1cu2du CQI=15 16UE: mean=14.888W std=0.045W runs=5
+1cu2du CQI=15 64UE: mean=15.987W std=0.032W runs=5
+1cu2du CQI=15 96UE: mean=15.157W std=0.020W runs=5
+1cu3du CQI=5 1UE: mean=26.908W std=0.297W runs=5
+1cu3du CQI=5 4UE: mean=26.737W std=0.317W runs=5
+1cu3du CQI=5 16UE: mean=32.480W std=0.184W runs=5
+1cu3du CQI=5 64UE: mean=36.379W std=0.076W runs=5
+1cu3du CQI=5 96UE: mean=39.056W std=0.148W runs=5
+1cu3du CQI=10 1UE: mean=24.796W std=0.045W runs=5
+1cu3du CQI=10 4UE: mean=25.372W std=0.076W runs=5
+1cu3du CQI=10 16UE: mean=31.823W std=0.124W runs=5
+1cu3du CQI=10 64UE: mean=36.015W std=0.096W runs=5
+1cu3du CQI=10 96UE: mean=38.857W std=0.157W runs=5
+1cu3du CQI=15 1UE: mean=24.855W std=0.110W runs=5
+1cu3du CQI=15 4UE: mean=25.313W std=0.033W runs=5
+1cu3du CQI=15 16UE: mean=31.450W std=0.107W runs=5
+1cu3du CQI=15 64UE: mean=35.618W std=0.107W runs=5
+1cu3du CQI=15 96UE: mean=38.490W std=0.113W runs=5

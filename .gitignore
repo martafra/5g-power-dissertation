@@ -1,0 +1,26 @@
+# Experiment logs and data
+docs/logs/
+
+# Generated figures
+analysis/*.png
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+# External repositories
+srsRAN_Project/
+open5gs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large config files with sensitive info
+docker/.env
