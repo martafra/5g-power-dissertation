@@ -1,0 +1,8 @@
+test_mode:
+  test_ue:
+    rnti: 0x104
+    ri: 1
+    cqi: 15
+    nof_ues: 96
+    pusch_active: true
+    pdsch_active: true

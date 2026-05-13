@@ -1,0 +1,457 @@
+#
+# Copyright 2021-2026 Software Radio Systems Limited
+#
+# This file is part of srsRAN
+#
+# srsRAN is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of
+# the License, or (at your option) any later version.
+#
+# srsRAN is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Affero General Public License for more details.
+#
+# A copy of the GNU Affero General Public License can be found in
+# the LICENSE file in the top-level directory of this distribution
+# and at http://www.gnu.org/licenses/.
+#
+
+services:
+  gnb:
+    image: srsran/gnb
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        OS_VERSION: "24.04"
+    networks: {}
+    entrypoint: [ "true" ]
+
+  cu-cp:
+    container_name: srsran_cu_cp
+    image: srsran/gnb
+    networks:
+      ran:
+        ipv4_address: ${CU_CP_IP:-10.53.1.4}
+    volumes:
+      - gnb-storage:/tmp,subpath=cu_cp
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      5gc:
+        condition: service_healthy
+    configs:
+      - cu_cp_config.yml
+      - cu_cp_compose_config.yml
+    healthcheck:
+      test: [ "CMD-SHELL", "for p in 38462 38472; do ss -l -H -A sctp \"sport = :$p\" | grep -q . || exit 1; done; exit 0" ]
+      interval: 3s
+      timeout: 1s
+      retries: 60
+    command: srscucp -c /cu_cp_config.yml -c /cu_cp_compose_config.yml
+
+  cu-up:
+    container_name: srsran_cu_up
+    image: srsran/gnb
+    networks:
+      ran:
+        ipv4_address: ${CU_UP_IP:-10.53.1.5}
+      f1u:
+        ipv4_address: ${CU_UP_F1U_IP:-172.18.10.2}
+    volumes:
+      - gnb-storage:/tmp,subpath=cu_up
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp:
+        condition: service_healthy
+    configs:
+      - cu_up_config.yml
+      - cu_up_compose_config.yml
+    command: srscuup -c /cu_up_config.yml -c /cu_up_compose_config.yml
+  
+  cu-cp2:
+    container_name: srsran_cu_cp2
+    image: srsran/gnb
+    networks:
+      ran:
+        ipv4_address: 10.53.1.14
+    volumes:
+      - gnb-storage:/tmp,subpath=cu_cp2
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      5gc:
+        condition: service_healthy
+    configs:
+      - cu_cp2_config.yml
+      - cu_cp2_compose_config.yml
+    healthcheck:
+      test: [ "CMD-SHELL", "for p in 38462 38472; do ss -l -H -A sctp \"sport = :$p\" | grep -q . || exit 1; done; exit 0" ]
+      interval: 3s
+      timeout: 1s
+      retries: 60
+    command: srscucp -c /cu_cp2_config.yml -c /cu_cp2_compose_config.yml
+
+  cu-up2:
+    container_name: srsran_cu_up2
+    image: srsran/gnb
+    networks:
+      ran:
+        ipv4_address: 10.53.1.15
+      f1u:
+        ipv4_address: 172.18.10.8
+    volumes:
+      - gnb-storage:/tmp,subpath=cu_up2
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp2:
+        condition: service_healthy
+    configs:
+      - cu_up2_config.yml
+      - cu_up2_compose_config.yml
+    command: srscuup -c /cu_up2_config.yml -c /cu_up2_compose_config.yml
+
+  du-b:
+    container_name: srsran_du_b
+    image: srsran/gnb
+    privileged: true
+    cap_add:
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - gnb-storage:/tmp,subpath=du_b
+    networks:
+      ran:
+        ipv4_address: 10.53.1.16
+      f1u:
+        ipv4_address: 172.18.10.9
+      metrics:
+        ipv4_address: 172.19.1.13
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp2:
+        condition: service_healthy
+    command: srsdu -c /du_b_config.yml -c /du_b_compose_config.yml -c /testmode_b_config.yml
+    configs:
+      - du_b_config.yml
+      - du_b_compose_config.yml
+      - testmode_b_config.yml
+
+  du:
+    container_name: srsran_du
+    image: srsran/gnb
+    privileged: true
+    cap_add:
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - gnb-storage:/tmp,subpath=du
+      - /dev/bus/usb/:/dev/bus/usb/
+      - /usr/share/uhd/images:/usr/share/uhd/images
+    networks:
+      ran:
+        ipv4_address: ${DU_IP:-10.53.1.6}
+      f1u:
+        ipv4_address: ${DU_F1U_IP:-172.18.10.3}
+      metrics:
+        ipv4_address: 172.19.1.3
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp:
+        condition: service_healthy
+    configs:
+      - du_config.yml
+      - du_compose_config.yml
+      - testmode_config.yml
+    command: srsdu -c /du_config.yml -c /du_compose_config.yml -c /testmode_config.yml
+
+  du2:
+    container_name: srsran_du2
+    image: srsran/gnb
+    privileged: true
+    cap_add:
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - gnb-storage:/tmp,subpath=du2
+    networks:
+      ran:
+        ipv4_address: ${DU2_IP:-10.53.1.7}
+      f1u:
+        ipv4_address: ${DU2_F1U_IP:-172.18.10.4}
+      metrics:
+        ipv4_address: 172.19.1.9
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp:
+        condition: service_healthy
+    command: srsdu -c /du2_config.yml -c /du2_compose_config.yml -c /testmode2_config.yml
+    configs:
+      - du2_config.yml
+      - du2_compose_config.yml
+      - testmode2_config.yml
+
+  du3:
+    container_name: srsran_du3
+    image: srsran/gnb
+    privileged: true
+    cap_add:
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - gnb-storage:/tmp,subpath=du3
+    networks:
+      ran:
+        ipv4_address: ${DU3_IP:-10.53.1.8}
+      f1u:
+        ipv4_address: ${DU3_F1U_IP:-172.18.10.5}
+      metrics:
+        ipv4_address: 172.19.1.10
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp:
+        condition: service_healthy
+    command: srsdu -c /du3_config.yml -c /du3_compose_config.yml -c /testmode3_config.yml
+    configs:
+      - du3_config.yml
+      - du3_compose_config.yml
+      - testmode3_config.yml
+
+  du4:
+    container_name: srsran_du4
+    image: srsran/gnb
+    privileged: true
+    cap_add:
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - gnb-storage:/tmp,subpath=du4
+    networks:
+      ran:
+        ipv4_address: ${DU4_IP:-10.53.1.9}
+      f1u:
+        ipv4_address: ${DU4_F1U_IP:-172.18.10.6}
+      metrics:
+        ipv4_address: 172.19.1.11
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp:
+        condition: service_healthy
+    command: srsdu -c /du4_config.yml -c /du4_compose_config.yml -c /testmode4_config.yml
+    configs:
+      - du4_config.yml
+      - du4_compose_config.yml
+      - testmode4_config.yml
+  du5:
+    container_name: srsran_du5
+    image: srsran/gnb
+    privileged: true
+    cap_add:
+      - SYS_NICE
+      - CAP_SYS_PTRACE
+    volumes:
+      - gnb-storage:/tmp,subpath=du5
+    networks:
+      ran:
+        ipv4_address: 10.53.1.10
+      f1u:
+        ipv4_address: 172.18.10.7
+      metrics:
+        ipv4_address: 172.19.1.12
+    depends_on:
+      gnb:
+        condition: service_completed_successfully
+      cu-cp:
+        condition: service_healthy
+    command: srsdu -c /du5_config.yml -c /du5_compose_config.yml -c /testmode5_config.yml
+    configs:
+      - du5_config.yml
+      - du5_compose_config.yml
+      - testmode5_config.yml
+
+configs:
+  cu_cp_config.yml:
+    file: ${CUCP_CONFIG_PATH:-../configs/cu_cp.yml}
+  cu_cp_compose_config.yml:
+    content: |
+      cu_cp:
+        amf:
+          addr: ${OPEN5GS_IP:-10.53.1.2}
+          bind_addr: ${CU_CP_IP:-10.53.1.4}
+        e1ap:
+          bind_addr: ${CU_CP_IP:-10.53.1.4}
+        f1ap:
+          bind_addr: ${CU_CP_IP:-10.53.1.4}
+  cu_up_config.yml:
+    file: ${CUUP_CONFIG_PATH:-../configs/cu_up.yml}
+  cu_up_compose_config.yml:
+    content: |
+      cu_up:
+        e1ap:
+          cu_cp_addr: ${CU_CP_IP:-10.53.1.4}
+          bind_addr: ${CU_UP_IP:-10.53.1.5}
+        f1u:
+          socket:
+            -
+              bind_addr: ${CU_UP_F1U_IP:-172.18.10.2}
+  du_config.yml:
+    file: ${DU_CONFIG_PATH:-../configs/du_rf_b200_tdd_n78_20mhz.yml}
+  du_compose_config.yml:
+    content: |
+      f1ap:
+        cu_cp_addr: ${CU_CP_IP:-10.53.1.4}
+        bind_addr: ${DU_IP:-10.53.1.6}
+      f1u:
+        socket:
+          -
+            bind_addr: ${DU_F1U_IP:-172.18.10.3}
+      metrics:
+        autostart_stdout_metrics: true
+        enable_json: true
+      remote_control:
+        bind_addr: 0.0.0.0
+        enabled: true
+  testmode_config.yml:
+    file: ../configs/testmode.yml
+  testmode2_config.yml:
+    file: ../configs/testmode2.yml
+  testmode3_config.yml:
+    file: ../configs/testmode3.yml
+  testmode4_config.yml:
+    file: ../configs/testmode4.yml
+  du2_config.yml:
+    file: ../configs/du2_dummy.yml
+  du2_compose_config.yml:
+    content: |
+      f1ap:
+        cu_cp_addr: ${CU_CP_IP:-10.53.1.4}
+        bind_addr: ${DU2_IP:-10.53.1.7}
+      f1u:
+        socket:
+          -
+            bind_addr: ${DU2_F1U_IP:-172.18.10.4}
+      metrics:
+        autostart_stdout_metrics: true
+        enable_json: true
+      remote_control:
+        bind_addr: 0.0.0.0
+        enabled: true
+  du3_config.yml:
+    file: ../configs/du3_dummy.yml
+  du3_compose_config.yml:
+    content: |
+      f1ap:
+        cu_cp_addr: ${CU_CP_IP:-10.53.1.4}
+        bind_addr: ${DU3_IP:-10.53.1.8}
+      f1u:
+        socket:
+          -
+            bind_addr: ${DU3_F1U_IP:-172.18.10.5}
+      metrics:
+        autostart_stdout_metrics: true
+        enable_json: true
+      remote_control:
+        bind_addr: 0.0.0.0
+        enabled: true
+  du4_config.yml:
+    file: ../configs/du4_dummy.yml
+  du4_compose_config.yml:
+    content: |
+      f1ap:
+        cu_cp_addr: ${CU_CP_IP:-10.53.1.4}
+        bind_addr: ${DU4_IP:-10.53.1.9}
+      f1u:
+        socket:
+          -
+            bind_addr: ${DU4_F1U_IP:-172.18.10.6}
+      metrics:
+        autostart_stdout_metrics: true
+        enable_json: true
+      remote_control:
+        bind_addr: 0.0.0.0
+        enabled: true
+  testmode5_config.yml:
+    file: ../configs/testmode5.yml
+  du5_config.yml:
+    file: ../configs/du5_dummy.yml
+  du5_compose_config.yml:
+    content: |
+      f1ap:
+        cu_cp_addr: ${CU_CP_IP:-10.53.1.4}
+        bind_addr: 10.53.1.10
+      f1u:
+        socket:
+          -
+            bind_addr: 172.18.10.7
+      metrics:
+        autostart_stdout_metrics: true
+        enable_json: true
+      remote_control:
+        bind_addr: 0.0.0.0
+        enabled: true
+  cu_cp2_config.yml:
+    file: ../configs/cu_cp.yml
+  cu_cp2_compose_config.yml:
+    content: |
+      cu_cp:
+        amf:
+          addr: ${OPEN5GS_IP:-10.53.1.2}
+          bind_addr: 10.53.1.14
+        e1ap:
+          bind_addr: 10.53.1.14
+        f1ap:
+          bind_addr: 10.53.1.14
+  cu_up2_config.yml:
+    file: ../configs/cu_up.yml
+  cu_up2_compose_config.yml:
+    content: |
+      cu_up:
+        e1ap:
+          cu_cp_addr: 10.53.1.14
+          bind_addr: 10.53.1.15
+        f1u:
+          socket:
+            -
+              bind_addr: 172.18.10.8
+  du_b_config.yml:
+    file: ../configs/du_b_dummy.yml
+  du_b_compose_config.yml:
+    content: |
+      f1ap:
+        cu_cp_addr: 10.53.1.14
+        bind_addr: 10.53.1.16
+      f1u:
+        socket:
+          -
+            bind_addr: 172.18.10.9
+      metrics:
+        autostart_stdout_metrics: true
+        enable_json: true
+      remote_control:
+        bind_addr: 0.0.0.0
+        enabled: true
+  testmode_b_config.yml:
+    file: ../configs/testmode_b.yml
+
+networks:
+  f1u:
+    name: f1u_network
+    enable_ipv6: true
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.18.10.0/24"
+        - subnet: fd00:0:0:10::/64
+          gateway: fd00:0:0:10::1
