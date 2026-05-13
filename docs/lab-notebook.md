@@ -210,3 +210,47 @@
   3. Run matrix experiments for multi-CU topologies
   4. Write Design and Implementation chapters
   5. Write Evaluation chapter with full comparison
+
+  ## 2026-05-13
+### 2CU-2DU topology implementation and matrix experiments
+- Added cu-cp2, cu-up2, du-b services to docker-compose.split.yml
+  - CU-CP2: 10.53.1.14 (ran), metrics 172.19.1.13
+  - CU-UP2: 10.53.1.15 (ran), 172.18.10.8 (f1u)
+  - du-b: 10.53.1.16 (ran), 172.18.10.9 (f1u), metrics 172.19.1.14
+  - Note: 10.53.1.11 already in use by Scaphandre, caused initial IP conflict
+- Created configs/du_b_dummy.yml and configs/testmode_b.yml
+- Updated collect_power_breakdown.sh to support cu_cp2, cu_up2, du_b
+- Written scripts/start_2cu2du.sh: staged container startup with temperature check
+- Written scripts/run_matrix_2cu2du.sh: matrix experiments for 2CU-2DU topology
+- Verified 2CU-2DU topology: du-b connected to cu-cp2 on 10.53.1.14:38472
+
+### Breakdown measurement: 2CU-2DU baseline
+- Collected at thermal steady state (cores ~38°C)
+- Results (60 samples, 5s interval):
+  - cu_cp:  mean=0.891W std=0.063W
+  - cu_cp2: mean=0.896W std=0.063W
+  - cu_up:  mean=0.897W std=0.064W
+  - cu_up2: mean=0.892W std=0.063W
+  - du1:    mean=12.038W std=0.827W
+  - du_b:   mean=12.012W std=0.937W
+  - Total:  ~27.6W
+- Both CU-DU groups are symmetric, confirming correct isolation
+
+### Matrix experiments: 2CU-2DU
+- 75 experiments completed (3 CQI x 5 UE x 5 runs)
+- Results summary (CQI=15):
+  - 1 UE:  19.12W, 4 UE: 19.60W, 16 UE: 25.55W, 64 UE: 27.62W, 96 UE: 28.41W
+- Fixed overhead of second CU-DU group: ~7W at low load, increasing to ~13W at 96 UE
+- std consistently below 0.15W across all runs: no thermal throttling observed
+
+### CloudLab setup
+- Requested and received CloudLab account approval
+- Created profile 5g-power-research: single d6515 node (32-core AMD EPYC, 128GB RAM)
+  - Ubuntu 22.04, Docker pre-installed via startup script
+  - Hardware type selected to avoid thermal throttling observed on local testbed
+- Experiment martafra-305578 scheduled for 13 May 2026 13:00, expires 14 May 05:00
+- Next steps:
+  1. Configure CloudLab node: clone repo, build Docker images
+  2. Run matrix experiments for 1CU-4DU and 2CU-2DU on CloudLab
+  3. Implement 2CU-4DU topology
+  4. Write Design and Implementation chapters

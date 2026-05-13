@@ -25,6 +25,9 @@ DU1=$(get_pid srsran_du)
 DU2=$(get_pid srsran_du2)
 DU3=$(get_pid srsran_du3)
 DU4=$(get_pid srsran_du4)
+CU_CP2=$(get_pid srsran_cu_cp2)
+CU_UP2=$(get_pid srsran_cu_up2)
+DU_B=$(get_pid srsran_du_b)
 
 
 echo "=== srsRAN Power Breakdown Collector ==="
@@ -38,7 +41,7 @@ for i in $(seq 1 $SAMPLES); do
   TS=$(date -u +"%Y-%m-%dT%H:%M:%S")
   METRICS=$(curl -s $SCAPHANDRE_URL | grep "scaph_process_power")
 
-  for ENTRY in "cu_cp:$CU_CP" "cu_up:$CU_UP" "du1:$DU1" "du2:$DU2" "du3:$DU3" "du4:$DU4"; do
+  for ENTRY in "cu_cp:$CU_CP" "cu_up:$CU_UP" "du1:$DU1" "du2:$DU2" "du3:$DU3" "du4:$DU4" "cu_cp2:$CU_CP2" "cu_up2:$CU_UP2" "du_b:$DU_B"; do
     COMP=$(echo $ENTRY | cut -d: -f1)
     PID=$(echo $ENTRY | cut -d: -f2)
     if [ -z "$PID" ]; then continue; fi
