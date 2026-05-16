@@ -254,3 +254,37 @@
   2. Run matrix experiments for 1CU-4DU and 2CU-2DU on CloudLab
   3. Implement 2CU-4DU topology
   4. Write Design and Implementation chapters
+
+  ## 2026-05-16
+### CloudLab experiments: 1CU-NDU matrix and breakdown
+
+- Matrix experiments completed on CloudLab (AMD EPYC, 64 cores, 125GB RAM)
+  - 600 JSON files: 8 topologies (1CU-1DU to 1CU-8DU) x 3 CQI x 5 UE x 5 runs
+  - All 600 runs valid, no thermal throttling observed
+- Breakdown collected from single 1CU-8DU run (60 samples, 5s interval):
+  - cu_cp: 0.219W, cu_up: 0.204W (fixed overhead: 0.423W total)
+  - du1-du5: 3.18-3.32W each (linear scaling)
+  - du6: 2.395W, du7: 1.271W, du8: 1.246W (CU scheduler saturation above 5 DU)
+  - Per-topology totals derived by component summation (breakdown_by_topology.csv)
+- Analysis notebook updated with full 8-topology dataset:
+  - Per-component breakdown (stacked bar + marginal cost from breakdown)
+  - Matrix overview (8 subplots, CQI x UE per topology)
+  - Marginal cost of adding a DU (consecutive topology differences)
+  - Heatmap (CQI x UE per topology)
+  - Fixed vs dynamic power overhead (1 UE baseline)
+  - Energy efficiency: W per UE
+
+### Multi-CU topology: 2CU-2DU
+- start_2cu2du.sh updated to remove temperature check (not available on CloudLab)
+- Breakdown collected (60 samples, 5s interval):
+  - cu_cp: 0.120W, cu_cp2: 0.120W, cu_up: 0.120W, cu_up2: 0.120W
+  - du1: 1.863W, du_b: 2.080W
+  - Total: ~4.42W - lower than laptop measurements due to AMD EPYC hardware
+- Matrix experiments launched in background (75 experiments, ~8 hours)
+  - Log: docs/logs/matrix_2cu2du_run.log
+
+### CloudLab extension
+- Extended experiment to 2026-05-23 to accommodate full multi-CU experiment matrix
+- Planned topologies: 2CU-2DU (in progress), 2CU-4DU, 2CU-6DU, 2CU-8DU,
+  3CU-3DU, 3CU-6DU, 4CU-4DU
+- Each topology requires breakdown (5 min) + matrix (8-9 hours)
