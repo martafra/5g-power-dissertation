@@ -296,3 +296,31 @@
   - CQI has negligible impact, consistent with 1CU results
   - Main load jump between 4 and 16 UEs
 - Next: configure and run 2CU-4DU topology
+
+## 2026-05-17
+### 2CU-6DU topology setup and breakdown
+
+- Added du-b3 to docker-compose.split.yml
+- Resolved IP conflicts: du6 (.21/.14), du7 (.22/.15), du8 (.23/.16)
+- Updated PCI values: du_b=11, du_b2=12, du_b3=13
+- Removed unused config files du9-du20
+- Created collect_power_breakdown_2cu6du.sh, start_2cu6du.sh, run_matrix_2cu6du.sh
+- Breakdown collected (60 samples, 5s interval):
+  - cu_cp: 0.182W, cu_cp2: 0.183W, cu_up: 0.181W, cu_up2: 0.181W
+  - du1: 2.979W, du2: 2.964W, du3: 3.010W
+  - du_b: 3.209W, du_b2: 3.131W, du_b3: 3.136W
+  - Total: ~19.1W
+- Matrix experiments launched in background (75 experiments, ~8 hours)
+  - Log: docs/logs/matrix_2cu6du_run.log
+
+### 2CU-8DU topology setup and breakdown
+- Added du-b4 to docker-compose.split.yml (10.53.1.24, 172.18.10.17, 172.19.1.22, pci=14)
+- Created du_b4_dummy.yml, testmode_b4.yml
+- Created start_2cu8du.sh, collect_power_breakdown_2cu8du.sh, run_matrix_2cu8du.sh
+- Breakdown collected (60 samples, 5s interval):
+  - cu_cp: 0.251W, cu_cp2: 0.246W, cu_up: 0.250W, cu_up2: 0.255W
+  - du1: 3.951W, du2: 3.869W, du3: 3.798W, du4: 3.844W
+  - du_b: 3.718W, du_b2: 3.980W, du_b3: 3.953W, du_b4: 3.796W
+  - Total: ~34.8W
+- Matrix experiments launched in background (75 experiments, ~8 hours)
+  - Log: docs/logs/matrix_2cu8du_run.log
