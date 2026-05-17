@@ -288,3 +288,11 @@
 - Planned topologies: 2CU-2DU (in progress), 2CU-4DU, 2CU-6DU, 2CU-8DU,
   3CU-3DU, 3CU-6DU, 4CU-4DU
 - Each topology requires breakdown (5 min) + matrix (8-9 hours)
+
+### Matrix experiments: 2CU-2DU - completed
+- 75 experiments completed (3 CQI x 5 UE x 5 runs), all runs valid
+- Key results:
+  - 1 UE:  ~2.7W, 4 UE: ~2.7W, 16 UE: ~3.6W, 64 UE: ~3.8W, 96 UE: ~3.9W
+  - CQI has negligible impact, consistent with 1CU results
+  - Main load jump between 4 and 16 UEs
+- Next: configure and run 2CU-4DU topology
