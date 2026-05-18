@@ -1,12 +1,7 @@
 #!/bin/bash
-# Collect power consumption per srsRAN component
-# Supports CU-CP, CU-UP, up to 20 DUs, and second CU group (cu-cp2, cu-up2, du-b)
-# Usage: ./collect_power_breakdown.sh [topology] [samples] [interval_seconds]
-# Example: ./collect_power_breakdown.sh 1cu5du 60 5
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOGS_DIR="$SCRIPT_DIR/../docs/logs"
-TOPOLOGY=${1:-1cu1du}
+TOPOLOGY=${1:-3cu3du}
 SAMPLES=${2:-60}
 INTERVAL=${3:-5}
 OUTPUT="$LOGS_DIR/breakdown_${TOPOLOGY}_$(date +%Y%m%d_%H%M%S).csv"
@@ -18,31 +13,19 @@ get_pid() {
     docker inspect $1 --format '{{.State.Pid}}' 2>/dev/null || echo ""
 }
 
-# Collect all PIDs
 CU_CP=$(get_pid srsran_cu_cp)
 CU_UP=$(get_pid srsran_cu_up)
 CU_CP2=$(get_pid srsran_cu_cp2)
 CU_UP2=$(get_pid srsran_cu_up2)
-
-# Collect DU PIDs dynamically (du, du2...du20, du_b, du_b2)
-declare -A DU_PIDS
-DU_PIDS["du1"]=$(get_pid srsran_du)
-DU_PIDS["du_b"]=$(get_pid srsran_du_b)
-DU_PIDS["du_b2"]=$(get_pid srsran_du_b2)
-for i in $(seq 2 20); do
-    PID=$(get_pid srsran_du${i})
-    if [ -n "$PID" ]; then
-        DU_PIDS["du${i}"]=$PID
-    fi
-done
+CU_CP3=$(get_pid srsran_cu_cp3)
+CU_UP3=$(get_pid srsran_cu_up3)
+DU1=$(get_pid srsran_du)
+DU_B=$(get_pid srsran_du_b)
+DU_C=$(get_pid srsran_du_c)
 
 echo "=== srsRAN Power Breakdown Collector ==="
 echo "Topology: $TOPOLOGY"
-echo -n "PIDs: CU-CP=$CU_CP | CU-UP=$CU_UP"
-for key in $(echo "${!DU_PIDS[@]}" | tr ' ' '\n' | sort); do
-    echo -n " | ${key^^}=${DU_PIDS[$key]}"
-done
-echo ""
+echo "PIDs: CU-CP=$CU_CP | CU-UP=$CU_UP | CU-CP2=$CU_CP2 | CU-UP2=$CU_UP2 | CU-CP3=$CU_CP3 | CU-UP3=$CU_UP3 | DU1=$DU1 | DU_B=$DU_B | DU_C=$DU_C"
 echo "Config: Samples=$SAMPLES | Interval=${INTERVAL}s | Output=$OUTPUT"
 echo "Starting collection..."
 
@@ -52,8 +35,7 @@ for i in $(seq 1 $SAMPLES); do
     TS=$(date -u +"%Y-%m-%dT%H:%M:%S")
     METRICS=$(curl -s $SCAPHANDRE_URL | grep "scaph_process_power")
 
-    # Measure CU-CP
-    for ENTRY in "cu_cp:$CU_CP" "cu_up:$CU_UP" "cu_cp2:$CU_CP2" "cu_up2:$CU_UP2"; do
+    for ENTRY in "cu_cp:$CU_CP" "cu_up:$CU_UP" "cu_cp2:$CU_CP2" "cu_up2:$CU_UP2" "cu_cp3:$CU_CP3" "cu_up3:$CU_UP3" "du1:$DU1" "du_b:$DU_B" "du_c:$DU_C"; do
         COMP=$(echo $ENTRY | cut -d: -f1)
         PID=$(echo $ENTRY | cut -d: -f2)
         if [ -z "$PID" ]; then continue; fi
@@ -61,17 +43,6 @@ for i in $(seq 1 $SAMPLES); do
         if [ -n "$VAL" ]; then
             WATTS=$(python3 -c "print(f'{$VAL/1e6:.6f}')")
             echo "$TS,$COMP,$PID,$VAL,$WATTS" >> "$OUTPUT"
-        fi
-    done
-
-    # Measure all DUs
-    for key in $(echo "${!DU_PIDS[@]}" | tr ' ' '\n' | sort); do
-        PID=${DU_PIDS[$key]}
-        if [ -z "$PID" ]; then continue; fi
-        VAL=$(echo "$METRICS" | grep "pid=\"$PID\"" | grep -oP '} \K[\d.]+' | head -1)
-        if [ -n "$VAL" ]; then
-            WATTS=$(python3 -c "print(f'{$VAL/1e6:.6f}')")
-            echo "$TS,$key,$PID,$VAL,$WATTS" >> "$OUTPUT"
         fi
     done
 

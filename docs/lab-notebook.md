@@ -324,3 +324,19 @@
   - Total: ~34.8W
 - Matrix experiments launched in background (75 experiments, ~8 hours)
   - Log: docs/logs/matrix_2cu8du_run.log
+
+## 2026-05-18
+### 3CU-3DU topology setup and experiments
+- Added cu-cp3, cu-up3, du-c to docker-compose.split.yml
+  - cu-cp3: 10.53.1.25, cu-up3: 10.53.1.26/172.18.10.18
+  - du-c: 10.53.1.27, 172.18.10.19, 172.19.1.23, pci=15, rnti=0x400
+- Created du_c_dummy.yml, testmode_c.yml
+- Created start_3cu3du.sh, collect_power_breakdown_3cu3du.sh, run_matrix_3cu3du.sh
+- Breakdown collected (60 samples, 5s interval):
+  - cu_cp: 0.142W, cu_cp2: 0.143W, cu_cp3: 0.142W
+  - cu_up: 0.142W, cu_up2: 0.141W, cu_up3: 0.143W
+  - du1: 2.293W, du_b: 2.202W, du_c: 2.283W
+  - Total: ~7.6W
+- Matrix experiments completed (75 experiments):
+  - CQI ininfluente, salto 4-16 UE marcato, saturazione 64-96 UE
+  - Range: ~4.6W (1 UE) a ~6.9W (96 UE

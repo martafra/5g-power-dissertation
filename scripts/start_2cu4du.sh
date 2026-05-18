@@ -1,9 +1,6 @@
 #!/bin/bash
 set -e
-
 COMPOSE="docker compose -f docker-compose.yml -f docker-compose.split.yml -f docker-compose.ui.yml"
-TEMP_LIMIT=60
-
 
 wait_healthy() {
     local container=$1
@@ -14,9 +11,7 @@ wait_healthy() {
     echo "$container is healthy!"
 }
 
-echo "=== Starting 2CU-2DU topology ==="
-
-
+echo "=== Starting 2CU-4DU topology ==="
 echo "Starting 5GC..."
 $COMPOSE up -d 5gc
 wait_healthy open5gs_5gc
@@ -31,7 +26,7 @@ $COMPOSE up -d cu-up cu-up2
 sleep 10
 
 echo "Starting DUs..."
-$COMPOSE up -d du du-b
+$COMPOSE up -d du du2 du-b du-b2
 sleep 10
 
 echo "Starting monitoring stack..."
