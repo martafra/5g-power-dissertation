@@ -1,0 +1,17 @@
+cu_cp:
+  amf:
+    addr: {{AMF_ADDR}}
+    bind_addr: {{CU_CP_ADDR}}
+    supported_tracking_areas:
+      - tac: 7
+        plmn_list:
+          - plmn: "00101"
+            tai_slice_support_list:
+              - sst: 1
+  e1ap:
+    bind_addr: {{CU_CP_ADDR}}
+  f1ap:
+    bind_addr: {{CU_CP_ADDR}}
+log:
+  filename: /tmp/cu_cp_{{CU_ID}}.log
+  all_level: warning

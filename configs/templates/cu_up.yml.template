@@ -1,0 +1,15 @@
+cu_up:
+  e1ap:
+    cu_cp_addr: {{CU_CP_ADDR}}
+    bind_addr: {{CU_UP_ADDR}}
+  ngu:
+    socket:
+      -
+        bind_addr: {{CU_UP_ADDR}}
+  f1u:
+    socket:
+      -
+        bind_addr: {{CU_UP_F1U_ADDR}}
+log:
+  filename: /tmp/cu_up_{{CU_ID}}.log
+  all_level: warning

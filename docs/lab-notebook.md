@@ -339,4 +339,25 @@
   - Total: ~7.6W
 - Matrix experiments completed (75 experiments):
   - CQI ininfluente, salto 4-16 UE marcato, saturazione 64-96 UE
-  - Range: ~4.6W (1 UE) a ~6.9W (96 UE
+  - Range: ~4.6W (1 UE) a ~6.9W (96 UE)
+
+## 2026-05-21
+### Manual scaling script implementation
+
+- Implemented scale.sh: dynamic CU-DU topology scaler using docker run with generated configs
+  - Parameters: --cu <n> --du <m> --warn-threshold <pct> --scaledown-threshold <pct> --cqi <val> --ues <val> --monitor <interval>
+  - Auto-starts Scaphandre, Prometheus and 5GC if not running
+  - Allocates IPs dynamically from predefined pools (RAN: 10.53.1.40+, F1U: 172.18.10.30+, metrics: 172.19.1.40+)
+  - Generates configs from templates at runtime (configs/templates/)
+  - Measures power via Scaphandre before and after each transition
+  - Monitoring loop: samples power every N seconds and prints warnings if above/below thresholds
+  - Scale-up: starts CU-CP, waits healthy, starts CU-UP, then DUs
+  - Scale-down: stops DUs first, then CU
+- Implemented teardown.sh: stops all srsRAN containers, optionally stops monitoring stack and 5GC
+- Created config templates: cu_cp.yml.template, cu_up.yml.template, du.yml.template, testmode.yml.template
+- Updated docker-compose.yml: networks set to external: true to use pre-created ran/f1u/metrics networks
+- Tested full cycle:
+  - Cold start: 0 containers → 2CU-2DU (~9.8W) - all infrastructure auto-started
+  - Scale-up: 1CU-1DU → 2CU-2DU: delta +8.3W
+  - Scale-down: 2CU-2DU → 1CU-1DU: delta -8.3W
+  - Monitoring loop: stable ~10.2W for 2CU-2DU at 96 UE CQI=15

@@ -1,0 +1,8 @@
+test_mode:
+  test_ue:
+    rnti: {{RNTI}}
+    ri: 1
+    cqi: {{CQI}}
+    nof_ues: {{NOF_UES}}
+    pusch_active: true
+    pdsch_active: true
