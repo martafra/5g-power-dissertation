@@ -254,3 +254,82 @@
   2. Run matrix experiments for 1CU-4DU and 2CU-2DU on CloudLab
   3. Implement 2CU-4DU topology
   4. Write Design and Implementation chapters
+## 2026-05-16
+### CloudLab experiments: 1CU-NDU matrix and breakdown
+- Matrix experiments completed on CloudLab (AMD EPYC 7452, 64 logical cores, 125GB RAM)
+  - 600 JSON files: 8 topologies (1CU-1DU to 1CU-8DU) x 3 CQI x 5 UE x 5 runs
+  - All 600 runs valid, no thermal throttling observed
+- Breakdown collected from single 1CU-8DU run (60 samples, 5s interval):
+  - cu_cp: 0.219W, cu_up: 0.204W (fixed overhead: 0.423W total)
+  - du1-du5: 3.18-3.32W each (linear scaling)
+  - du6: 2.395W, du7: 1.271W, du8: 1.246W (CU scheduler saturation above 5 DU)
+  - Per-topology totals derived by component summation (breakdown_by_topology.csv)
+- Analysis notebook updated with full 8-topology dataset
+- Multi-CU topology 2CU-2DU: breakdown + matrix completed (75 experiments)
+- Extended CloudLab experiment to 2026-05-23
+
+## 2026-05-17
+### Multi-CU topologies: 2CU-4DU, 2CU-6DU, 2CU-8DU
+- 2CU-4DU: breakdown + matrix completed (75 experiments)
+  - cu overhead: 0.60W total, DU mean: 2.62W/DU, total: ~11.1W
+- 2CU-6DU: breakdown + matrix completed (75 experiments)
+  - cu overhead: 0.73W total, DU mean: 3.07W/DU, total: ~19.1W
+- 2CU-8DU: breakdown + matrix completed (75 experiments)
+  - cu overhead: 1.00W total, DU mean: 3.99W/DU, total: ~34.8W
+- docker-compose.split.yml updated: IP conflicts resolved, du6-du8 IPs reassigned
+- collect_power_breakdown scripts created for each topology
+
+## 2026-05-18
+### Multi-CU topologies: 3CU-3DU, 3CU-6DU, 4CU-4DU
+- 3CU-3DU: breakdown + matrix completed (75 experiments)
+  - cu overhead: 0.85W total, DU mean: 2.26W/DU, total: ~7.6W
+- 3CU-6DU: breakdown + matrix completed (75 experiments)
+  - cu overhead: 1.36W total, DU mean: 3.49W/DU, total: ~26.6W
+- 4CU-4DU: breakdown + matrix completed (75 experiments)
+  - cu overhead: 1.32W total, DU mean: 2.70W/DU, total: ~11.9W
+- Key finding: centralised CU architectures are more energy-efficient than distributed ones
+  at equivalent DU counts. At 6 DU, 3CU topology consumes ~6W more than 1CU at 96 UEs.
+- Analysis notebook updated with all multi-CU topologies and centralised vs distributed comparison
+
+
+## 2026-05-21
+### Manual and automatic scaling implementation
+- Implemented scale.sh: dynamic CU-DU topology scaler using docker run with generated configs
+  - Parameters: --cu, --du, --warn-threshold, --scaledown-threshold, --cqi, --ues, --monitor
+  - Auto-starts Scaphandre, Prometheus and 5GC if not running
+  - Allocates IPs dynamically from predefined pools
+  - Generates configs from templates at runtime (configs/templates/)
+  - Measures power via Scaphandre before and after each transition
+  - Monitoring loop: samples power every N seconds and prints warnings
+- Implemented autoscale.sh: threshold-based automatic CU-DU scaler
+  - Monitors per-DU power consumption via Scaphandre
+  - Scales up after K consecutive samples above high threshold
+  - Scales down after K consecutive samples below low threshold
+  - Cooldown period prevents flapping
+- Implemented load_generator.sh: varies nof_ues in testmode configs and restarts DUs
+- Implemented teardown.sh: stops all srsRAN containers, optionally stops full stack
+- Created config templates: cu_cp.yml.template, cu_up.yml.template, du.yml.template, testmode.yml.template
+- Updated docker-compose.yml: networks set to external: true
+- Tested full autoscaling cycle: 1CU→2CU→3CU (scale-up) and 3CU→2CU (scale-down)
+- Note: in testmode power difference between 1 UE and 96 UE is small (~0.5W);
+  autoscaler thresholds must be calibrated to topology-level consumption
+
+
+## 2026-05-22
+### Flask API and React UI
+- Implemented api/app.py: Flask REST API for platform control
+  - GET /api/status: topology, power, container list, process states
+  - POST /api/scale: trigger topology transition
+  - POST /api/teardown: stop RAN containers
+  - POST /api/autoscale/start|stop: control autoscaler daemon
+  - POST /api/load/start|stop: control load generator
+  - GET /api/metrics/history: recent scaling events from logs
+  - GET /api/metrics/breakdown: per-container power consumption
+- React UI (Vite + Recharts + Axios):
+  - Real-time power chart (total and per-DU)
+  - Per-component power breakdown with bar chart
+  - Manual scaling controls
+  - Autoscaler configuration and toggle
+  - Load generator configuration and toggle
+  - Scaling event log
+- Accessible via SSH tunnel: ssh -L 5000:localhost:5000 martafra@amd006.utah.cloudlab.us
