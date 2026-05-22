@@ -8,7 +8,7 @@ import json
 import os
 import glob
 from datetime import datetime
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -77,6 +77,18 @@ def get_power():
     except:
         return 0.0
 
+
+DIST_DIR = os.path.join(os.path.dirname(__file__), 'dist')
+
+@app.route('/')
+def index():
+    return send_from_directory(DIST_DIR, 'index.html')
+
+@app.route('/<path:path>')
+def static_files(path):
+    if os.path.exists(os.path.join(DIST_DIR, path)):
+        return send_from_directory(DIST_DIR, path)
+    return send_from_directory(DIST_DIR, 'index.html')
 
 @app.route("/api/status")
 def status():
