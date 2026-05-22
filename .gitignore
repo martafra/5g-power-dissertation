@@ -24,3 +24,10 @@ Thumbs.db
 
 # Large config files with sensitive info
 docker/.env
+# UI
+ui/node_modules/
+ui/dist/
+ui/.env.local
+ui/.env*.local
+# API
+api/__pycache__/
