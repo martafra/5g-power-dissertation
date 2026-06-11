@@ -333,3 +333,63 @@
   - Load generator configuration and toggle
   - Scaling event log
 - Accessible via SSH tunnel: ssh -L 5000:localhost:5000 martafra@amd006.utah.cloudlab.us
+
+## 2026-06-10
+
+### ZMQ setup - local development (laptop)
+
+- compiled srsRAN_4G from source with ZMQ enabled (`-DENABLE_ZEROMQ=ON -DENABLE_EXPORT=ON`)
+- confirmed `libsrsran_rf_zmq.so` active in srsUE
+- compiled srsRAN Project (release_25_04) with ZMQ enabled
+- confirmed `libzmq.so.5` linked in `gnb` binary
+- key finding: ZMQ + srsUE only works with **10 MHz** (`channel_bandwidth_MHz: 10`, `srate: 11.52e6`); 20 MHz causes persistent `PBCH-MIB: CRC failed`
+- key finding: `coreset0_index: 12` is incompatible with 10 MHz; must use `coreset0_index: 6`
+- key finding: srsUE requires `ssb_nr_arfcn` removed from config to correctly find SSB
+- applied two patches to `srsRAN_4G/lib/src/phy/ue/ue_dl_nr.c` to bypass PDCCH measurement thresholds that produce false negatives with ZMQ (RSRP=-inf, corr=0.000):
+  - disabled `isnormal(m->norm_corr)` early return
+  - disabled EPRE threshold check
+  - both checks set to `if (false && ...)` rather than removed, for clarity
+- confirmed `RRC Connected` and `PDU Session Establishment successful. IP: 10.45.1.2`
+- measured throughput with iperf3: DL ~26.8 Mbps, UL ~5.5 Mbps
+- measured latency with ping (100 packets, 0.1s interval): RTT min=18.7ms avg=35.7ms max=261ms, 0% loss
+- GNU Radio tested as broker but not required for single UE; direct ZMQ connection works
+
+### Configuration summary (gnb + srsUE, monolithic)
+
+- band 3, dl_arfcn=368500, bw=10 MHz, SCS=15 kHz, srate=11.52e6
+- coreset0_index=6, ss0_index=0, prach_config_index=1
+- Open5GS running in Docker on `10.53.1.2`
+- gNB bind_addr=10.53.1.1 (host-side ran network gateway)
+- srsUE network namespace: ue1, IP: 10.45.1.2
+
+---
+
+## 2026-06-11
+
+### ZMQ power + throughput experiments on CloudLab (node amd004.utah.cloudlab.us, d6515)
+
+- installed Docker, srsRAN_4G, srsRAN Project with ZMQ on fresh CloudLab node
+- replicated working ZMQ setup from laptop
+- registered IMSI `001010123456780` in Open5GS web UI
+- confirmed `RRC Connected` and `PDU Session Establishment` on CloudLab node
+- ran `run_zmq_power_throughput.sh`: 3 modes (idle, dl, ul), 5 runs each
+- Scaphandre measuring gnb and srsue processes via RAPL
+
+### Results
+
+| mode | power mean (W) | power std (W) | throughput (Mbps) |
+|------|---------------|--------------|-------------------|
+| idle | 1.974         | 0.010        | 0                 |
+| dl   | 2.276         | 0.054        | 27.5              |
+| ul   | 2.154         | 0.012        | 6.0               |
+
+- DL overhead vs idle: +0.30W for 27.5 Mbps
+- UL overhead vs idle: +0.18W for 6.0 Mbps
+- gNB consumes ~1.5W at idle, ~1.6W under load
+- srsUE consumes ~0.45W at idle, ~0.68W under DL load
+- results stored in `docs/logs/zmq/`
+
+### Next steps
+
+- attempt ZMQ with disaggregated CU/DU setup (srscucp + srscuup + srsdu) on CloudLab
+- if successful, run power + throughput matrix across topologies

@@ -1,0 +1,136 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: ZMQ broker for srsRAN gNB + srsUE (single UE)
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    hier_block_src_path: '.:'
+    id: zmq_broker_1ue
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: ZMQ Broker - 1 UE
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 8]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: '23040000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 12]
+    rotation: 0
+    state: enabled
+
+# DL path: gNB tx (2000) -> UE rx (2100)
+- name: zeromq_req_source_dl
+  id: zeromq_req_source
+  parameters:
+    address: tcp://127.0.0.1:2000
+    affinity: ''
+    alias: ''
+    comment: Receive DL from gNB
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pass_tags: 'False'
+    timeout: 100
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 200]
+    rotation: 0
+    state: enabled
+
+- name: zeromq_rep_sink_dl
+  id: zeromq_rep_sink
+  parameters:
+    address: tcp://127.0.0.1:2100
+    affinity: ''
+    alias: ''
+    comment: Send DL to UE
+    pass_tags: 'False'
+    timeout: 100
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 200]
+    rotation: 0
+    state: enabled
+
+# UL path: UE tx (2101) -> gNB rx (2001)
+- name: zeromq_req_source_ul
+  id: zeromq_req_source
+  parameters:
+    address: tcp://127.0.0.1:2101
+    affinity: ''
+    alias: ''
+    comment: Receive UL from UE
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    pass_tags: 'False'
+    timeout: 100
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [8, 400]
+    rotation: 0
+    state: enabled
+
+- name: zeromq_rep_sink_ul
+  id: zeromq_rep_sink
+  parameters:
+    address: tcp://127.0.0.1:2001
+    affinity: ''
+    alias: ''
+    comment: Send UL to gNB
+    pass_tags: 'False'
+    timeout: 100
+    type: complex
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [400, 400]
+    rotation: 0
+    state: enabled
+
+connections:
+- [zeromq_req_source_dl, '0', zeromq_rep_sink_dl, '0']
+- [zeromq_req_source_ul, '0', zeromq_rep_sink_ul, '0']
+
+metadata:
+  file_format: 1
+  grc_version: 3.10.1.1
