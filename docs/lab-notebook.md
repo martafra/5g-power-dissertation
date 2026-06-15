@@ -439,3 +439,99 @@ Key observations:
 - run same experiment on additional topologies (1CU-2DU, 2CU-2DU) to compare with ru_dummy matrix
 - investigate multi-UE support via GNU Radio broker (currently limited to 1 UE with direct ZMQ)
 - add ZMQ results to power_analysis.ipynb
+
+## 2026-06-15
+
+### Multi-UE ZMQ setup - CloudLab (amd004.utah.cloudlab.us, d6515)
+
+#### Objective
+
+Extend the ZMQ disaggregated setup (srscucp + srscuup + srsdu) to support multiple simultaneous UEs, replicating the UE count dimension of the ru_dummy matrix.
+
+#### Approach
+
+Used the official srsRAN Project multi-UE GNU Radio broker (`multi_ue_scenario.grc`), obtained from the archived `srsran/srsRAN_Project_docs` repository. The broker handles:
+- DL broadcast: DU tx -> UE1, UE2, UE3 (via separate REP sinks)
+- UL multiplexing: UE1, UE2, UE3 tx -> DU rx (via separate REQ sources)
+
+ZMQ port assignments:
+- DU: tx=2000, rx=2001
+- UE1: rx=2100, tx=2101
+- UE2: rx=2200, tx=2201
+- UE3: rx=2300, tx=2301 (from `ue3_zmq.conf`)
+
+#### Troubleshooting log
+
+**Phase 1 - srsUE closes immediately (`Closing stdin thread`)**
+- cause: running srsUE with `</dev/null` or `setsid` removes its stdin; srsUE detects this and exits
+- fix: use `tmux new-session -d -s ueN "..."` to provide a virtual terminal
+
+**Phase 2 - DU stuck at `Completed 0 of 11520 samples`**
+- cause 1: `multi_ue_scenario.py` attempts to render Qt GUI; on headless CloudLab node this causes deadlock
+- fix 1: use `xvfb-run -a` to provide a virtual framebuffer
+- cause 2: GNU Radio broker uses synchronous REQ/REP sockets for 3 UEs; starting only 2 UEs left one socket permanently waiting
+- fix 2: start all 3 UEs (broker is designed for exactly 3)
+
+**Phase 3 - UEs stuck at `Sending PDU Session Establishment Request`**
+- cause 1 (UE1): config had `apn = srsapn`; Open5GS only accepts `apn = internet`
+- fix 1: `sed -i 's/apn = srsapn/apn = internet/' ue*_zmq.conf`
+- cause 2 (UE2, UE3): official configs had different K keys (`...ef00`, `...ef01`); Open5GS database has `...eeff` for all subscribers
+- fix 2: unified K key to `00112233445566778899aabbccddeeff` across all UE configs
+
+**Phase 4 - `total_nof_ra_preambles` causes DU segfault**
+- adding the official multi-UE PRACH parameters to `du_zmq.yml` caused the DU to crash immediately after ZMQ connection
+- these parameters appear unsupported in this version of srsRAN Project (commit 4bf1543936)
+- workaround: kept original PRACH config (`prach_config_index: 1` only); 3 UEs connected successfully without extra PRACH parameters
+
+**Phase 5 - tmux duplicate session errors**
+- cause: killing UE processes left tmux sessions alive
+- fix: `tmux kill-server` before restarting
+
+#### Correct startup order
+
+```bash
+xvfb-run -a python3 ~/dissertation/configs/zmq/multiue_official/multi_ue_scenario.py &
+sleep 3
+sudo srscucp -c ~/dissertation/configs/zmq_split/cu_cp_zmq.yml &
+sleep 2
+sudo srscuup -c ~/dissertation/configs/zmq_split/cu_up_zmq.yml &
+sleep 2
+sudo srsdu -c ~/dissertation/configs/zmq_split/du_zmq.yml &
+sleep 10
+sudo tmux new-session -d -s ue1 "srsue ~/dissertation/configs/zmq/multiue_official/ue1_zmq.conf"
+sudo tmux new-session -d -s ue2 "srsue ~/dissertation/configs/zmq/multiue_official/ue2_zmq.conf"
+sudo tmux new-session -d -s ue3 "srsue ~/dissertation/configs/zmq/multiue_official/ue3_zmq.conf"
+```
+
+Post-connection routing:
+```bash
+sudo iptables -I FORWARD -j ACCEPT
+sudo iptables -I DOCKER-USER -j ACCEPT
+sudo ip netns exec ue1 ip route add default dev tun_srsue
+sudo ip netns exec ue2 ip route add default dev tun_srsue
+sudo ip netns exec ue3 ip route add default dev tun_srsue
+```
+
+#### Results - 1CU-1DU, 3 UE simultaneous, ZMQ
+
+UE IP assignments:
+- UE1: 10.45.1.2
+- UE2: 10.45.1.12
+- UE3: 10.45.1.13
+
+Ping RTT (from host to each UE): ~80-120 ms, 0% packet loss
+
+Simultaneous DL throughput (iperf3, 10s):
+
+| UE | throughput sender (Mbps) | throughput receiver (Mbps) | retransmits |
+|----|--------------------------|----------------------------|-------------|
+| 1  | 4.34                     | 2.52                       | 1           |
+| 2  | 3.79                     | 2.19                       | 0           |
+| 3  | 2.38                     | 1.33                       | 0           |
+| total | 10.51                 | 6.04                       | 1           |
+
+The total DL throughput (~10.5 Mbps) is roughly one third of the single-UE throughput (~28 Mbps), consistent with fair round-robin scheduling across 3 UEs on the 10 MHz channel.
+
+#### Next steps
+
+- extend to multi-DU with ZMQ
