@@ -393,3 +393,49 @@
 
 - attempt ZMQ with disaggregated CU/DU setup (srscucp + srscuup + srsdu) on CloudLab
 - if successful, run power + throughput matrix across topologies
+
+## 2026-06-14
+
+### ZMQ disaggregated setup (srscucp + srscuup + srsdu) - CloudLab
+
+#### What was done
+
+- confirmed that ZMQ works with the **disaggregated CU/DU split** (srscucp + srscuup + srsdu as separate processes), not just the monolithic gnb
+- ran power breakdown experiment for 1CU-1DU topology with 1 UE via ZMQ
+- measured per-component power (CU-CP, CU-UP, DU, srsUE) in three modes: idle, DL traffic, UL traffic
+- measured throughput (iperf3) and latency (ping) alongside power
+
+#### Configuration issues and workarounds
+
+- **iptables blocking traffic**: after UE reconnection, ping and iperf3 traffic was dropped silently. Fixed with:
+  ```bash
+  sudo iptables -I FORWARD -j ACCEPT
+  sudo iptables -I DOCKER-USER -j ACCEPT
+  ```
+- **missing default route in UE namespace**: after reconnection the route was gone. Fixed with:
+  ```bash
+  sudo ip netns exec ue1 ip route add default dev tun_srsue
+  ```
+- **GNU Radio broker conflict**: leftover gnuradio_broker process was occupying ZMQ ports after multi-UE experiments. Fixed with `sudo pkill -f gnuradio_broker` before restarting srsUE
+- **srsUE stuck at "Attaching UE..."**: caused by stale DU state after UE disconnect. Fixed by restarting srsdu before restarting srsUE
+
+#### Results - 1CU-1DU, 1 UE, ZMQ (CloudLab d6515, AMD EPYC 7452)
+
+| mode | cu-cp (W) | cu-up (W) | du (W) | srsue (W) | total (W) | throughput (Mbps) | RTT (ms) |
+|------|-----------|-----------|--------|-----------|-----------|-------------------|---------|
+| idle | 0.159     | 0.162     | 1.588  | 0.323     | 2.231     | -                 | -       |
+| dl   | 0.156     | 0.158     | 1.571  | 0.318     | 2.269     | 27.6              | 27.7    |
+| ul   | 0.157     | 0.164     | 1.600  | 0.357     | 2.278     | 6.0               | -       |
+
+Key observations:
+- DU dominates power (~70% of total), consistent with ru_dummy experiments
+- CU-CP and CU-UP each consume ~0.16W regardless of traffic mode
+- DL and UL add minimal power overhead vs idle (+0.04W and +0.05W respectively)
+- throughput and latency consistent with earlier gnb monolithic ZMQ results (27.5 Mbps DL, ~28ms RTT)
+- ZMQ disaggregated results are comparable to gnb monolithic, confirming the split architecture does not add significant power overhead
+
+#### Next steps
+
+- run same experiment on additional topologies (1CU-2DU, 2CU-2DU) to compare with ru_dummy matrix
+- investigate multi-UE support via GNU Radio broker (currently limited to 1 UE with direct ZMQ)
+- add ZMQ results to power_analysis.ipynb
