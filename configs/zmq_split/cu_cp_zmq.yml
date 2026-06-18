@@ -17,4 +17,4 @@ cu_cp:
 
 log:
   filename: /tmp/cu_cp_zmq.log
-  all_level: warning
+  all_level: info

@@ -37,4 +37,4 @@ cell_cfg:
 
 log:
   filename: /tmp/du_zmq.log
-  all_level: warning
+  all_level: info
