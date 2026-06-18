@@ -532,6 +532,126 @@ Simultaneous DL throughput (iperf3, 10s):
 
 The total DL throughput (~10.5 Mbps) is roughly one third of the single-UE throughput (~28 Mbps), consistent with fair round-robin scheduling across 3 UEs on the 10 MHz channel.
 
+### Fix - 100% packet loss on ZMQ UE uplink/internet path
+
+**Symptom**: UEs successfully attached (RRC Connected, PDU Session Establishment successful, `tun_srsue` interface created with correct IP), and ping to the UPF gateway (`10.45.1.1`) worked with 0% loss, but ping from any UE namespace to an external address (`8.8.8.8`) showed 100% packet loss.
+
+**Diagnosis steps**:
+- confirmed ICMP echo requests left the UE namespace correctly via `tun_srsue` (`tcpdump -i tun_srsue`)
+- confirmed the host correctly routes `10.45.0.0/16` to the Open5GS container (`10.53.1.2`) via the bridge (`ip route show`)
+- confirmed the Open5GS container itself has working internet access (`docker exec open5gs_5gc ping 8.8.8.8` succeeded)
+- confirmed `net.ipv4.ip_forward = 1` inside the container
+- confirmed a `MASQUERADE` rule already existed inside the container for `10.45.0.0/24` (visible only via `iptables-legacy`, not `iptables`, due to legacy/nft table split) - but UE IPs were in `10.45.1.0/24`, outside that rule's scope
+- added a matching rule inside the container for `10.45.1.0/24`, still no effect
+- ran `tcpdump -i any icmp -n` on the **host** while pinging from a UE namespace: the packet was visible leaving the host's physical NIC (`enp1s0f0np0`) with source IP still `10.45.1.18` (the UE's private IP), meaning **no NAT was ever applied** - the packet bypassed the container's NAT path entirely at the host level
+
+**Root cause**: the host's NAT table (`iptables -t nat -L POSTROUTING`) had `MASQUERADE` rules for other internal subnets (`10.53.1.0/24`, `172.19.1.0/24`, `172.17.0.0/16`) but **none for `10.45.0.0/16`** (the UE subnet range used by Open5GS). The host was correctly routing UE traffic to the container's bridge, but never rewriting the source address before it left the physical interface.
+
+**Fix** (applied at the host level, not inside the container):
+```bash
+sudo iptables -t nat -A POSTROUTING -s 10.45.0.0/16 -o enp1s0f0np0 -j MASQUERADE
+```
+
+**Verification**:
+```bash
+sudo ip netns exec ue1 ping -c 3 -W 5 8.8.8.8
+# 0% packet loss, RTT ~86-127 ms
+```
+Confirmed working for UE1, UE2, and UE3 after the fix - all reached 0% packet loss to `8.8.8.8`.
+
+**Note**: this rule does not persist across host reboots unless added to a persistent iptables config (e.g. `iptables-persistent` or a startup script). Re-check this rule (`sudo iptables -t nat -L POSTROUTING -n -v | grep 10.45`) after any node reboot or `iptables` flush.
+
 #### Next steps
 
 - extend to multi-DU with ZMQ
+
+## 2026-06-18
+### Multi-UE ZMQ setup - debugging session, CloudLab (amd004.utah.cloudlab.us, d6515)
+#### Objective
+Get the 3-UE setup (documented 2026-06-15) running again after it stopped working, and extend it to 4 simultaneous UEs by adding a fourth branch to the GNU Radio broker.
+
+#### Approach
+Wrote a headless 4-UE extension of the official broker (`multi_ue_4ue.py`), removing the Qt GUI (not needed under `xvfb-run`) and adding a fourth REQ source / REP sink pair (ports 2400/2401) following the same pattern as UE1-3. Path loss values moved to CLI args instead of GUI sliders.
+
+The 3-UE setup had stopped working since 2026-06-15 (DU stuck at "Completed 0 of 11520 samples", all UEs stuck at "Attaching UE..."). Spent most of the session re-diagnosing this before the 4-UE extension could even be tested, since the symptom looked identical regardless of UE count.
+
+#### Fix 1 - subscriber DB / APN mismatch (UE1)
+UE1's IMSI (`001010123456780`) was registered in the Open5GS subscriber DB with APN `srsapn`/`ims` only, while `ue1_zmq.conf` requests `apn = internet`. The PDU Session Establishment Request was silently never accepted because the requested APN didn't exist in that subscriber's slice.
+
+Fixed by updating the subscriber's `slice` array directly in MongoDB to match the structure of the other (working) subscribers, with `name: 'internet'` and a free IP (`10.45.1.18`):
+```bash
+docker exec open5gs_5gc mongosh open5gs --quiet --eval '
+db.subscribers.updateOne(
+  { imsi: "001010123456780" },
+  { $set: { slice: [ { sst: 1, default_indicator: true, session: [ {
+    qos: { arp: { priority_level: 8, pre_emption_capability: 1, pre_emption_vulnerability: 1 }, index: 9 },
+    ambr: { downlink: { value: 1, unit: 3 }, uplink: { value: 1, unit: 3 } },
+    name: "internet", type: 3, pcc_rule: [], ue: { ipv4: "10.45.1.18" }
+  } ] } ] } }
+)'
+```
+This alone did not resolve the full stall (see Fix 2/3 below) but was a real and necessary correction.
+
+#### Fix 2 - stale `srsue` processes holding ZMQ ports
+Several previous test runs had left `srsue` processes alive in the background (not reachable by `pkill -f srsue`, likely orphaned from earlier `tmux` sessions), still bound to the UE ports and `ESTABLISHED` against the broker. New `srsue` launches failed silently with `Address already in use` whenever redirected to a log file, masking the real error.
+
+Identified via:
+```bash
+sudo lsof -i :2100 -i :2101 -i :2200 -i :2201 -i :2300 -i :2301 -i :2400 -i :2401
+```
+Fixed by killing the stale PIDs explicitly, then using `sudo tmux kill-server` (not just `kill-session`) before any subsequent restart.
+
+#### Fix 3 - wrong binary paths / launch timing
+Re-ran the exact startup sequence documented on 2026-06-15, but with relative binary names (`srscucp`, `srscuup`, `srsdu`) instead of absolute paths - all three exited immediately (`command not found`). Corrected to absolute paths.
+
+Also confirmed empirically that all 3 (then 4) `srsue` instances must be launched in close succession (no long `sleep` between them) - the broker's synchronous REQ/REP sockets require all expected UEs to connect before any data flows; staggering launches by 10-15s left earlier UEs timed out by the time the last one connected.
+
+With all three fixes applied, the 3-UE setup worked end-to-end: all UEs reached `RRC Connected` -> `PDU Session Establishment successful` -> `tun_srsue` interface created with correct subscriber IP.
+
+#### Fix 4 - host-level NAT missing for UE subnet (100% packet loss to internet)
+Once attached, all UEs could ping the UPF gateway (`10.45.1.1`, same subnet, no NAT needed) with 0% loss, but pinging any external address (`8.8.8.8`) showed 100% packet loss.
+
+Traced with `tcpdump -i any icmp -n` on the host while pinging from a UE namespace: the ICMP packet was seen leaving the host's physical NIC (`enp1s0f0np0`) with source IP still `10.45.1.18` (the UE's private IP) - meaning no NAT was ever applied, despite a `MASQUERADE` rule already existing *inside* the Open5GS container for `10.45.0.0/24` (visible only via `iptables-legacy`, due to legacy/nft table split). The host was correctly routing UE traffic to the container's bridge, but the host's own NAT table had `MASQUERADE` rules for other internal subnets (`10.53.1.0/24`, `172.19.1.0/24`, `172.17.0.0/16`) but none for `10.45.0.0/16`.
+
+Fixed at the host level (not inside the container):
+```bash
+sudo iptables -t nat -A POSTROUTING -s 10.45.0.0/16 -o enp1s0f0np0 -j MASQUERADE
+```
+Verified 0% packet loss to `8.8.8.8` from UE1, UE2, UE3 after applying.
+
+**Note**: this rule does not persist across host reboots. Re-check (`sudo iptables -t nat -L POSTROUTING -n -v | grep 10.45`) after any node reboot or iptables flush.
+
+#### Fix 5 - 4-UE broker deadlock (ZMQ High Water Mark)
+With all of the above fixed, extended to 4 UEs using `multi_ue_4ue.py`. UE1 attached and exchanged regular PUCCH/PDSCH traffic for a few seconds, then received `RRC Release`; UE2/3/4 never completed random access, looping on PRACH transmission. The DU process stayed alive at ~150% CPU but stopped writing to its log entirely, with no progress even after 20+ seconds of additional wait.
+
+Ruled out (in order): flow graph structural errors (block/connection counts matched the working 3-UE original exactly, scaled by one branch), `add_vcc` parameter misuse (already corrected earlier in the session - it's vector length, not port count), ZMQ receive timeout (raised 100ms -> 1000ms, no effect), subscriber DB/APN mismatches (already correct for all 4 IMSIs), stale processes (checked clean).
+
+Root cause: the ZMQ `req_source`/`rep_sink` blocks used the default High Water Mark (`zmq_hwm = -1`), unchanged from the official 3-UE broker. Sufficient buffering for 3 synchronous REQ/REP socket pairs was not enough once a 4th pair was added and UEs began exchanging sustained uplink/downlink traffic, leading to a GNU Radio scheduler deadlock.
+
+Fixed:
+```python
+self.zmq_hwm = 1000
+```
+(single change in `multi_ue_4ue.py`'s `__init__`, applies to all REQ/REP sockets)
+
+#### Results - 4 UE simultaneous, ZMQ, after all fixes
+All four RNTIs (`0x4601`-`0x4604`) active and stable for 800+ seconds of internal DU runtime, continuous PUCCH/PDSCH activity, no further deadlock.
+
+UE IP assignments:
+- UE1: 10.45.1.18
+- UE2: 10.45.1.12
+- UE3: 10.45.1.13
+- UE4: 10.45.1.14
+
+Ping to `8.8.8.8` (external), all 4 UEs:
+| UE | RTT min/avg/max (ms) | packet loss |
+|----|----------------------|-------------|
+| 1  | 130.6 / 276.9 / 567.3 | 0% |
+| 2  | 110.2 / 133.9 / 147.2 | 0% |
+| 3  | 114.9 / 139.8 / 153.6 | 0% |
+| 4  | 102.8 / 129.8 / 144.7 | 0% |
+
+#### Next steps
+- run simultaneous iperf3 throughput test across all 4 UEs (same methodology as the 3-UE result from 2026-06-15) to complete the power/throughput correlation
+- integrate these results into the analysis notebook
+- consider scripting the full startup sequence (broker + core + DU + 4x UE + routing) into a single reusable script, given how much of this session was spent re-discovering steps already documented

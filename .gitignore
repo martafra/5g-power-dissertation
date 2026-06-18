@@ -17,6 +17,7 @@ __pycache__/
 # External repositories
 srsRAN_Project/
 open5gs/
+srsRAN_4G/
 
 # OS
 .DS_Store
