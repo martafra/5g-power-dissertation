@@ -28,14 +28,14 @@ class multi_ue_scenario_4ue(gr.top_block):
 
     def __init__(self, ue1_path_loss_db=0, ue2_path_loss_db=10,
                  ue3_path_loss_db=20, ue4_path_loss_db=30,
-                 slow_down_ratio=4, samp_rate=11520000):
+                 slow_down_ratio=1, samp_rate=11520000):
         gr.top_block.__init__(self, "srsRAN_multi_UE_4ue", catch_exceptions=True)
 
         ##################################################
         # variables
         ##################################################
         self.zmq_timeout = 1000
-        self.zmq_hwm = 1000
+        self.zmq_hwm = 10000
         self.ue1_path_loss_db = ue1_path_loss_db
         self.ue2_path_loss_db = ue2_path_loss_db
         self.ue3_path_loss_db = ue3_path_loss_db
@@ -157,8 +157,8 @@ def parse_args():
                          help='UE3 path loss in dB (default: 20)')
     parser.add_argument('--ue4-loss', type=float, default=30,
                          help='UE4 path loss in dB (default: 30)')
-    parser.add_argument('--slow-down-ratio', type=float, default=4,
-                         help='time slow down ratio (default: 4)')
+    parser.add_argument('--slow-down-ratio', type=float, default=1,
+                         help='time slow down ratio (default: 1, no artificial slowdown)')
     parser.add_argument('--samp-rate', type=float, default=11520000,
                          help='sample rate in Hz (default: 11520000)')
     return parser.parse_args()

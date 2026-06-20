@@ -655,3 +655,91 @@ Ping to `8.8.8.8` (external), all 4 UEs:
 - run simultaneous iperf3 throughput test across all 4 UEs (same methodology as the 3-UE result from 2026-06-15) to complete the power/throughput correlation
 - integrate these results into the analysis notebook
 - consider scripting the full startup sequence (broker + core + DU + 4x UE + routing) into a single reusable script, given how much of this session was spent re-discovering steps already documented
+
+#### Addendum - parameter tuning: slow_down_ratio, HWM, and path loss (4 UE)
+
+**Context**: following the DL/UL methodology mismatch found above, two broker parameters were tested empirically to see whether they affected the low uplink throughput observed.
+
+**Test 1 - HWM and slow_down_ratio**
+
+Default broker parameters at the time (`zmq_hwm=1000`, `slow_down_ratio=4`, inherited from the original 3-UE broker) were changed to `zmq_hwm=10000` and `slow_down_ratio=1` (i.e. no artificial channel slowdown).
+
+Result (path loss still at original defaults, 0/10/20/30 dB for UE1-4):
+
+| UE | Sender (Mbps) | Receiver (Kbps) | Retr |
+|----|---------------|------------------|------|
+| 1  | 1.48          | 568              | 0    |
+| 2  | 1.07          | 523              | 0    |
+| 3  | 1.38          | 454              | 0    |
+| 4  | 1.01          | 272              | 0    |
+| **total** | **4.94** | **1817** | **0** |
+
+Compared to the prior result with the old defaults (~0.86-1 Mbps aggregate, 7-21 retransmits across the run) this is a ~5x improvement with zero retransmits. The ~5x factor is consistent with removing `slow_down_ratio=4` (which by design throttles the sample rate by that factor).
+
+**Decision**: `zmq_hwm=10000` and `slow_down_ratio=1` adopted as the new standard defaults in `multi_ue_4ue.py`, both in the broker class constructor and the CLI argument defaults. Any future single-UE (no-broker) baseline measurement should be re-checked for an equivalent parameter before being compared against multi-UE results, since the original single-UE figures (2026-06-14) may not have had an equivalent slowdown applied at all (single UE connects directly via ZMQ, no GNU Radio broker in between).
+
+**Test 2 - path loss uniformity (0 dB for all 4 UEs)**
+
+Hypothesis: the default per-UE path loss progression (0/10/20/30 dB) might be forcing UE3/UE4 into conservative MCS (QPSK), and removing that asymmetry might restore higher throughput.
+
+Setting all four UEs to 0 dB path loss caused a new failure mode: all 4 UEs got stuck in a PRACH retry loop, never completing random access. DU log showed one successful PRACH detection every ~16 seconds, each assigned a new `tc-rnti`, suggesting only one UE at a time was being processed successfully rather than all four failing simultaneously. Root cause not fully diagnosed - possibly related to the uplink combiner (`add_vcc`) behaving differently when all four branches carry identical-amplitude signals (no path loss to differentiate them), though this remains a hypothesis, not confirmed.
+
+**Test 3 - path loss, modest and diversified (0/3/6/9 dB)**
+
+Retried with a smaller, more realistic spread instead of either extreme (0 dB uniform, or 0-30 dB original). All 4 UEs attached successfully this time (no PRACH loop).
+
+Result (same `zmq_hwm=10000`, `slow_down_ratio=1` as Test 1):
+
+| UE | Path loss (dB) | Sender (Mbps) | Retr |
+|----|------------------|----------------|------|
+| 1  | 0  | 1.48  | 0 |
+| 2  | 3  | 1.16  | 0 |
+| 3  | 6  | 1.01  | 0 |
+| 4  | 9  | 0.858 | 0 |
+| **total** | | **4.51** | **0** |
+
+Compared to Test 1 (path loss 0/10/20/30, total 4.94 Mbps), the much smaller path loss spread (0/3/6/9) produced essentially the same aggregate throughput (4.51 Mbps) - within measurement noise of Test 1, not a meaningful improvement.
+
+**Conclusion**: `slow_down_ratio` and `zmq_hwm` are the parameters that actually determine achievable throughput in this ZMQ simulation; per-UE path loss, at least within the ranges tested (0-9 dB and 0-30 dB), has negligible effect on aggregate throughput. Path loss of exactly 0 dB for all UEs simultaneously should be avoided - it triggers a PRACH retry loop rather than a clean attach, for reasons not yet fully understood. A modest, non-zero, diversified path loss (e.g. 0/3/6/9 dB) is recommended going forward: it avoids the all-zero failure mode while not measurably penalising throughput, and still gives each UE a distinguishable signal characteristic if that is useful for future analysis.
+
+#### Addendum - DL test with new parameters (closing the loop on the DL/UL asymmetry)
+
+To confirm the DL/UL asymmetry identified earlier also holds with the new `slow_down_ratio=1`/`zmq_hwm=10000` parameters (not just with the old defaults, as in the 2026-06-14 single-UE reference), ran a DL test: iperf3 server inside each UE namespace, client from the host connecting in to each UE's IP (0/3/6/9 dB path loss, same as Test 3 above).
+
+| UE | Path loss (dB) | Sender (Mbps) | Receiver (Mbps) | Retr |
+|----|------------------|----------------|--------------------|------|
+| 1  | 0  | 9.71 | 7.71 | 0 |
+| 2  | 3  | 9.48 | 7.36 | 0 |
+| 3  | 6  | 7.76 | 6.18 | 0 |
+| 4  | 9  | 6.38 | 5.16 | 1 |
+| **total** | | **33.33** | **26.41** | **1** |
+
+DL aggregate (33.33 Mbps) vs UL aggregate from Test 3 (4.51 Mbps) under identical broker parameters and path loss: a **~7.4x DL/UL ratio**. This is consistent with - if anything more pronounced than - the ~4.6x ratio seen in the single-UE 2026-06-14 reference (DL 27.6 Mbps vs UL 6.0 Mbps), confirming the asymmetry is a real, reproducible characteristic of this ZMQ-based setup rather than an artefact of the old default parameters.
+
+Also notable: 4-UE aggregate DL throughput (33.3 Mbps) exceeds the single-UE DL reference (27.6 Mbps) - plausible, since multiplexing 4 UEs may let the scheduler use the shared 10 MHz channel more efficiently than a single UE alone can.
+
+**Final summary of today's three isolated variables**:
+1. **Direction (DL vs UL)**: ~4.6-7.4x difference, intrinsic to the stack - always specify which direction any reported figure refers to
+2. **Broker parameters (`slow_down_ratio`, `zmq_hwm`)**: ~5x difference between old (4, 1000) and new (1, 10000) defaults, same direction
+3. **Per-UE path loss**: no measurable effect within 0-30 dB (except exactly-0-for-all, which breaks attach)
+
+All three are independent and compose multiplicatively; none of today's earlier "low throughput" readings indicated a regression or leftover bug from the 4-UE broker work - they were uplink measurements with the old broker defaults, simply not comparable to the 2026-06-15 downlink figure without accounting for both factors.
+
+## 2026-06-20
+#### Addendum - scalability limit beyond 4 UE (7 UE and 16 UE attempts)
+
+**Context**: after validating 4 UE as fully working (attach, routing, DL/UL throughput - see addenda above), attempted to scale further using a newly generalised broker.
+
+**New tooling created** (kept for future use, even though scaling beyond 4 UE was not achieved this session):
+- `multi_ue_nue.py`: programmatically generates an N-UE GNU Radio broker (same topology as `multi_ue_4ue.py` - shared throttle, per-UE path loss, single `add_vcc(1)` combiner - but built in a loop instead of hand-copied blocks). Takes `--n-ue`, `--path-loss` (space-separated dB list), `--zmq-hwm`, `--slow-down-ratio` as CLI args. Defaults: `zmq_hwm=10000`, `slow_down_ratio=1` (matching today's validated standard), path loss defaults to a 2 dB step progression if not specified.
+- `generate_16ue_confs.sh`: generates N `srsue` ZMQ conf files from a working template, substituting IMSI (sequential, matching the 16 subscribers already in the Open5GS DB, `...780` to `...795`), ZMQ ports (matching `multi_ue_nue.py`'s scheme: UE*i* = `2000+i*100+1` / `2000+i*100`), and - critically - `netns`, `filename`, and pcap paths (see bug below).
+
+**Bug found and fixed in the generator script**: the first version of `generate_16ue_confs.sh` substituted IMSI and ports correctly but left `netns = ue1` and all log/pcap filenames (`/tmp/ue1.log`, etc.) unchanged in every generated file, copied verbatim from the UE1 template. This meant every "UE2" through "UE16" config was actually trying to attach inside UE1's already-occupied network namespace, producing a misleading `Failed to setup/configure GW interface` error that looked like a namespace or permissions problem but was actually a config generation bug. Fixed by adding `netns`, `mac_filename`, `mac_nr_filename`, `nas_filename`, and `filename` to the substitution list, each parameterised by UE index.
+
+**16 UE attempt**: broker started successfully (8+16=... sockets all bound), but only 7 of 16 UEs ever completed random access; the remaining 9 looped on PRACH transmission indefinitely. Broker CPU usage was extreme: **1065% (over 10 cores)**, with system load average 24+. This is a clear computational bottleneck in the single-process GNU Radio broker, not a configuration issue - confirmed by checking socket counts (correct, 16 LISTEN sockets) and system resources (`97%+ idle` when only 7 UE branches were active, vs the saturated state with 16).
+
+**7 UE attempt** (after fixing the netns/filename bug above): 4 of 7 UEs (UE1-4) completed the full attach sequence (RRC Connected, PDU Session Establishment successful, correct per-UE IP assigned) and remained stable. UE5-7 got stuck in the same PRACH retry loop as the 16-UE case, and did **not** recover even after an additional 4 minutes of waiting with no other changes - confirming this is a stable failure point, not a slow-but-eventually-successful process. Broker CPU at this point was ~300% - higher than the ~160% seen with a healthy 4-UE broker, but far below the 16-UE case's 1065%.
+
+**Conclusion**: **4 simultaneous UEs is the practical, repeatable stability limit** for this single-process GNU Radio broker architecture on this hardware (CloudLab d6515, AMD EPYC 7452). The limiting factor is broker CPU/scheduling load, not subscriber DB, IMSI/APN config, network namespaces, routing, or DU/CU-CP capacity (DU and CU-CP both remained healthy and responsive throughout, even while UE5-7 failed to attach). The PRACH retry pattern (one successful detection roughly every 16 seconds, never overlapping) suggests the broker cannot keep pace with synchronous REQ/REP polling across more than ~4-5 socket pairs under sustained load, regardless of how long it is left running.
+
+**Decision**: descope multi-UE ZMQ throughput/power measurements to 1, 3, and 4 simultaneous UEs, all of which are now verified stable and reproducible. Keep `multi_ue_nue.py` and `generate_16ue_confs.sh` in the repository for any future attempt at a redesigned (e.g. multi-process) broker - the generalised, parameterised tooling is sound and bug-free; the limitation is architectural (single GNU Radio process), not something fixable by configuration changes within the current broker design.
