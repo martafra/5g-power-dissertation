@@ -1,246 +1,186 @@
 #!/bin/bash
-# collect_zmq_breakdown.sh - per-component power breakdown for ZMQ 1CU-1DU setup
-# measures CU-CP, CU-UP, DU, srsUE separately with idle/dl/ul traffic modes
-# usage: ./collect_zmq_breakdown.sh [topology] [samples] [interval] [runs]
-# example: ./collect_zmq_breakdown.sh 1cu1du 60 5 5
-
-set -uo pipefail
+# Collect power consumption per srsRAN component for a ZMQ-based deployment,
+# alongside DL/UL throughput (iperf3) and latency (ping). Mirrors the
+# structure of collect_power_breakdown.sh (ru_dummy version), extended with
+# idle/DL/UL phases since ZMQ uses real srsUE traffic instead of synthetic
+# testmode load.
+#
+# Usage: ./collect_zmq_breakdown.sh [n_ue] [duration_seconds] [warmup_seconds] [sample_interval] [run_tag]
+# Example: ./collect_zmq_breakdown.sh 4 300 60 5 2
+# run_tag is included in output filenames so repeated runs of the same
+# configuration don't overwrite each other's iperf3 logs.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOGS_DIR="$SCRIPT_DIR/../docs/logs/zmq"
-TOPOLOGY=${1:-1cu1du}
-SAMPLES=${2:-60}
-INTERVAL=${3:-5}
-RUNS=${4:-5}
-WARMUP=20
-IPERF_DURATION=20
-UE_IP="10.45.1.2"
-UE_NETNS="ue1"
-SCAPHANDRE_URL="http://localhost:8080/metrics"
+LOGS_DIR="$SCRIPT_DIR/../docs/logs"
+N_UE=${1:-1}
+DURATION=${2:-300}
+WARMUP=${3:-60}
+INTERVAL=${4:-5}
+RUN_TAG=${5:-1}
+OUTPUT="$LOGS_DIR/zmq_breakdown_${N_UE}ue_run${RUN_TAG}_$(date +%Y%m%d_%H%M%S).csv"
+SCAPHANDRE_URL="http://10.53.1.11:8080/metrics"
 
 mkdir -p "$LOGS_DIR"
 
-log() { echo "[$(date -u +%H:%M:%S)] $*"; }
-
-get_pid_native() {
-    pgrep -f "$1" | tail -1 || echo ""
+get_pid() {
+    docker inspect "$1" --format '{{.State.Pid}}' 2>/dev/null || echo ""
 }
 
-get_component_power() {
-    local pid=$1
-    if [ -z "$pid" ]; then echo "0"; return; fi
-    local result
-    result=$(curl -s "$SCAPHANDRE_URL" | grep "scaph_process_power_consumption_microwatts" | \
-    grep "pid=\"$pid\"" | \
-    python3 -c "
-import sys
-found = False
-for line in sys.stdin:
-    try:
-        val = float(line.split('}')[-1].strip()) / 1e6
-        print(f'{val:.6f}')
-        found = True
-        break
-    except:
-        pass
-if not found:
-    print('0')
-" 2>/dev/null | head -1)
-    echo "${result:-0}"
+# CU-CP/CU-UP/DU run as host processes via sudo for the ZMQ setup, not
+# containers, so PIDs come from ps instead of docker inspect
+get_host_pid() {
+    # pgrep -f matches the whole sudo wrapper chain (sudo -> sudo -> real
+    # binary), since the full command line contains the binary name at
+    # every level. The actual process (the one with real CPU/power, not
+    # always 0W like the sudo wrappers) is consistently the last PID in
+    # the chain, not the first.
+    pgrep -f "$1" | tail -1
+}
+
+CU_CP=$(get_host_pid "srscucp")
+CU_UP=$(get_host_pid "srscuup")
+DU=$(get_host_pid "srsdu")
+
+declare -A UE_PIDS
+for i in $(seq 1 "$N_UE"); do
+    UE_PIDS["ue${i}"]=$(pgrep -f "ue${i}_zmq.conf" | tail -1)
+done
+
+echo "=== srsRAN ZMQ Power + Throughput Breakdown Collector ==="
+echo "N_UE: $N_UE"
+echo -n "PIDs: CU-CP=$CU_CP | CU-UP=$CU_UP | DU=$DU"
+for key in $(echo "${!UE_PIDS[@]}" | tr ' ' '\n' | sort); do
+    echo -n " | ${key^^}=${UE_PIDS[$key]}"
+done
+echo ""
+echo "Config: Duration=${DURATION}s | Warmup=${WARMUP}s | Interval=${INTERVAL}s"
+echo "Output: $OUTPUT"
+echo "==========================================================="
+
+echo "timestamp,phase,component,pid,microwatts,watts" > "$OUTPUT"
+
+sample_power() {
+    local PHASE=$1
+    local N_SAMPLES=$((DURATION / INTERVAL))
+
+    for i in $(seq 1 "$N_SAMPLES"); do
+        TS=$(date -u +"%Y-%m-%dT%H:%M:%S")
+        METRICS=$(curl -s "$SCAPHANDRE_URL" | grep "scaph_process_power")
+
+        for ENTRY in "cu_cp:$CU_CP" "cu_up:$CU_UP" "du:$DU"; do
+            COMP=$(echo "$ENTRY" | cut -d: -f1)
+            PID=$(echo "$ENTRY" | cut -d: -f2)
+            if [ -z "$PID" ]; then continue; fi
+            VAL=$(echo "$METRICS" | grep "pid=\"$PID\"" | grep -oP '} \K[\d.]+' | head -1)
+            if [ -n "$VAL" ]; then
+                WATTS=$(python3 -c "print(f'{$VAL/1e6:.6f}')")
+                echo "$TS,$PHASE,$COMP,$PID,$VAL,$WATTS" >> "$OUTPUT"
+            fi
+        done
+
+        for key in $(echo "${!UE_PIDS[@]}" | tr ' ' '\n' | sort); do
+            PID=${UE_PIDS[$key]}
+            if [ -z "$PID" ]; then continue; fi
+            VAL=$(echo "$METRICS" | grep "pid=\"$PID\"" | grep -oP '} \K[\d.]+' | head -1)
+            if [ -n "$VAL" ]; then
+                WATTS=$(python3 -c "print(f'{$VAL/1e6:.6f}')")
+                echo "$TS,$PHASE,$key,$PID,$VAL,$WATTS" >> "$OUTPUT"
+            fi
+        done
+
+        echo "  [$PHASE] sample $i/$N_SAMPLES at $TS"
+        sleep "$INTERVAL"
+    done
 }
 
 run_iperf_dl() {
-    iperf3 -c "$UE_IP" -t "$IPERF_DURATION" -J 2>/dev/null | \
-    python3 -c "
-import sys, json
-try:
-    d = json.load(sys.stdin)
-    bps = d['end']['sum_sent']['bits_per_second']
-    retrans = d['end']['sum_sent']['retransmits']
-    print(f'{bps/1e6:.3f} {retrans}')
-except:
-    print('0 0')
-"
+    # server inside each UE namespace, client from inside the Open5GS
+    # container connecting in. The host itself cannot reach UE namespace
+    # IPs directly (no working path even though a route exists), but the
+    # container can, via the real UPF/DU/broker data path.
+    local PIDS=()
+    for i in $(seq 1 "$N_UE"); do
+        sudo ip netns exec "ue${i}" iperf3 -s -p "53${i}1" -1 < /dev/null > /dev/null 2>&1 &
+    done
+    sleep 1
+    for i in $(seq 1 "$N_UE"); do
+        UE_IP=$(sudo ip netns exec "ue${i}" ip -4 addr show tun_srsue 2>/dev/null | grep -oP 'inet \K[\d.]+')
+        if [ -z "$UE_IP" ]; then
+            echo "  warning: no IP found for ue${i}, skipping DL client"
+            continue
+        fi
+        docker exec open5gs_5gc iperf3 -c "$UE_IP" -p "53${i}1" -t "$DURATION" \
+            > "$LOGS_DIR/iperf_dl_ue${i}_${N_UE}ue_run${RUN_TAG}.log" 2>&1 &
+        PIDS+=($!)
+    done
+    for pid in "${PIDS[@]}"; do
+        wait "$pid"
+    done
 }
 
 run_iperf_ul() {
-    iperf3 -c "$UE_IP" -t "$IPERF_DURATION" -R -J 2>/dev/null | \
-    python3 -c "
-import sys, json
-try:
-    d = json.load(sys.stdin)
-    bps = d['end']['sum_received']['bits_per_second']
-    retrans = d['end']['sum_sent']['retransmits']
-    print(f'{bps/1e6:.3f} {retrans}')
-except:
-    print('0 0')
-"
-}
-
-run_ping_latency() {
-    ping -c 20 -i 0.2 "$UE_IP" 2>/dev/null | \
-    python3 -c "
-import sys, re
-rtts = []
-for line in sys.stdin:
-    m = re.search(r'time=([\d.]+)', line)
-    if m:
-        rtts.append(float(m.group(1)))
-if rtts:
-    import numpy as np
-    print(f'{np.mean(rtts):.2f} {np.min(rtts):.2f} {np.max(rtts):.2f} {np.std(rtts):.2f} {len(rtts)}')
-else:
-    print('0 0 0 0 0')
-"
-}
-
-measure() {
-    local MODE=$1
-    local RUN=$2
-    local OUTFILE="${LOGS_DIR}/zmq_breakdown_${TOPOLOGY}_${MODE}_run${RUN}.json"
-
-    if [ -f "$OUTFILE" ]; then
-        log "already exists, skipping: $(basename "$OUTFILE")"
-        return
-    fi
-
-    # get PIDs
-    local PID_CUCP PID_CUUP PID_DU PID_UE
-    PID_CUCP=$(get_pid_native srscucp)
-    PID_CUUP=$(get_pid_native srscuup)
-    PID_DU=$(get_pid_native srsdu)
-    PID_UE=$(get_pid_native srsue)
-
-    log "PIDs: cu-cp=$PID_CUCP cu-up=$PID_CUUP du=$PID_DU srsue=$PID_UE"
-
-    log "warming up ${WARMUP}s..."
-    sleep "$WARMUP"
-
-    local THROUGHPUT_MBPS=0
-    local RETRANSMITS=0
-    local RTT_MEAN=0 RTT_MIN=0 RTT_MAX=0 RTT_STD=0 RTT_N=0
-
-    if [ "$MODE" = "dl" ]; then
-        log "starting iperf3 dl..."
-        read -r THROUGHPUT_MBPS RETRANSMITS <<< "$(run_iperf_dl)"
-        log "dl throughput: ${THROUGHPUT_MBPS} Mbps retrans: ${RETRANSMITS}"
-        log "measuring latency..."
-        read -r RTT_MEAN RTT_MIN RTT_MAX RTT_STD RTT_N <<< "$(run_ping_latency)"
-    elif [ "$MODE" = "ul" ]; then
-        log "starting iperf3 ul..."
-        read -r THROUGHPUT_MBPS RETRANSMITS <<< "$(run_iperf_ul)"
-        log "ul throughput: ${THROUGHPUT_MBPS} Mbps retrans: ${RETRANSMITS}"
-    fi
-
-    log "sampling power every ${INTERVAL}s for $((SAMPLES * INTERVAL))s..."
-
-    local CUCP_SAMPLES=() CUUP_SAMPLES=() DU_SAMPLES=() UE_SAMPLES=() TOTAL_SAMPLES=()
-
-    for i in $(seq 1 "$SAMPLES"); do
-        local cucp cuup du ue total
-        cucp=$(get_component_power "$PID_CUCP")
-        cuup=$(get_component_power "$PID_CUUP")
-        du=$(get_component_power "$PID_DU")
-        ue=$(get_component_power "$PID_UE")
-        total=$(python3 -c "vals=['$cucp','$cuup','$du','$ue']; print(f'{sum(float(v) if v.strip() else 0 for v in vals):.6f}')" 2>/dev/null || echo "0")
-        CUCP_SAMPLES+=("$cucp")
-        CUUP_SAMPLES+=("$cuup")
-        DU_SAMPLES+=("$du")
-        UE_SAMPLES+=("$ue")
-        TOTAL_SAMPLES+=("$total")
-        log "  sample $i/$SAMPLES: total=${total}W cu-cp=${cucp}W cu-up=${cuup}W du=${du}W srsue=${ue}W"
-        [ "$i" -lt "$SAMPLES" ] && sleep "$INTERVAL"
+    # server in the Open5GS container, client inside each UE namespace
+    for i in $(seq 1 "$N_UE"); do
+        docker exec -d open5gs_5gc iperf3 -s -p "52${i}1"
     done
-
-    python3 - << PYEOF > "$OUTFILE"
-import json, numpy as np
-
-def stats(samples):
-    valid = [s for s in samples if s > 0.05]
-    if not valid:
-        return {"mean_W": 0, "std_W": 0, "n": 0, "samples": samples}
-    return {"mean_W": round(np.mean(valid), 6), "std_W": round(np.std(valid), 6), "n": len(valid), "samples": samples}
-
-cucp = [$(IFS=,; echo "${CUCP_SAMPLES[*]}")]
-cuup = [$(IFS=,; echo "${CUUP_SAMPLES[*]}")]
-du   = [$(IFS=,; echo "${DU_SAMPLES[*]}")]
-ue   = [$(IFS=,; echo "${UE_SAMPLES[*]}")]
-total = [$(IFS=,; echo "${TOTAL_SAMPLES[*]}")]
-
-result = {
-    "topology": "$TOPOLOGY",
-    "mode": "$MODE",
-    "run": $RUN,
-    "nof_ues": 1,
-    "throughput_mbps": float("$THROUGHPUT_MBPS"),
-    "retransmits": int("$RETRANSMITS"),
-    "rtt_mean_ms": float("$RTT_MEAN"),
-    "rtt_min_ms": float("$RTT_MIN"),
-    "rtt_max_ms": float("$RTT_MAX"),
-    "rtt_std_ms": float("$RTT_STD"),
-    "components": {
-        "cu_cp": stats(cucp),
-        "cu_up": stats(cuup),
-        "du":    stats(du),
-        "srsue": stats(ue),
-        "total": stats(total)
-    }
-}
-print(json.dumps(result, indent=2))
-PYEOF
-
-    log "saved: $(basename "$OUTFILE")"
-    python3 -c "
-import json
-d = json.load(open('$OUTFILE'))
-c = d['components']
-print(f'  total={c[\"total\"][\"mean_W\"]:.3f}W cu-cp={c[\"cu_cp\"][\"mean_W\"]:.3f}W cu-up={c[\"cu_up\"][\"mean_W\"]:.3f}W du={c[\"du\"][\"mean_W\"]:.3f}W srsue={c[\"srsue\"][\"mean_W\"]:.3f}W throughput={d[\"throughput_mbps\"]:.1f}Mbps rtt={d[\"rtt_mean_ms\"]:.1f}ms')
-"
-}
-
-MODES=("idle" "dl" "ul")
-TOTAL=$(( ${#MODES[@]} * RUNS ))
-COUNT=0
-
-echo "=== ZMQ Power Breakdown Experiment ==="
-echo "Topology: $TOPOLOGY"
-echo "Modes: ${MODES[*]}"
-echo "Runs: $RUNS | Samples: $SAMPLES | Interval: ${INTERVAL}s"
-echo "Output: $LOGS_DIR"
-echo "======================================"
-
-for MODE in "${MODES[@]}"; do
-    for RUN in $(seq 1 "$RUNS"); do
-        COUNT=$((COUNT + 1))
-        echo ""
-        log "[$COUNT/$TOTAL] topology=$TOPOLOGY mode=$MODE run=$RUN"
-
-        if [ "$MODE" != "idle" ]; then
-            sudo pkill iperf3 2>/dev/null || true
-            sleep 1
-            sudo ip netns exec "$UE_NETNS" iperf3 -s -D 2>/dev/null || true
-            sleep 2
-        fi
-
-        measure "$MODE" "$RUN"
+    sleep 1
+    local PIDS=()
+    for i in $(seq 1 "$N_UE"); do
+        sudo ip netns exec "ue${i}" iperf3 -c 10.53.1.2 -p "52${i}1" -t "$DURATION" < /dev/null > "$LOGS_DIR/iperf_ul_ue${i}_${N_UE}ue_run${RUN_TAG}.log" 2>&1 &
+        PIDS+=($!)
     done
-done
+    for pid in "${PIDS[@]}"; do
+        wait "$pid"
+    done
+}
 
 echo ""
-echo "=== All experiments complete! ==="
+echo "--- phase: idle ---"
+echo "Warming up ${WARMUP}s..."
+sleep "$WARMUP"
+sample_power "idle"
+
 echo ""
-echo "=== SUMMARY ==="
-for MODE in "${MODES[@]}"; do
-    echo -n "mode=$MODE: "
-    python3 - << PYEOF
-import json, glob, numpy as np
-files = glob.glob("${LOGS_DIR}/zmq_breakdown_${TOPOLOGY}_${MODE}_run*.json")
-if not files:
-    print("no data")
-else:
-    totals = [json.load(open(f))['components']['total']['mean_W'] for f in sorted(files)]
-    tputs = [json.load(open(f))['throughput_mbps'] for f in sorted(files)]
-    rtts = [json.load(open(f))['rtt_mean_ms'] for f in sorted(files) if json.load(open(f))['rtt_mean_ms'] > 0]
-    print(f"power={np.mean(totals):.3f}W±{np.std(totals):.3f} throughput={np.mean(tputs):.1f}Mbps rtt={np.mean(rtts):.1f}ms runs={len(totals)}")
+echo "--- phase: dl ---"
+echo "Starting DL traffic and sampling in parallel..."
+run_iperf_dl &
+IPERF_DL_PID=$!
+sample_power "dl"
+wait "$IPERF_DL_PID"
+
+echo ""
+echo "--- phase: ul ---"
+echo "Starting UL traffic and sampling in parallel..."
+run_iperf_ul &
+IPERF_UL_PID=$!
+sample_power "ul"
+wait "$IPERF_UL_PID"
+
+echo ""
+echo "=== Collection complete! ==="
+echo "Rows saved: $(wc -l < "$OUTPUT")"
+echo "Output: $OUTPUT"
+echo ""
+echo "=== POWER SUMMARY (by phase and component) ==="
+python3 - << PYEOF
+import csv, numpy as np
+from collections import defaultdict
+data = defaultdict(list)
+with open('$OUTPUT') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        data[(row['phase'], row['component'])].append(float(row['watts']))
+for (phase, comp), vals in sorted(data.items()):
+    if vals:
+        print(f"{phase:6s} {comp:8s}: mean={np.mean(vals):.3f}W std={np.std(vals):.3f}W n={len(vals)}")
 PYEOF
+
+echo ""
+echo "=== THROUGHPUT SUMMARY ==="
+for i in $(seq 1 "$N_UE"); do
+    echo "ue${i}:"
+    echo -n "  DL: "
+    grep -A 3 "sender" "$LOGS_DIR/iperf_dl_ue${i}_${N_UE}ue_run${RUN_TAG}.log" 2>/dev/null | head -1 || echo "no data"
+    echo -n "  UL: "
+    grep -A 3 "sender" "$LOGS_DIR/iperf_ul_ue${i}_${N_UE}ue_run${RUN_TAG}.log" 2>/dev/null | head -1 || echo "no data"
 done
