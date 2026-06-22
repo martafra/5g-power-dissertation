@@ -743,3 +743,49 @@ All three are independent and compose multiplicatively; none of today's earlier 
 **Conclusion**: **4 simultaneous UEs is the practical, repeatable stability limit** for this single-process GNU Radio broker architecture on this hardware (CloudLab d6515, AMD EPYC 7452). The limiting factor is broker CPU/scheduling load, not subscriber DB, IMSI/APN config, network namespaces, routing, or DU/CU-CP capacity (DU and CU-CP both remained healthy and responsive throughout, even while UE5-7 failed to attach). The PRACH retry pattern (one successful detection roughly every 16 seconds, never overlapping) suggests the broker cannot keep pace with synchronous REQ/REP polling across more than ~4-5 socket pairs under sustained load, regardless of how long it is left running.
 
 **Decision**: descope multi-UE ZMQ throughput/power measurements to 1, 3, and 4 simultaneous UEs, all of which are now verified stable and reproducible. Keep `multi_ue_nue.py` and `generate_16ue_confs.sh` in the repository for any future attempt at a redesigned (e.g. multi-process) broker - the generalised, parameterised tooling is sound and bug-free; the limitation is architectural (single GNU Radio process), not something fixable by configuration changes within the current broker design.
+
+## 2026-06-22
+
+#### Multi-DU extension: 1CU-2DU (DU2 + UE5)
+- Extended `multi_ue_nue.py` with a `--du-base-port` arg (default 2000, backward compatible), copy saved as `configs/zmq_multidu/zmq_broker.py`. Original left untouched.
+- New `configs/zmq_multidu/du2_zmq.yml` (F1AP/F1U bind_addr 127.0.10.3, RF ports 10000/10001, pci=2) and `ue5_zmq.conf` (ports 10101/10100, netns ue5, IMSI 001010123456784).
+- CU-CP/CU-UP needed no changes - F1AP/E1AP accept multiple DU/CU-UP connections natively.
+
+#### Fix - F1SetupFailure on second DU (misdiagnosed for hours as a ZMQ race)
+DU2 kept stalling at "Attaching UE..." with no PRACH attempt. Spent most of the session on stdio buffering, Xvfb cleanup, tight broker/DU/UE launch timing, /proc/<pid>/io throughput checks - all real findings (below) but none were the actual cause.
+
+Root cause found by finally checking the right log file - `cu_cp_zmq.yml`'s own `log.filename: /tmp/cu_cp_zmq.log`, not the shell-redirected stdout. CU-CP was sending explicit `F1SetupFailure` to whichever DU connected second:
+- `gnb_du_id` not set in either DU config -> both defaulted to 0, duplicate
+- `sector_id` (under `cell_cfg`) not set in either -> both defaulted to 0, duplicate NCI (gnb_id + sector_id) despite different PCI
+
+Fixed by adding `gnb_du_id: 1` (top-level) and `sector_id: 1` (under `cell_cfg`) to `du2_zmq.yml` only. Confirmed `F1SetupResponse` for both du=0 and du=1 in `cu_cp_zmq.log` after the fix.
+
+#### Other things found while chasing the above
+- `srscucp`/`srscuup`/`srsdu` stdout buffers fully when redirected to a file with `>` - stays empty for a long time. Use `stdbuf -oL -eL` in front of the binary.
+- srsue's internal log file ([log] filename in the conf) is separate from console output - console only shows milestones, detailed cell-search logs only go to file. Low log volume delays the flush; SIGTERM (not -9) forces one.
+- Anything launched with plain `&` in an SSH shell dies if that shell's session disconnects - only the UEs are individually tmux-wrapped, CU-CP/CU-UP/DU/broker aren't. Lost the whole stack twice today this way. Launch everything inside one tmux session.
+- `pkill -9` on a broker doesn't let xvfb-run clean up its own Xvfb child (SIGKILL can't be trapped) - orphaned Xvfb accumulate over repeated restarts, need periodic `pkill -9 -f Xvfb`.
+- UE default route disappears if tun_srsue gets recreated (e.g. after restarting srsue) - re-add after every restart, not just once. Caused a "Network is unreachable" / iperf3 "Bad file descriptor" on UE1's UL test that looked like a deeper namespace issue at first.
+
+#### First 1CU-2DU power + throughput trial (60s/phase)
+New script `collect_zmq_multidu_trial.sh` (tracks two DU PIDs + non-contiguous UE indices 1/5 explicitly).
+
+| | idle | DL | UL |
+|---|---|---|---|
+| DU1 | 2.090 W | 2.737 W | 2.752 W |
+| DU2 | 2.082 W | 2.720 W | 2.743 W |
+| UE1 | 0.486 W | 1.692 W / 27.3 Mbps | 1.249 W / 6.41 Mbps |
+| UE5 | 0.468 W | 1.683 W / 27.4 Mbps | 1.258 W / 6.42 Mbps |
+| CU-CP | 0.217-0.251 W | | |
+| CU-UP | 0.218-0.409 W | | |
+
+DU1/DU2 and UE1/UE5 symmetric within <1%. DU power matches the 1.7-3.0W/DU range from the single-DU dataset.
+
+Known bug in the script's throughput summary (inherited from `collect_zmq_breakdown.sh`): `grep ... | head -1 || echo "no data"` never falls through to "no data" because `head -1` exits 0 even on empty input - a failed iperf3 run prints blank instead of flagging it. Almost missed the UE1 route issue because of this.
+
+#### Next steps
+- Fix the silent-failure throughput summary bug in both collection scripts
+- Generalise the gnb_du_id/sector_id fix for arbitrary N (each new DU needs both unique, not just unique PCI)
+- Generalise collect_zmq_multidu_trial.sh and run_zmq_matrix_experiments.sh to take an arbitrary DU/UE list
+- Consider a bounded retry-with-health-check wrapper for genuine ZMQ startup races (rare, separate from today's bug)
+- Move to 1CU-3DU once generalised
