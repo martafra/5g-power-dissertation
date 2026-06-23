@@ -211,19 +211,31 @@ run_one() {
     local NUE=$1
     local RUN=$2
     local OUTFILE="${LOGDIR}/zmq_power_${NUE}ue_run${RUN}.csv"
+    local MAX_STACK_RETRIES=2
 
     if [ -f "$OUTFILE" ]; then
         echo "  Already exists, skipping: $(basename "$OUTFILE")"
         return
     fi
 
-    restart_stack "$NUE"
+    local n_attached=0
+    for stack_attempt in $(seq 1 "$MAX_STACK_RETRIES"); do
+        restart_stack "$NUE"
 
-    local n_attached
-    n_attached=$(verify_attach "$NUE")
-    echo "  Attached: $n_attached / $NUE UEs"
-    if [ "$n_attached" -lt "$NUE" ]; then
-        echo "  WARNING: not all UEs attached, results may be incomplete or this run should be discarded"
+        n_attached=$(verify_attach "$NUE")
+        echo "  Attached: $n_attached / $NUE UEs (stack attempt $stack_attempt/$MAX_STACK_RETRIES)"
+
+        if [ "$n_attached" -eq "$NUE" ]; then
+            break
+        fi
+        echo "  Not all UEs attached, retrying full stack restart..."
+    done
+
+    if [ "$n_attached" -ne "$NUE" ]; then
+        echo "  ERROR: only $n_attached/$NUE UEs attached after $MAX_STACK_RETRIES full stack attempts."
+        echo "         Skipping data collection for this run - re-run the matrix script later to retry it"
+        echo "         (this combination's CSV does not exist yet, so it won't be skipped next time)."
+        return
     fi
 
     "$BREAKDOWN_SCRIPT" "$NUE" "$DURATION" "$WARMUP" "$SAMPLE_INTERVAL" "$RUN"
