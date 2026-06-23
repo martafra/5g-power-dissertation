@@ -789,3 +789,26 @@ Known bug in the script's throughput summary (inherited from `collect_zmq_breakd
 - Generalise collect_zmq_multidu_trial.sh and run_zmq_matrix_experiments.sh to take an arbitrary DU/UE list
 - Consider a bounded retry-with-health-check wrapper for genuine ZMQ startup races (rare, separate from today's bug)
 - Move to 1CU-3DU once generalised
+
+## 2026-06-23 (seguito sessione 2026-06-22)
+
+#### Generalised the multi-DU pipeline to N DUs, UE-per-DU configurable
+- `configs/zmq/generate_multidu_confs.sh`: generates duN_zmq.yml for any N, deriving gnb_du_id/sector_id/pci/bind_addr/RF ports from the DU index (extends yesterday's du2_zmq.yml fix to arbitrary N).
+- `configs/zmq/generate_multidu_ue_confs.sh`: generates UE confs across DUs, global UE index reserves 4 slots/DU (DU1=UE1-4, DU2=UE5-8, DU3=UE9-12, DU4=UE13-16) but ports stay local to each DU's own broker.
+- `scripts/collect_zmq_multidu_breakdown.sh`: generalised collector for any (n_du, ue_per_du). Also fixes a silent-failure bug inherited from the original script (`grep | head -1 || echo "no data"` never falls through, since `head -1` exits 0 on empty input) and adds a defensive default-route re-check before each iperf3 phase (the route on tun_srsue has been seen to disappear unpredictably, not just after explicit UE restarts).
+- `scripts/run_zmq_multidu_matrix_experiments.sh`: full matrix runner, DU_VALUES=(1,2,3,4) x UE_PER_DU_VALUES=(1,4), 5 runs each (40 experiments total, ~10h40m). Includes a bounded per-branch retry (broker/DU/UE startup race, up to 3 attempts) plus a full-stack-level retry (up to 2 attempts) on top.
+
+#### Bug found after the first full run: incomplete branches silently saved as "successful"
+First 40-experiment run completed without any script error, but a sanity check (`cut -d, -f3 | sort -u` per CSV, comparing actual vs expected component list) found 7/40 CSVs missing an entire DU+UE branch despite no script-level failure being reported. Root cause: the per-branch retry logic correctly detected and logged failures (visible via `WARNING: DU<n> never attached`), but `run_one()` proceeded to collect and save data regardless of whether all branches had actually attached - the retry protected against transient failures within a branch but nothing checked the *aggregate* attach count before deciding to save.
+
+All affected runs were at UE_PER_DU=4 (never at UE_PER_DU=1), and the missing DU was not consistent across runs (sometimes DU1, sometimes the last DU added, sometimes a middle one) - consistent with the genuine occasional ZMQ REQ/REP startup race rather than a deterministic config bug, just occurring often enough at 4 UEs/broker to occasionally exhaust the 3 per-branch retries.
+
+Fixed by adding a full-stack-level retry in `run_one()` (not just per-branch): if `verify_attach` doesn't report 100% after a full `restart_stack`, retry the entire stack restart (up to 2 times) before giving up; if still incomplete, skip saving the CSV entirely so a later re-run of the matrix script (which already skips combinations whose output file exists) picks it up automatically.
+
+Deleted the 7 affected CSVs and re-ran the matrix - it correctly skipped the 33 already-complete combinations and only redid the missing 7 (~2h instead of ~10h40m). All 7 came back complete on the first or second stack attempt this time. Verified all 40 CSVs have the expected component count for their (n_du, ue_per_du) combination with no outliers.
+
+#### Dataset: full 1CU-NDU power + throughput matrix (40 experiments)
+DU=1..4, UE-per-DU=1 and 4, 5 runs each, in `docs/logs/zmq_multidu_matrix/`. Power consistently symmetric across DUs/UEs within a given combination (as already seen with 1CU-2DU). Notable early observation from the 4DU x 4UE case: UL throughput across the 16 UEs is highly uneven (52-555 Kbps range, vs ~6.4 Mbps uniform with 1 UE/DU) with an apparent fairness pattern - some UEs show few retransmissions but very low throughput, others show many retransmissions but higher throughput. Likely the single-process broker's scheduling under contention (consistent with the previously documented 4-UE-per-broker CPU saturation limit), now visible as a throughput/fairness effect rather than just a CPU ceiling. Worth a closer look once in the analysis notebook - this is the kind of power-vs-performance divergence the next phase of the comparison is meant to surface.
+
+#### Next steps
+- Move on to multi-CU topologies
