@@ -812,3 +812,117 @@ DU=1..4, UE-per-DU=1 and 4, 5 runs each, in `docs/logs/zmq_multidu_matrix/`. Pow
 
 #### Next steps
 - Move on to multi-CU topologies
+
+
+## 2026-06-28 — Multi-CU manual validation complete; three bugs found and fixed in the multi-DU matrix infrastructure
+
+### Multi-CU validation (pre-reboot)
+
+Manually validated all four planned multi-CU scenarios (2CU×1DU and 2CU×2DU,
+each at 1 and 4 UE/DU), comparing against the existing single-CU baselines:
+
+- **A** (2CU×1DU, 1 UE/DU): full attach + clean DL/UL on both groups.
+- **B** (2CU×1DU, 4 UE/DU): attach failed repeatedly using `multi_ue_nue.py`
+  for group 1's DU alongside a second full CU-CP/CU-UP/DU/broker stack.
+  Switching DU1's broker to `zmq_broker.py --du-base-port 2000` (already the
+  default port, fully backward compatible) resolved it. Confirmed: all 8 UEs
+  attach and pass DL/UL traffic.
+- **C** (2CU×2DU, 1 UE/DU): first-ever test of 2 DUs under a brand-new CU-CP.
+  Worked on the first attempt using `zmq_broker.py` throughout. Clean DL/UL
+  on all 4 UEs.
+- **D** (2CU×2DU, 4 UE/DU, 16 UE total): attach succeeded for all 16 (IPs
+  10.45.1.3–10.45.1.18, no duplicates) after fixing an IMSI collision (see
+  below). DL clean on all 16. UL completed on 14/16 with the expected
+  scheduler-contention signature under maximum load; UE5 and UE11 lost their
+  network namespaces after many same-day restarts (pre-existing namespace
+  staleness issue, see Bug 1) and were not chased further as the scientific
+  result for D was already established.
+
+**Operational rule confirmed for all multi-CU work going forward:** always
+use `zmq_broker.py`, never `multi_ue_nue.py`, when a second CU-CP/CU-UP/DU
+stack is running concurrently. Also: a broker, its DU, and its UEs must
+always be restarted together as a single unit; never restart one tier while
+leaving an adjacent tier alive — this reliably desyncs the ZMQ socket pairing.
+
+### Bug 1: stale UE network namespaces (multi-DU matrix)
+
+While investigating an IMSI collision (below), discovered that `ip netns`
+entries for `ue1`–`ue16` had not been deleted in **ten days** (`ue1`–`ue4`
+dated back to 17 June), surviving every single process restart across the
+entire multi-DU matrix and today's multi-CU work. Likely a contributing
+cause of various "Bad file descriptor" / stalled-attach symptoms seen
+throughout the matrix.
+
+Fix applied to `restart_stack()` in
+`scripts/run_zmq_multidu_matrix_experiments.sh`: delete all 16 UE namespaces
+at the start of every stack restart, not just the first one.
+
+### Bug 2: IMSI collision between `multiue_official` and `zmq_multidu` UE confs
+
+`ue2`/`ue3`/`ue4` (`configs/zmq/multiue_official/`, predating the global-index
+convention) shared IMSIs `...790`/`...791`/`...792` with `ue11`/`ue12`/`ue13`
+(`configs/zmq_multidu/`). Collision is only triggered when `ue_per_du=4` with
+3 or 4 DUs active, i.e. exactly the `1CU-3DU@4UE/DU` and `1CU-4DU@4UE/DU`
+combinations (10 of 40 runs).
+
+Confirmed impact: not limited to the 2-3 directly colliding UEs per
+combination — `ue1` on the same DU showed full single-UE bandwidth (~25 Mbps)
+instead of the expected 4-way-shared ~6.6 Mbps, proving none of DU1's 4 UEs
+were behaving as a real 4-UE/DU load in those combinations. **Both affected
+combinations (10 runs total) are compromised in their entirety, not just the
+colliding UEs.**
+
+Fix: reassigned `ue2`/`ue3`/`ue4` to the unused IMSI slots `781`/`782`/`783`
+(already provisioned in Open5GS, never used). Old compromised CSVs moved to
+`docs/logs/zmq_multidu_matrix/compromised_imsi_collision/` for reference, not
+deleted.
+
+### Node reboot
+
+Repeated, escalating attach failures during the matrix redo (including on
+the simplest possible case, 1CU-1DU/1UE) led to a full `sudo reboot` of the
+CloudLab node (amd004) to rule out accumulated host-level state. Verified
+post-reboot: Docker daemon healthy, all three containers (`open5gs_5gc`,
+`prometheus`, `scaphandre`) restarted manually and confirmed healthy, MASQUERADE
+iptables rule (non-persistent across reboot) reapplied.
+
+### Bug 3 (root cause): missing namespace creation in `start_branch()`
+
+Post-reboot, even the simplest case failed repeatedly despite Bug 1 and Bug 2
+being fixed. Root-caused via manual, foreground, single-UE testing: `srsue`
+does **not** create its own network namespace — it expects one to already
+exist (`Failed to find netns ueN: No such file or directory` otherwise). The
+matrix's `start_branch()` function never created it; the only `ip netns add`
+in the whole script ran later, inside `run_one()`, after the attach
+retry logic had already given up. Long-lived namespaces created by hand in
+much earlier sessions (some dating to 17 June) had been masking this gap for
+weeks; the reboot removed them all at once (`/run/netns` is tmpfs) and
+exposed the missing creation step.
+
+Fix: added `sudo ip netns add "ue${global_i}" 2>/dev/null` inside
+`start_branch()`'s UE-launch loop, immediately before the `tmux new-session`
+call, in `scripts/run_zmq_multidu_matrix_experiments.sh`.
+
+A separate, unrelated subscriber-database issue was also found and fixed
+during this investigation: UE1's subscriber document in Open5GS had reverted
+to an old DNN (`srsapn`/`ims` instead of `internet`), most likely lost when
+`open5gs_5gc`'s MongoDB did not flush cleanly during the forced reboot
+shutdown (container exited with segfault, code 139). Corrected via
+`mongosh updateOne`.
+
+### Outcome
+
+Full 40-run multi-DU ZMQ matrix completed cleanly after the Bug 3 fix,
+verified `Attached: N/N UEs (stack attempt 1/2)` with zero retries on the
+final clean run. All three fixes are in the script itself, not manual
+workarounds, so future matrix runs (including the planned multi-CU
+automation) inherit them automatically.
+
+### Follow-up
+
+- Build the multi-CU equivalent of `collect_zmq_multidu_breakdown.sh` /
+  `run_zmq_multidu_matrix_experiments.sh` (tracking 2× CU-CP/CU-UP, always
+  using `zmq_broker.py`).
+- Latency/RTT confirmed out of scope for this dissertation (power +
+  throughput only); not pursued further, including for ZMQ generally,
+  since RF-layer timing is not representative of a real deployment.

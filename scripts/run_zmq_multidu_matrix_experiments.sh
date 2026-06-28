@@ -207,6 +207,7 @@ start_branch() {
         local global_i=$(( (d - 1) * 4 + local_i ))
         local ue_conf
         ue_conf=$(ue_conf_path "$global_i" "$d")
+        sudo ip netns add "ue${global_i}" 2>/dev/null
         sudo tmux new-session -d -s "ue${global_i}" \
             "sudo ~/dissertation/srsRAN_4G/build/srsue/src/srsue $ue_conf"
     done
@@ -239,6 +240,10 @@ restart_stack() {
     sudo pkill -9 -f srsdu
     sudo pkill -9 -f multi_ue
     sudo pkill -9 -f zmq_broker
+    # stale ue netns persisting across restarts can wedge a later
+    # attach (found during manual multi-CU debugging) - force fresh
+    # namespaces every restart, not just fresh processes
+    for i in $(seq 1 16); do sudo ip netns delete "ue${i}" 2>/dev/null; done
     sleep 3
 
     sudo stdbuf -oL -eL ~/dissertation/srsRAN_Project/build/apps/cu_cp/srscucp \

@@ -1,0 +1,23 @@
+gnb_id: 412
+ran_node_name: cu_cp_g2
+
+cu_cp:
+  amf:
+    addr: 10.53.1.2
+    port: 38412
+    bind_addr: 10.53.1.3
+    supported_tracking_areas:
+      - tac: 7
+        plmn_list:
+          - plmn: "00101"
+            tai_slice_support_list:
+              - sst: 1
+  inactivity_timer: 7200
+  e1ap:
+    bind_addr: 127.0.21.1
+  f1ap:
+    bind_addr: 127.0.11.1
+
+log:
+  filename: /tmp/cu_cp2_zmq.log
+  all_level: warning
