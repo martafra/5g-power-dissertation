@@ -926,3 +926,59 @@ automation) inherit them automatically.
 - Latency/RTT confirmed out of scope for this dissertation (power +
   throughput only); not pursued further, including for ZMQ generally,
   since RF-layer timing is not representative of a real deployment.
+
+  ## 2026-06-29/30 — Multi-CU ZMQ matrix complete and validated; pipeline automation built
+
+### Dataset collected
+
+Completed data collection for the multi-CU matrix: 20 runs across 4
+topologies (2CU×1DU and 2CU×2DU, UE/DU ∈ {1,4}, 5 runs each). All 20
+runs passed automated validation: expected power components present across
+all phases (idle/dl/ul), distinct UE IPs across all runs (no IMSI
+collision), non-zero DL and UL throughput for every UE.
+
+3 initial runs showed "Bad file descriptor" on UL (ue4 in
+2cu1du_4ue_run1, ue8 in 2cu1du_4ue_run2, ue7/ue10/ue16 in
+2cu2du_4ue_run2), a known ZMQ testbed artefact under maximum load,
+already documented from the multi-DU sessions. Moved to
+`ul_redo_backup/` and re-collected; all 3 redo runs passed validation
+on the first attempt.
+
+### Automation pipeline
+
+Two new scripts built, symmetric to their multi-DU counterparts:
+
+- `scripts/collect_zmq_multicu_breakdown.sh`: collects power and
+  throughput for a 2CU-NDU topology, tracking CU-CP1/CU-UP1 and
+  CU-CP2/CU-UP2 by config filename rather than binary name (impossible
+  otherwise, as both groups run identical binaries).
+- `scripts/run_zmq_multicu_matrix_experiments.sh`: full matrix
+  orchestrator. Includes preflight check (covering the secondary host
+  IP 10.53.1.3, which is not persistent across reboots),
+  retry-with-healthcheck per DU branch, and the three operational rules
+  established during manual validation of scenarios A-D: always
+  `zmq_broker.py`, never `multi_ue_nue.py`; broker+DU+UEs always
+  restarted as a unit; UE network namespace created inside
+  `start_branch()` before launching srsue.
+
+### Preliminary power results (idle phase, mean over 5 runs)
+
+| Topology | CU-CP1 | CU-UP1 | CU-CP2 | CU-UP2 | DU1 | DU2 | DU3 | DU4 | Total |
+|---|---|---|---|---|---|---|---|---|---|
+| 2CU×1DU, 1UE/DU | 0.222W | 0.223W | 0.224W | 0.222W | 2.150W | 2.154W | - | - | 5.195W |
+| 2CU×1DU, 4UE/DU | 0.343W | 0.344W | 0.342W | 0.346W | 3.079W | 3.090W | - | - | 7.543W |
+| 2CU×2DU, 1UE/DU | 0.322W | 0.322W | 0.324W | 0.324W | 2.869W | 2.886W | 2.862W | 2.860W | 12.769W |
+| 2CU×2DU, 4UE/DU | 0.626W | 0.628W | 0.627W | 0.624W | 4.761W | 4.758W | 4.762W | 4.741W | 21.526W |
+
+The DU dominates power consumption (~80-85% of total in every topology).
+The two CU groups show near-identical consumption (difference < 5mW),
+confirming the testbed is balanced. UE load impacts DUs primarily
+(+40-45% from 1 to 4 UE/DU); CUs scale proportionally but with much
+smaller absolute values. Direct comparison between 1CU and 2CU topologies
+at equal DU and UE count, to quantify the energy cost of CU distribution,
+is deferred to the Jupyter notebook analysis.
+
+### Follow-up
+
+- Full statistical analysis in `analysis/power_analysis.ipynb`,
+  integrating multi-DU and multi-CU datasets.
