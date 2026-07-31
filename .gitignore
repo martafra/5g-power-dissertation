@@ -1,6 +1,10 @@
 # Experiment logs and data
-docs/logs/
-
+!docs/logs/
+docs/logs/*
+!docs/logs/matrix/
+!docs/logs/zmq_multidu_matrix/
+!docs/logs/zmq_multicu_matrix/
+!docs/logs/iperf_*.log
 # Generated figures
 analysis/*.png
 
