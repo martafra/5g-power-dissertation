@@ -18,6 +18,8 @@ __pycache__/
 srsRAN_Project/
 open5gs/
 srsRAN_4G/
+!deploy/srsRAN_Project/
+!deploy/srsRAN_4G/
 
 # OS
 .DS_Store

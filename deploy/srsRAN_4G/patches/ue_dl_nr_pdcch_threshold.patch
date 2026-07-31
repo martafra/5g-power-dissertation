@@ -1,0 +1,24 @@
+diff --git a/lib/src/phy/ue/ue_dl_nr.c b/lib/src/phy/ue/ue_dl_nr.c
+index ecf9807eb..eca9b1456 100644
+--- a/lib/src/phy/ue/ue_dl_nr.c
++++ b/lib/src/phy/ue/ue_dl_nr.c
+@@ -22,8 +22,8 @@
+ #include "srsran/phy/ue/ue_dl_nr.h"
+ #include <complex.h>
+ 
+-#define UE_DL_NR_PDCCH_CORR_DEFAULT_THR 0.5f
+-#define UE_DL_NR_PDCCH_EPRE_DEFAULT_THR -80.0f
++#define UE_DL_NR_PDCCH_CORR_DEFAULT_THR 0.0f
++#define UE_DL_NR_PDCCH_EPRE_DEFAULT_THR -1000.0f
+ 
+ /**
+  * @brief Shifts FFT window a fraction of the cyclic prefix. Set to 0.0f for disabling.
+@@ -269,7 +269,7 @@ static int ue_dl_nr_find_dci_ncce(srsran_ue_dl_nr_t*     q,
+   }
+ 
+   // Compare EPRE with threshold
+-  if (m->epre_dBfs < q->pdcch_dmrs_epre_thr) {
++  if (false && m->epre_dBfs < q->pdcch_dmrs_epre_thr) {
+     INFO("Discarded PDCCH candidate L=%d;ncce=%d; EPRE is too weak (%.1f<%.1f);",
+          location.L,
+          location.ncce,
