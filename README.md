@@ -11,7 +11,7 @@ Trinity College Dublin
 
 This project investigates how CU-DU topology configurations and traffic load influence per-component power consumption in a disaggregated, containerised 5G RAN. Two complementary experimental campaigns are presented:
 
-- **ru\_dummy campaign**: 600 runs across 15 topologies (1CU-1DU through 1CU-8DU and multi-CU configurations), varying CQI and UE count, using srsRAN testmode for controlled, reproducible load generation.
+- **ru\_dummy campaign**: 1125 runs across 15 topologies (1CU-1DU through 1CU-8DU and 7 multi-CU configurations), varying CQI and UE count, using srsRAN testmode for controlled, reproducible load generation.
 - **ZMQ campaign**: 60 validated runs across 8 topologies using real srsUE processes with ZMQ RF emulation, measuring both power and throughput via iperf3.
 
 Power consumption is measured at the process level via Scaphandre and Intel RAPL, with each srsRAN component (CU-CP, CU-UP, DU) running as a separate Docker container.
@@ -53,7 +53,11 @@ Power consumption is measured at the process level via Scaphandre and Intel RAPL
 │   ├── zmq_multicu/            Additional CU and DU configs for multi-CU ZMQ experiments
 │   ├── zmq_split/              ZMQ split configs (CU-CP, CU-UP, DU)
 │   └── runtime/                Runtime-generated configs (populated by scale.sh)
-├── deploy/                     Static deployment configs for ru_dummy experiments
+├── deploy/
+│   ├── configs/                Static deployment configs for ru_dummy experiments
+│   ├── srsRAN_Project/         Modified srsRAN Project files (Dockerfile, docker-compose, configs)
+│   └── srsRAN_4G/
+│       └── patches/            PDCCH threshold patch for ZMQ UE compatibility
 ├── docs/
 │   └── lab-notebook.md         Dated lab notebook: setup steps, troubleshooting, experiment log, known issues
 ├── scripts/                    Experiment automation and data collection
@@ -86,11 +90,12 @@ Power consumption is measured at the process level via Scaphandre and Intel RAPL
 
 | Parameter | Values |
 |-----------|--------|
-| Topologies (1CU) | 1CU-1DU through 1CU-8DU |
-| Topologies (multi-CU) | 2CU-2DU, 2CU-4DU, 2CU-6DU, 2CU-8DU, 3CU-3DU, 3CU-6DU, 4CU-4DU |
+| Topologies (1CU) | 1CU-1DU through 1CU-8DU (600 runs) |
+| Topologies (multi-CU) | 2CU-2DU, 2CU-4DU, 2CU-6DU, 2CU-8DU, 3CU-3DU, 3CU-6DU, 4CU-4DU (525 runs) |
 | CQI values | 5, 10, 15 |
 | UE counts | 1, 4, 16, 64, 96 |
 | Runs per combination | 5 |
+| **Total** | **1125 runs** |
 
 ### ZMQ campaign (60 runs)
 
@@ -150,8 +155,3 @@ Power consumption is measured at the process level via Scaphandre and Intel RAPL
 ## License
 
 This repository is part of an MSc dissertation at Trinity College Dublin. Code may be reused with attribution.
-
-## Contact
-
-Marta Fraioli - fraiolim@tcd.ie  
-GitHub: [martafra/5g-power-dissertation](https://github.com/martafra/5g-power-dissertation)
