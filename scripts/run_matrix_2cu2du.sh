@@ -1,7 +1,9 @@
 #!/bin/bash
-# Full experiment matrix: topology x UE count x CQI x runs
-# Topologies: 1CU-1DU, 1CU-2DU, 1CU-3DU
-# Results saved as JSON in docs/logs/matrix/
+# Representative per-topology matrix runner (2CU-2DU shown).
+# Each topology in the ru_dummy campaign has an equivalent script that follows
+# this same structure, differing only in the number of DU containers started
+# and the corresponding testmode files written per DU.
+# Sweeps: CQI in {5,10,15} x per-DU UE count in {1,4,16,64,96} x 5 runs.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOCKER_DIR="$SCRIPT_DIR/../srsRAN_Project/docker"
@@ -103,20 +105,10 @@ test_mode:
     pusch_active: true
     pdsch_active: true
 TMEOF
-  cat > "$CONFIGS/testmode2.yml" << TMEOF
+  cat > "$CONFIGS/testmode_b.yml" << TMEOF
 test_mode:
   test_ue:
-    rnti: 0xa4
-    ri: 1
-    cqi: $CQI
-    nof_ues: $NUE
-    pusch_active: true
-    pdsch_active: true
-TMEOF
-  cat > "$CONFIGS/testmode3.yml" << TMEOF
-test_mode:
-  test_ue:
-    rnti: 0x104
+    rnti: 0x166
     ri: 1
     cqi: $CQI
     nof_ues: $NUE
@@ -125,19 +117,17 @@ test_mode:
 TMEOF
 }
 
-TOPOLOGIES=(1cu1du 1cu2du 1cu3du)
-TOTAL=$(( ${#TOPOLOGIES[@]} * ${#CQI_VALUES[@]} * ${#UE_VALUES[@]} * RUNS ))
+TOTAL=$(( ${#CQI_VALUES[@]} * ${#UE_VALUES[@]} * RUNS ))
 COUNT=0
 
-echo "=== srsRAN Power Matrix Experiment ==="
-echo "Topologies: ${TOPOLOGIES[*]}"
+echo "=== srsRAN Power Matrix Experiment: 2CU-2DU ==="
 echo "UE values:  ${UE_VALUES[*]}"
 echo "CQI values: ${CQI_VALUES[*]}"
 echo "Runs: $RUNS"
 echo "Total experiments: $TOTAL"
 echo "Estimated time: $(( TOTAL * (WARMUP + DURATION) / 3600 ))h $(( (TOTAL * (WARMUP + DURATION) % 3600) / 60 ))m"
 echo "Output dir: $LOGDIR"
-echo "======================================="
+echo "=================================================="
 
 for CQI in "${CQI_VALUES[@]}"; do
   for NUE in "${UE_VALUES[@]}"; do
@@ -145,31 +135,13 @@ for CQI in "${CQI_VALUES[@]}"; do
 
       COUNT=$((COUNT + 1))
       echo ""
-      echo "[$COUNT/$TOTAL] 1CU-1DU | CQI=$CQI | UEs=$NUE | Run=$RUN"
+      echo "[$COUNT/$TOTAL] 2CU-2DU | CQI=$CQI | UEs=$NUE | Run=$RUN"
       set_testmode $NUE $CQI
-      docker stop srsran_du2 srsran_du3 2>/dev/null
-      docker stop srsran_du 2>/dev/null; docker rm srsran_du 2>/dev/null
-      $COMPOSE up -d du 2>/dev/null
+      docker stop srsran_du srsran_du_b 2>/dev/null
+      docker rm srsran_du srsran_du_b 2>/dev/null
+      $COMPOSE up -d du du-b 2>/dev/null
       sleep 10
-      measure "1cu1du" $NUE $CQI $RUN
-
-      COUNT=$((COUNT + 1))
-      echo ""
-      echo "[$COUNT/$TOTAL] 1CU-2DU | CQI=$CQI | UEs=$NUE | Run=$RUN"
-      docker stop srsran_du srsran_du2 srsran_du3 2>/dev/null
-      docker rm srsran_du srsran_du2 2>/dev/null
-      $COMPOSE up -d du du2 2>/dev/null
-      sleep 10
-      measure "1cu2du" $NUE $CQI $RUN
-
-      COUNT=$((COUNT + 1))
-      echo ""
-      echo "[$COUNT/$TOTAL] 1CU-3DU | CQI=$CQI | UEs=$NUE | Run=$RUN"
-      docker stop srsran_du srsran_du2 srsran_du3 2>/dev/null
-      docker rm srsran_du srsran_du2 srsran_du3 2>/dev/null
-      $COMPOSE up -d du du2 du3 2>/dev/null
-      sleep 10
-      measure "1cu3du" $NUE $CQI $RUN
+      measure "2cu2du" $NUE $CQI $RUN
 
     done
   done
@@ -179,13 +151,12 @@ echo ""
 echo "=== All experiments complete! ==="
 echo ""
 echo "=== SUMMARY ==="
-for TOPOLOGY in "${TOPOLOGIES[@]}"; do
-  for CQI in "${CQI_VALUES[@]}"; do
-    for NUE in "${UE_VALUES[@]}"; do
-      echo -n "${TOPOLOGY} CQI=${CQI} ${NUE}UE: "
-      python3 - << PYEOF
+for CQI in "${CQI_VALUES[@]}"; do
+  for NUE in "${UE_VALUES[@]}"; do
+    echo -n "2cu2du CQI=${CQI} ${NUE}UE: "
+    python3 - << PYEOF
 import json, glob, numpy as np
-files = glob.glob("${LOGDIR}/power_${TOPOLOGY}_cqi${CQI}_${NUE}ue_run*.json")
+files = glob.glob("${LOGDIR}/power_2cu2du_cqi${CQI}_${NUE}ue_run*.json")
 means = []
 for f in sorted(files):
     d = json.load(open(f))
@@ -196,6 +167,5 @@ if means:
 else:
     print("no data")
 PYEOF
-    done
   done
 done

@@ -70,7 +70,7 @@ Power consumption is measured at the process level via Scaphandre and Intel RAPL
 
 | Script | Description |
 |--------|-------------|
-| `run_matrix_experiments.sh` | Full ru\_dummy experiment matrix: 15 topologies x 3 CQI x 5 UE counts x 5 runs |
+| `run_matrix_2cu2du.sh` | Representative per-topology ru_dummy matrix runner (2CU-2DU). Sweeps CQI {5,10,15} x per-DU UE {1,4,16,64,96} x 5 runs |
 | `collect_power_breakdown.sh` | Per-component power breakdown collector for ru\_dummy topologies |
 | `run_zmq_multidu_matrix_experiments.sh` | Full ZMQ experiment matrix for 1CU-NDU topologies |
 | `run_zmq_multicu_matrix_experiments.sh` | Full ZMQ experiment matrix for 2CU topologies |
